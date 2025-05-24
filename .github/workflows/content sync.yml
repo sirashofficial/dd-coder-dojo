@@ -1,0 +1,231 @@
+name: DD Coder Dojo - Content Sync & Deploy
+
+# When this runs:
+# - When content files are updated
+# - Every day at 6 AM (to catch any issues)
+# - Manual trigger from GitHub Actions tab
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'data/**'
+      - 'images/**'
+      - '*.html'
+      - 'css/**'
+      - 'js/**'
+  
+  schedule:
+    # Run daily at 6 AM South Africa time (4 AM UTC)
+    - cron: '0 4 * * *'
+  
+  workflow_dispatch:
+    inputs:
+      sync_type:
+        description: 'Type of sync to run'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+        - full
+        - content-only
+        - images-only
+
+jobs:
+  content-validation:
+    name: 🔍 Validate Content
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: |
+        npm install --only=dev
+        # Install basic validation tools
+        npm install -g jsonlint
+    
+    - name: Validate JSON files
+      run: |
+        echo "🔍 Validating JSON data files..."
+        for file in data/*.json; do
+          if [ -f "$file" ]; then
+            echo "Checking $file..."
+            jsonlint "$file" > /dev/null
+            echo "✅ $file is valid"
+          fi
+        done
+    
+    - name: Run content sync script
+      run: |
+        echo "🚀 Running content synchronization..."
+        node scripts/sync-content.js
+    
+    - name: Check for large images
+      run: |
+        echo "🖼️ Checking image sizes..."
+        find images -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" | while read file; do
+          size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null || echo 0)
+          if [ $size -gt 500000 ]; then
+            echo "⚠️ Large image detected: $file ($(($size / 1024))KB)"
+          fi
+        done
+
+  deploy-website:
+    name: 🚀 Deploy Website
+    needs: content-validation
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Optimize images (if needed)
+      run: |
+        echo "🖼️ Optimizing images..."
+        # Add image optimization here if needed
+        # Example: using imagemin or similar tools
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
+        # Only include the files we want to deploy
+        exclude_assets: |
+          .github/
+          scripts/
+          docs/
+          node_modules/
+          *.md
+          .gitignore
+          package*.json
+
+  content-health-check:
+    name: 🏥 Content Health Check
+    needs: deploy-website
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Content health report
+      run: |
+        echo "# DD Coder Dojo - Content Health Report" > health-report.md
+        echo "Generated: $(date)" >> health-report.md
+        echo "" >> health-report.md
+        
+        # Count team members
+        if [ -f "data/team.json" ]; then
+          team_count=$(grep -o '"active":\s*true' data/team.json | wc -l)
+          echo "👥 Active Team Members: $team_count" >> health-report.md
+        fi
+        
+        # Count projects
+        if [ -f "data/projects.json" ]; then
+          project_count=$(grep -o '"id":\s*[0-9]' data/projects.json | wc -l)
+          echo "📱 Total Projects: $project_count" >> health-report.md
+        fi
+        
+        # Check recent updates
+        echo "" >> health-report.md
+        echo "## Recent Updates" >> health-report.md
+        git log --oneline --since="1 week ago" --grep="content\|update\|add" >> health-report.md || echo "No recent content updates" >> health-report.md
+        
+        # Show any warnings
+        echo "" >> health-report.md
+        echo "## Issues to Review" >> health-report.md
+        
+        # Check for placeholder content
+        if grep -r "placeholder\|TODO\|FIXME" data/ >/dev/null 2>&1; then
+          echo "⚠️ Placeholder content found in data files" >> health-report.md
+        fi
+        
+        # Check for missing images
+        missing_images=0
+        if [ -f "data/team.json" ]; then
+          grep -o '"image":\s*"[^"]*"' data/team.json | grep -o '"[^"]*"$' | tr -d '"' | while read img; do
+            if [ ! -f "$img" ]; then
+              echo "❌ Missing image: $img" >> health-report.md
+              missing_images=$((missing_images + 1))
+            fi
+          done
+        fi
+        
+        if [ $missing_images -eq 0 ]; then
+          echo "✅ All team images present" >> health-report.md
+        fi
+        
+        cat health-report.md
+    
+    - name: Create Issue for Problems (if any)
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = `Content Health Check Failed - ${new Date().toISOString().split('T')[0]}`;
+          const body = `
+          ## Automated Content Health Check Failed
+          
+          The daily content validation has detected issues that need attention.
+          
+          **Action Required:**
+          1. Check the failed workflow logs above
+          2. Review and fix any data validation errors
+          3. Ensure all required images are present
+          4. Test the website locally before pushing fixes
+          
+          **Common Issues:**
+          - Invalid JSON syntax in data files
+          - Missing team member photos
+          - Large image files (>500KB)
+          - Broken links in team social profiles
+          
+          **For Help:**
+          - Review the [Content Editing Guide](docs/CONTENT_EDITING_GUIDE.md)
+          - Contact tech support if needed
+          
+          ---
+          *This issue was created automatically by GitHub Actions*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['content', 'automated', 'needs-attention']
+          });
+
+  notify-success:
+    name: 📢 Notify Success
+    needs: [content-validation, deploy-website]
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+    - name: Success notification
+      run: |
+        echo "🎉 DD Coder Dojo website updated successfully!"
+        echo "✅ Content validation passed"
+        echo "✅ Website deployed"
+        echo "🌐 Changes are now live"
+        
+        # You could add Slack/Discord notifications here
+        # Or email notifications for important updates

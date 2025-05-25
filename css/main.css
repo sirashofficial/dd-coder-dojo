@@ -17,6 +17,16 @@
   --border-color: rgba(255,255,255,0.2);
 }
 
+/* ===== ACCESSIBILITY FOCUS STYLES ===== */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
 /* ===== DARK/LIGHT MODE ===== */
 body {
   font-family: var(--body-font);

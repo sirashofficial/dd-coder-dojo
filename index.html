@@ -1,3 +1,9 @@
+<!--
+File: index.html
+Purpose: Main landing page for the website. Contains navigation, hero section, program highlights, showcase, statistics, impact highlights, about, and contact sections.
+Last updated: 2025-05-25
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +28,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS Files -->
+      <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/home.css">
     
     <!-- Structured Data -->
@@ -71,6 +77,7 @@
             <li><a href="resources.html">Resources</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="community.html">Community</a></li>
         </ul>
     </nav>
 
@@ -86,17 +93,16 @@
 
     <main id="main-content" tabindex="-1">
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-background">
+        <section class="hero">            <div class="hero-background">
+                <canvas id="matrixCanvas"></canvas>
                 <div class="matrix-rain"></div>
                 <div class="floating-particles"></div>
             </div>
-            
-            <div class="hero-content">
-                <h1 class="hero-title">
+              <div class="hero-content fade-in" data-animation="slideInLeft">
+                <h1 class="hero-title slide-in-left">
                     <span class="typing-text" data-text="Code The Future">Code The Future</span>
                 </h1>
-                <p class="hero-subtitle">
+                <p class="hero-subtitle fade-in" style="animation-delay: 0.3s">
                     <span class="subtitle-line">Empowering young minds through</span>
                     <span class="rotating-words">
                         <span class="word active">coding education</span>
@@ -104,67 +110,54 @@
                         <span class="word">problem solving</span>
                         <span class="word">digital innovation</span>
                     </span>
-                </p>
-                <div class="cta-buttons">
-                    <a href="register.html" class="btn btn-primary pulse-btn">
+                </p>                <div class="cta-buttons scale-in" style="animation-delay: 0.6s">
+                    <a href="register.html" class="btn-enhanced btn-primary pulse-btn tooltip" data-tooltip="Start your coding journey today!">
                         <span>Join Our Community</span>
                         <div class="btn-particles"></div>
                     </a>
-                    <a href="programs.html" class="btn btn-secondary glow-btn">
+                    <a href="programs.html" class="btn-enhanced btn-secondary glow-btn tooltip" data-tooltip="Discover our exciting programs">
                         <span>Explore Programs</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="150">0</span>
+                <div class="hero-stats fade-in" style="animation-delay: 0.9s">
+                    <div class="stat-item scale-in" style="animation-delay: 1.0s">
+                        <span class="stat-number" data-count="150" data-target="150">0</span>
                         <span class="stat-label">Students Enrolled</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="200">0</span>
+                    <div class="stat-item scale-in" style="animation-delay: 1.1s">
+                        <span class="stat-number" data-count="200" data-target="200">0</span>
                         <span class="stat-label">Projects Created</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-target="3">0</span>
+                    <div class="stat-item scale-in" style="animation-delay: 1.2s">
+                        <span class="stat-number" data-count="3" data-target="3">0</span>
                         <span class="stat-label">Age Groups</span>
                     </div>
                 </div>
             </div>
             
-            <div class="hero-visual">
+            <div class="hero-visual slide-in-right" style="animation-delay: 0.4s">
                 <div class="code-container">
                     <div class="code-header">
                         <div class="code-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
+                            <span class="dot red pulse-on-hover"></span>
+                            <span class="dot yellow pulse-on-hover"></span>
+                            <span class="dot green pulse-on-hover"></span>
                         </div>
                         <span class="code-title">future_coder.js</span>
-                    </div>
-                    <pre class="code-content"><code>
-<span class="code-comment">// Welcome to DD Coder Dojo!</span>
-<span class="code-keyword">function</span> <span class="code-function">createYoungInnovator</span>() {
-  <span class="code-keyword">const</span> <span class="code-variable">student</span> = {
-    <span class="code-property">curiosity</span>: <span class="code-string">'unlimited'</span>,
-    <span class="code-property">creativity</span>: <span class="code-number">100</span>,
-    <span class="code-property">skills</span>: []
-  };
-  
-  <span class="code-keyword">while</span> (<span class="code-variable">student</span>.<span class="code-property">learning</span>) {
-    <span class="code-variable">student</span>.<span class="code-property">skills</span>.<span class="code-function">push</span>(
-      <span class="code-string">'problem_solving'</span>,
-      <span class="code-string">'logical_thinking'</span>,
-      <span class="code-string">'teamwork'</span>
-    );
-    <span class="code-function">buildTheFuture</span>();
-  }
-  
-  <span class="code-keyword">return</span> <span class="code-variable">student</span>;
-}
-
-<span class="code-comment">// Start your journey today! 🚀</span>
-<span class="code-function">createYoungInnovator</span>();
+                    </div><pre class="code-content"><code>
+<span class="code-line"><span class="code-comment">// Welcome to DD Coder Dojo!</span><span class="code-cursor"></span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">joinCommunity</span>() {<span class="code-cursor"></span></span>
+<span class="code-line">  <span class="code-keyword">const</span> <span class="code-variable">student</span> = {<span class="code-cursor"></span></span>
+<span class="code-line">    <span class="code-property">curiosity</span>: <span class="code-string">'unlimited'</span>,<span class="code-cursor"></span></span>
+<span class="code-line">    <span class="code-property">skills</span>: [<span class="code-string">'coding'</span>, <span class="code-string">'creativity'</span>]<span class="code-cursor"></span></span>
+<span class="code-line">  };<span class="code-cursor"></span></span>
+<span class="code-line">  <span class="code-variable">student</span>.<span class="code-function">buildTheFuture</span>();<span class="code-cursor"></span></span>
+<span class="code-line">  <span class="code-keyword">return</span> <span class="code-string">'Ready to innovate!'</span>;<span class="code-cursor"></span></span>
+<span class="code-line">}<span class="code-cursor"></span></span>
+<span class="code-line"><span class="code-comment">// Start your journey! 🚀</span><span class="code-cursor"></span></span>
+<span class="code-line"><span class="code-function">joinCommunity</span>();<span class="code-cursor"></span></span>
                     </code></pre>
                 </div>
                 
@@ -195,17 +188,15 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Programs Overview Section -->
-        <section class="programs" id="programs">
+        </section>        <!-- Programs Overview Section -->
+        <section class="programs fade-in" id="programs" data-parallax="0.1">
             <div class="container">
-                <h2>Our Programs</h2>
-                <p class="section-subtitle">From blocks to big ideas - discover the perfect coding path for every age!</p>
+                <h2 class="slide-in-left" data-animation="fadeInUp">Our Programs</h2>
+                <p class="section-subtitle fade-in" style="animation-delay: 0.2s">From blocks to big ideas - discover the perfect coding path for every age!</p>
                 
                 <div class="programs-grid">
                     <!-- Junior Program Card -->
-                    <div class="program-card" data-program="junior">
+                    <div class="program-card card-modern scale-in" data-program="junior" style="animation-delay: 0.3s">
                         <div class="program-card-inner">
                             <div class="program-card-front">
                                 <div class="program-icon">
@@ -408,23 +399,21 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Live Statistics Section -->
-        <section class="statistics-section" id="statistics">
+        </section>        <!-- Live Statistics Section -->
+        <section class="statistics-section fade-in" id="statistics" data-parallax="0.05">
             <div class="container">
-                <div class="stats-header">
-                    <h2>Our Impact in Numbers</h2>
-                    <p>See the amazing progress we're making together at DD Coder Dojo!</p>
+                <div class="stats-header fade-in">
+                    <h2 class="slide-in-left">Our Impact in Numbers</h2>
+                    <p class="scale-in" style="animation-delay: 0.2s">See the amazing progress we're making together at DD Coder Dojo!</p>
                 </div>
 
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
+                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.3s">
+                        <div class="stat-icon pulse-on-hover">
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="247" data-suffix="">0</div>
+                            <div class="stat-number" data-count="247" data-target="247" data-suffix="">0</div>
                             <div class="stat-label">Students Taught</div>
                             <div class="stat-sublabel">Since 2022</div>
                         </div>
@@ -433,12 +422,12 @@
                         </div>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon">
+                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.4s">
+                        <div class="stat-icon pulse-on-hover">
                             <i class="fas fa-project-diagram"></i>
                         </div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="380" data-suffix="">0</div>
+                            <div class="stat-number" data-count="380" data-target="380" data-suffix="">0</div>
                             <div class="stat-label">Projects Created</div>
                             <div class="stat-sublabel">And counting!</div>
                         </div>
@@ -447,12 +436,12 @@
                         </div>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon">
+                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.5s">
+                        <div class="stat-icon pulse-on-hover">
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="1250" data-suffix="">0</div>
+                            <div class="stat-number" data-count="1250" data-target="1250" data-suffix="">0</div>
                             <div class="stat-label">Coding Hours</div>
                             <div class="stat-sublabel">This year</div>
                         </div>
@@ -461,12 +450,12 @@
                         </div>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon">
+                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.6s">
+                        <div class="stat-icon pulse-on-hover">
                             <i class="fas fa-trophy"></i>
                         </div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="89" data-suffix="%">0</div>
+                            <div class="stat-number" data-count="89" data-target="89" data-suffix="%">0</div>
                             <div class="stat-label">Success Rate</div>
                             <div class="stat-sublabel">Students progressing</div>
                         </div>
@@ -621,6 +610,50 @@
                 </div>
             </div>
         </section>
+
+        <!-- Interactive Events Calendar Template (Sample) -->
+        <section class="calendar-section">
+          <h2>Events Calendar</h2>
+          <div class="calendar-container">
+            <div class="calendar-header">
+              <button class="calendar-prev" aria-label="Previous Month">&lt;</button>
+              <span class="calendar-month">July 2025</span>
+              <button class="calendar-next" aria-label="Next Month">&gt;</button>
+            </div>
+            <div class="calendar-grid">
+              <div class="calendar-day">Sun</div>
+              <div class="calendar-day">Mon</div>
+              <div class="calendar-day">Tue</div>
+              <div class="calendar-day">Wed</div>
+              <div class="calendar-day">Thu</div>
+              <div class="calendar-day">Fri</div>
+              <div class="calendar-day">Sat</div>
+              <!-- Example: Days of the month (dynamically generated) -->
+              <div class="calendar-date"></div>
+              <div class="calendar-date"></div>
+              <div class="calendar-date"></div>
+              <div class="calendar-date"></div>
+              <div class="calendar-date"></div>
+              <div class="calendar-date"></div>
+              <div class="calendar-date"></div>
+              <!-- ... -->
+              <div class="calendar-date event-date">
+                <span class="date-number">26</span>
+                <div class="event-dot"></div>
+                <div class="event-popup">
+                  <strong>Annual Hackathon</strong><br>
+                  <span>Open to all ages. Prizes for top teams.</span>
+                  <a href="#" class="btn-small">How to Enter</a>
+                </div>
+              </div>
+              <!-- ... -->
+            </div>
+            <div class="calendar-legend">
+              <span><span class="event-dot"></span> Event</span>
+              <span><span class="event-dot fundraiser"></span> Fundraiser</span>
+            </div>
+          </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -668,10 +701,12 @@
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>
-    </footer>
-
-    <!-- JavaScript Files -->
+    </footer>    <!-- JavaScript Files -->    <script src="js/effects/matrix.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/home.js"></script>
+    <script src="js/pages/home_stats.js"></script>
+    <!-- jQuery CDN for DOM manipulation and effects -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3gJwYp4gU1p2+XQ6p6Yk9QbQxtB6pZ9l+8l+6p6Yk9Q=" crossorigin="anonymous"></script>
 </body>
 </html>

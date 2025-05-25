@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Space Invaders Game",
+    "student": "Lindiwe M.",
+    "description": "A classic arcade game remake using Scratch.",
+    "image": "images/showcase/space-invaders.jpg",
+    "year": 2025
+  },
+  {
+    "id": 2,
+    "title": "Weather App",
+    "student": "Thabo K.",
+    "description": "A web app that shows real-time weather using JavaScript.",
+    "image": "images/showcase/weather-app.jpg",
+    "year": 2025
+  },
+  {
+    "id": 3,
+    "title": "Math Quiz Bot",
+    "student": "Ayesha P.",
+    "description": "A Python chatbot that quizzes users on math skills.",
+    "image": "images/showcase/math-quiz-bot.jpg",
+    "year": 2024
+  }
+]

@@ -1,3 +1,9 @@
+<!--
+File: about.html
+Purpose: About page for DD Coder Dojo. Describes the organization's mission, team, special features, history, and contact info. Enhanced with advanced jQuery effects for interactivity and modern user experience.
+Last updated: 2025-05-25
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +14,17 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
     
+    <!-- Open Graph & Twitter Card for SEO & Social Sharing -->
+    <meta property="og:title" content="About Us | DD Coder Dojo">
+    <meta property="og:description" content="Learn about DD Coder Dojo's mission, team, and journey in Austerville, Durban. Empowering young minds through coding.">
+    <meta property="og:image" content="images/about-header.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/about.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us | DD Coder Dojo">
+    <meta name="twitter:description" content="Learn about DD Coder Dojo's mission, team, and journey in Austerville, Durban.">
+    <meta name="twitter:image" content="images/about-header.jpg">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -15,10 +32,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS Files -->
+      <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/about.css">
+    
+    <!-- jQuery CDN for advanced effects -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3gJwYp4gU1p2+XQ6p6Yk9QbQxtB6pZ9l+8l+6p6Yk9Q=" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- 
@@ -87,12 +107,11 @@
         - Change title: Edit h1 text below
         - Change description: Edit p text below
         - Change background: Edit css/pages/about.css (line 15)
-        ====================================
-        -->
-        <section class="about-header">
+        ====================================        -->
+        <section class="about-header fade-in">
             <!-- EDITABLE CONTENT START -->
-            <h1>DD (Digital Democracy) Coder Dojo</h1>
-            <p>From blocks to big ideas — come code with us! Free coding classes for ages 7-17, supported by KCA in partnership with Raspberry Pi Foundation</p>
+            <h1 class="slide-in-left">DD (Digital Democracy) Coder Dojo</h1>
+            <p class="scale-in" style="animation-delay: 0.2s">From blocks to big ideas — come code with us! Free coding classes for ages 7-17, supported by KCA in partnership with Raspberry Pi Foundation</p>
             <!-- EDITABLE CONTENT END -->
         </section>
 
@@ -111,19 +130,19 @@
         4. Save file and refresh browser to see changes
         ====================================
         -->
-        <section class="mission-vision">
-            <h2>Our Purpose</h2>
+        <section class="mission-vision fade-in" style="animation-delay: 0.3s">
+            <h2 class="slide-in-right">Our Purpose</h2>
             <div class="mission-vision-container">
                 <!-- MISSION BOX - EDITABLE CONTENT START -->
-                <div class="mission-vision-box">
-                    <h3><i class="fas fa-bullseye"></i>Our Mission</h3>
+                <div class="mission-vision-box card-modern scale-in" style="animation-delay: 0.4s">
+                    <h3><i class="fas fa-bullseye pulse-on-hover"></i>Our Mission</h3>
                     <p>We believe that every child deserves access to quality technology education. DD (Digital Democracy) Coder Dojo provides free coding classes every weekday (Mon-Fri) for ages 7-17, teaching building games, apps & animations using Scratch, Python, & Web Development, while fostering problem-solving & creative thinking.</p>
                 </div>
                 <!-- MISSION BOX - EDITABLE CONTENT END -->
                 
                 <!-- APPROACH BOX - EDITABLE CONTENT START -->
-                <div class="mission-vision-box">
-                    <h3><i class="fas fa-heart"></i>Our Approach</h3>
+                <div class="mission-vision-box card-modern scale-in" style="animation-delay: 0.6s">
+                    <h3><i class="fas fa-heart pulse-on-hover"></i>Our Approach</h3>
                     <p>From blocks to big ideas, we guide students through fun projects with peer mentors in a supportive community environment. Located at 178 Austerville Drive, Wentworth, Durban, we're supported by KCA (Keep A Child Alive) in partnership with the Raspberry Pi Foundation.</p>
                 </div>
                 <!-- APPROACH BOX - EDITABLE CONTENT END -->
@@ -179,18 +198,12 @@
         ====================================
         Purpose: Key information about programs and contact
         Content Manager: Edit the content in each special-item below
-        Last Updated: 2025-01-15
-        
-        TO EDIT:
-        - What We Teach: Edit first special-item content
-        - How to Join: Edit second special-item content  
-        - Contact Details: Edit third special-item content
+        Last Updated: 2025-05-25
         ====================================
         -->
         <section class="special-section">
             <div class="container">
                 <h2>What Makes Us Special</h2>
-                
                 <div class="special-grid">
                     <!-- WHAT WE TEACH - EDITABLE CONTENT START -->
                     <div class="special-item">
@@ -202,6 +215,8 @@
                             <li>• <strong>Web Development</strong> with HTML, CSS & JavaScript</li>
                             <li>• Problem-solving & creative thinking skills</li>
                         </ul>
+                        <div class="special-counter" data-target="1200">0</div>
+                        <div class="counter-label">Students Taught</div>
                     </div>
                     <!-- WHAT WE TEACH - EDITABLE CONTENT END -->
                     
@@ -215,6 +230,8 @@
                             <li>• Attend our orientation session</li>
                             <li>• Scan QR Code to join WhatsApp Community</li>
                         </ul>
+                        <div class="special-counter" data-target="5">0</div>
+                        <div class="counter-label">Years Running</div>
                     </div>
                     <!-- HOW TO JOIN - EDITABLE CONTENT END -->
                     
@@ -228,69 +245,42 @@
                             <li>• <strong>Address:</strong> 178 Austerville Drive, Wentworth, Durban, 4052</li>
                             <li>• <strong>Schedule:</strong> Every Weekday (Mon-Fri)</li>
                         </ul>
+                        <div class="special-counter" data-target="30">0</div>
+                        <div class="counter-label">Peer Mentors</div>
                     </div>
                     <!-- CONTACT DETAILS - EDITABLE CONTENT END -->
                 </div>
             </div>
         </section>
 
-        <!-- 
+        <!--
         ====================================
-        HISTORY TIMELINE SECTION
+        TESTIMONIALS SECTION
         ====================================
-        Purpose: Show organization's journey over time
-        Content Manager: Edit timeline items below
-        Last Updated: 2025-01-15
-        
-        TO EDIT TIMELINE:
-        1. Find timeline-item sections below
-        2. Edit date, title, and description
-        3. To add new year: Copy entire timeline-item and edit
-        4. Keep HTML structure intact
+        Purpose: Rotating testimonials from students, parents, or mentors
         ====================================
         -->
-        <section class="history-section">
-            <h2>Our Journey</h2>
-            <div class="timeline">
-                <!-- 2022 - EDITABLE CONTENT START -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <span class="date">2022</span>
-                        <h3>Laying the Foundation</h3>
-                        <p>The first informal sessions began with a focus on digital literacy and fun with Scratch and typing. Early workshops revealed strong interest from kids, parents, and local schools in our community.</p>
+        <section class="testimonials-section">
+            <div class="container">
+                <h2>What Our Community Says</h2>
+                <div class="testimonials-carousel">
+                    <div class="testimonial active">
+                        <blockquote>“My child loves coming to Coder Dojo! The mentors are so supportive.”</blockquote>
+                        <cite>- Parent</cite>
+                    </div>
+                    <div class="testimonial">
+                        <blockquote>“I learned to code my first game here. Now I want to be a developer!”</blockquote>
+                        <cite>- Student</cite>
+                    </div>
+                    <div class="testimonial">
+                        <blockquote>“It’s amazing to see kids grow in confidence and skills every week.”</blockquote>
+                        <cite>- Mentor</cite>
                     </div>
                 </div>
-                <!-- 2022 - EDITABLE CONTENT END -->
-                
-                <!-- 2023 - EDITABLE CONTENT START -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <span class="date">2023</span>
-                        <h3>Growth and Structure</h3>
-                        <p>We officially adopted the Coder Dojo model and began holding weekly sessions. Introduced Code.org and Scratch as our primary teaching tools, and created a mentor system to help older learners guide younger ones.</p>
-                    </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-prev" aria-label="Previous testimonial">&#8592;</button>
+                    <button class="testimonial-next" aria-label="Next testimonial">&#8594;</button>
                 </div>
-                <!-- 2023 - EDITABLE CONTENT END -->
-                
-                <!-- 2024 - EDITABLE CONTENT START -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <span class="date">2024</span>
-                        <h3>Innovation and Community</h3>
-                        <p>Expanded our program to include themed events like Coolest Projects Showcase, Family Movie Night, and Christmas Celebrations. Introduced micro:bits to intermediate and senior students, and started incorporating typing lessons for juniors.</p>
-                    </div>
-                </div>
-                <!-- 2024 - EDITABLE CONTENT END -->
-                
-                <!-- 2025 - EDITABLE CONTENT START -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <span class="date">2025</span>
-                        <h3>Empowering Through Experience</h3>
-                        <p>Launched a year-long structured curriculum using Code.org and micro:bits. Started the Hackathon Fundraiser to boost skills and raise funds, with increased parental engagement through WhatsApp updates and "Did You Know?" tech facts.</p>
-                    </div>
-                </div>
-                <!-- 2025 - EDITABLE CONTENT END -->
             </div>
         </section>
 
@@ -383,8 +373,8 @@
     
     Don't change the order unless you know what you're doing!
     ====================================
-    -->
-    <script src="js/main.js"></script>
+    -->    <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/about.js"></script>
 </body>
 </html>

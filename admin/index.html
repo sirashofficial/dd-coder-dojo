@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | DD Coder Dojo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body { font-family: Poppins, Arial, sans-serif; background: #f7f7f7; margin: 0; }
+    .admin-container { max-width: 600px; margin: 3rem auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2rem; }
+    h1 { text-align: center; color: #1a1a1a; }
+    .admin-section { margin-bottom: 2rem; }
+    label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+    input, textarea { width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 1rem; }
+    button { background: #00d9ff; color: #fff; border: none; border-radius: 8px; padding: 0.8rem 2rem; font-size: 1rem; cursor: pointer; }
+    button:hover { background: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <h1><i class="fas fa-cogs"></i> Admin Panel</h1>
+    <div class="admin-section">
+      <h2>Welcome, Admin!</h2>
+      <p>Use the CMS below to edit your site content. (This is a placeholder UI. Connect to Netlify CMS or your backend for full functionality.)</p>
+    </div>
+    <div class="admin-section">
+      <label for="team">Edit Team (team.json)</label>
+      <textarea id="team" rows="6"></textarea>
+      <button>Save Team</button>
+    </div>
+    <div class="admin-section">
+      <label for="programs">Edit Programs (programs.json)</label>
+      <textarea id="programs" rows="6"></textarea>
+      <button>Save Programs</button>
+    </div>
+    <div class="admin-section">
+      <label for="projects">Edit Projects (projects.json)</label>
+      <textarea id="projects" rows="6"></textarea>
+      <button>Save Projects</button>
+    </div>
+    <div class="admin-section">
+      <label for="contact">Edit Contact (contact.json)</label>
+      <textarea id="contact" rows="4"></textarea>
+      <button>Save Contact</button>
+    </div>
+  </div>
+</body>
+</html>

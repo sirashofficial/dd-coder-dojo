@@ -15,9 +15,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS Files -->
+      <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/resources.css">
 </head>
 <body>
@@ -60,24 +60,72 @@
 
     <main id="main-content" tabindex="-1">
         <!-- Resources Header -->
-        <section class="resources-header">
-            <h1>Learn to Code!</h1>
-            <p>Learning to code is about creating, building confidence, gaining skills, and having fun. Here are our favorite resources to help you on your coding journey!</p>
+        <section class="resources-header hero-section parallax-container fade-in">
+            <div class="parallax-layer" data-speed="0.5">
+                <div class="hero-content">
+                    <h1 class="hero-title slide-in-left" data-animation-delay="0.2s">Learn to Code!</h1>
+                    <p class="hero-subtitle slide-in-right" data-animation-delay="0.4s">Learning to code is about creating, building confidence, gaining skills, and having fun. Here are our favorite resources to help you on your coding journey!</p>
+                    <div class="hero-buttons scale-in" data-animation-delay="0.6s">
+                        <button class="btn btn-primary pulse-on-hover" data-tooltip="Start with beginner resources">
+                            <i class="fas fa-play" aria-hidden="true"></i>
+                            Start Learning
+                        </button>
+                        <button class="btn btn-secondary" data-tooltip="View all resource categories">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                            Browse Resources
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Resources Section -->
-        <section class="resources-section">
+        <section class="resources-section fade-in" data-animation-delay="0.8s">
             <div class="resources-container">
-                <div class="resources-intro">
-                    <h2>Why Learn to Code?</h2>
-                    <p>Learning to code is about so many things: creating, learning computational and analytical thinking, understanding the power of computing, telling your stories, building confidence, gaining skills, and having fun. There are so many resources and tutorials out there to get started. Here are a few of our favorites used in DD Coder Dojo!</p>
+                <div class="resources-intro text-center slide-in-up">
+                    <h2 class="section-title">Why Learn to Code?</h2>
+                    <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Learning to code is about so many things: creating, learning computational and analytical thinking, understanding the power of computing, telling your stories, building confidence, gaining skills, and having fun. There are so many resources and tutorials out there to get started. Here are a few of our favorites used in DD Coder Dojo!</p>
                 </div>
                 
-                <div class="resource-categories">
-                    <!-- Beginner Resources -->
-                    <div class="category-card">
+                <!-- Search and Filter Section -->
+                <div class="resources-controls slide-in-up" data-animation-delay="0.4s">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input type="text" id="resourceSearch" placeholder="Search resources..." aria-label="Search learning resources">
+                            <button class="clear-search" id="clearSearch" aria-label="Clear search" style="display: none;">
+                                <i class="fas fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all" data-tooltip="Show all resources">
+                            <i class="fas fa-th" aria-hidden="true"></i>
+                            All
+                        </button>
+                        <button class="filter-btn" data-filter="beginner" data-tooltip="Beginner-friendly resources">
+                            <i class="fas fa-baby" aria-hidden="true"></i>
+                            Beginner
+                        </button>
+                        <button class="filter-btn" data-filter="physical" data-tooltip="Physical computing resources">
+                            <i class="fas fa-microchip" aria-hidden="true"></i>
+                            Physical
+                        </button>
+                        <button class="filter-btn" data-filter="web" data-tooltip="Web development resources">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            Web
+                        </button>
+                        <button class="filter-btn" data-filter="mobile" data-tooltip="Mobile app development">
+                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                            Mobile
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="resource-categories" id="resourceCategories">                    <!-- Beginner Resources -->
+                    <div class="category-card card-modern slide-in-left" data-animation-delay="1.0s" data-category="beginner" data-keywords="beginner scratch blockly games cs unplugged visual programming">
                         <div class="category-header">
-                            <div class="icon">
+                            <div class="icon pulse-animation">
                                 <i class="fas fa-baby"></i>
                             </div>
                             <h3>Beginner Resources</h3>
@@ -85,26 +133,26 @@
                         <div class="category-content">
                             <p>Perfect for getting started - no experience needed! These resources teach the logic of how computers think.</p>
                             <ul class="resource-list">
-                                <li class="resource-item">
-                                    <a href="https://csunplugged.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://csunplugged.org/" target="_blank" data-tooltip="Learn computing without computers">
                                         <i class="fas fa-external-link-alt"></i> CS Unplugged
                                     </a>
                                     <p>You don't need a computer to learn the logic of how computers think!</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://blockly.games/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://blockly.games/" target="_blank" data-tooltip="Visual programming games">
                                         <i class="fas fa-external-link-alt"></i> Blockly Games
                                     </a>
                                     <p>Fun games that teach drag and drop coding (online or download offline).</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://scratch.mit.edu/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://scratch.mit.edu/" target="_blank" data-tooltip="Create interactive stories and games">
                                         <i class="fas fa-external-link-alt"></i> Scratch
                                     </a>
                                     <p>Our platform of choice! Create simple programs or complex games and interactive projects.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://csfirst.withgoogle.com/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://csfirst.withgoogle.com/" target="_blank" data-tooltip="Google's CS First curriculum">
                                         <i class="fas fa-external-link-alt"></i> Google CS First
                                     </a>
                                     <p>A curriculum including videos and activities all using Scratch.</p>
@@ -112,11 +160,10 @@
                             </ul>
                         </div>
                     </div>
-                    
-                    <!-- Physical Computing -->
-                    <div class="category-card">
+                      <!-- Physical Computing -->
+                    <div class="category-card card-modern slide-in-left" data-animation-delay="1.2s" data-category="physical" data-keywords="physical computing microbit makecode hardware electronics robots">
                         <div class="category-header">
-                            <div class="icon">
+                            <div class="icon pulse-animation">
                                 <i class="fas fa-microchip"></i>
                             </div>
                             <h3>Physical Computing</h3>
@@ -124,26 +171,26 @@
                         <div class="category-content">
                             <p>Bring your code to life with physical devices and interactive projects!</p>
                             <ul class="resource-list">
-                                <li class="resource-item">
-                                    <a href="https://microbit.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://microbit.org/" target="_blank" data-tooltip="BBC's micro:bit platform">
                                         <i class="fas fa-external-link-alt"></i> BBC micro:bit
                                     </a>
                                     <p>Affordable microcontroller boards - code with MakeCode blocks, JavaScript or Python.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://makecode.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://makecode.org/" target="_blank" data-tooltip="Microsoft's MakeCode editor">
                                         <i class="fas fa-external-link-alt"></i> MakeCode
                                     </a>
                                     <p>Can interact with other devices and programs including Minecraft!</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://makeymakey.com/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://makeymakey.com/" target="_blank" data-tooltip="Turn objects into touchpads">
                                         <i class="fas fa-external-link-alt"></i> MakeyMakey
                                     </a>
                                     <p>Turn everyday objects into touchpads and combine with Scratch projects.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://www.raspberrypi.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://www.raspberrypi.org/" target="_blank" data-tooltip="Affordable mini-computer">
                                         <i class="fas fa-external-link-alt"></i> Raspberry Pi
                                     </a>
                                     <p>An affordable computer (~R1000) for robotics, automation, and so much more!</p>
@@ -153,9 +200,9 @@
                     </div>
                     
                     <!-- Advanced Resources -->
-                    <div class="category-card">
+                    <div class="category-card card-modern slide-in-left" data-animation-delay="1.4s">
                         <div class="category-header">
-                            <div class="icon">
+                            <div class="icon pulse-animation">
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <h3>More Advanced</h3>
@@ -163,26 +210,26 @@
                         <div class="category-content">
                             <p>Ready for the next level? These tools help you build real apps and complex programs.</p>
                             <ul class="resource-list">
-                                <li class="resource-item">
-                                    <a href="https://snap.berkeley.edu/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://snap.berkeley.edu/" target="_blank" data-tooltip="Advanced programming with Snap!">
                                         <i class="fas fa-external-link-alt"></i> Snap!
                                     </a>
                                     <p>Based on Scratch, Snap! allows more complex coding, particularly with data.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://appinventor.mit.edu/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://appinventor.mit.edu/" target="_blank" data-tooltip="MIT's App Inventor for mobile apps">
                                         <i class="fas fa-external-link-alt"></i> MIT App Inventor
                                     </a>
                                     <p>Another great MIT creation - build real mobile apps with drag-and-drop!</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://www.freecodecamp.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://www.freecodecamp.org/" target="_blank" data-tooltip="Learn web development for free">
                                         <i class="fas fa-external-link-alt"></i> freeCodeCamp
                                     </a>
                                     <p>Comprehensive web development curriculum with certificates.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://www.codecademy.com/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://www.codecademy.com/" target="_blank" data-tooltip="Interactive coding lessons">
                                         <i class="fas fa-external-link-alt"></i> Codecademy
                                     </a>
                                     <p>Interactive lessons in Python, JavaScript, HTML/CSS and more.</p>
@@ -192,9 +239,9 @@
                     </div>
                     
                     <!-- Global Movements -->
-                    <div class="category-card">
+                    <div class="category-card card-modern slide-in-left" data-animation-delay="1.6s">
                         <div class="category-header">
-                            <div class="icon">
+                            <div class="icon pulse-animation">
                                 <i class="fas fa-globe-africa"></i>
                             </div>
                             <h3>Global Movements</h3>
@@ -202,20 +249,20 @@
                         <div class="category-content">
                             <p>Join international movements bringing coding education to everyone!</p>
                             <ul class="resource-list">
-                                <li class="resource-item">
-                                    <a href="https://africacodeweek.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://africacodeweek.org/" target="_blank" data-tooltip="Coding for Africa">
                                         <i class="fas fa-external-link-alt"></i> Africa Code Week
                                     </a>
                                     <p>International movement to bring coding to Africa - tons of links and resources!</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://hourofcode.com/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://hourofcode.com/" target="_blank" data-tooltip="Hour of Code global initiative">
                                         <i class="fas fa-external-link-alt"></i> Hour of Code
                                     </a>
                                     <p>Global movement reaching tens of millions of students in 180+ countries.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://code.org/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://code.org/" target="_blank" data-tooltip="Code.org for K-12 computer science">
                                         <i class="fas fa-external-link-alt"></i> Code.org
                                     </a>
                                     <p>Our primary curriculum partner - courses for all ages and skill levels.</p>
@@ -225,9 +272,9 @@
                     </div>
                     
                     <!-- For Parents & Mentors -->
-                    <div class="category-card">
+                    <div class="category-card card-modern slide-in-left" data-animation-delay="1.8s">
                         <div class="category-header">
-                            <div class="icon">
+                            <div class="icon pulse-animation">
                                 <i class="fas fa-users"></i>
                             </div>
                             <h3>For Parents & Mentors</h3>
@@ -235,20 +282,20 @@
                         <div class="category-content">
                             <p>Resources to help parents and mentors support young coders on their journey.</p>
                             <ul class="resource-list">
-                                <li class="resource-item">
-                                    <a href="https://www.commonsensemedia.org/articles/coding-for-kids" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://www.commonsensemedia.org/articles/coding-for-kids" target="_blank" data-tooltip="Common Sense Media guide">
                                         <i class="fas fa-external-link-alt"></i> Common Sense Media: Coding for Kids
                                     </a>
                                     <p>Guide for parents on the benefits of coding education.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://www.raspberrypi.org/education/teacher-resources/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://www.raspberrypi.org/education/teacher-resources/" target="_blank" data-tooltip="Raspberry Pi teaching resources">
                                         <i class="fas fa-external-link-alt"></i> Raspberry Pi Teaching Resources
                                     </a>
                                     <p>Classroom resources for teaching with Raspberry Pi.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://scratch.mit.edu/ideas" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://scratch.mit.edu/ideas" target="_blank" data-tooltip="Scratch project ideas and help">
                                         <i class="fas fa-external-link-alt"></i> Scratch Ideas & Help
                                     </a>
                                     <p>Video tutorials and project ideas for Scratch - some available in isiZulu!</p>
@@ -258,9 +305,9 @@
                     </div>
                     
                     <!-- Interactive Tools -->
-                    <div class="category-card">
+                    <div class="category-card card-modern slide-in-left" data-animation-delay="2.0s">
                         <div class="category-header">
-                            <div class="icon">
+                            <div class="icon pulse-animation">
                                 <i class="fas fa-tools"></i>
                             </div>
                             <h3>Interactive Tools</h3>
@@ -268,20 +315,20 @@
                         <div class="category-content">
                             <p>Online tools and platforms that make learning to code more interactive and engaging.</p>
                             <ul class="resource-list">
-                                <li class="resource-item">
-                                    <a href="https://replit.com/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://replit.com/" target="_blank" data-tooltip="Replit online coding environment">
                                         <i class="fas fa-external-link-alt"></i> Replit
                                     </a>
                                     <p>Browser-based coding environment for multiple languages.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://codepen.io/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://codepen.io/" target="_blank" data-tooltip="CodePen for web development">
                                         <i class="fas fa-external-link-alt"></i> CodePen
                                     </a>
                                     <p>Online community for testing and showcasing HTML, CSS, and JavaScript.</p>
                                 </li>
-                                <li class="resource-item">
-                                    <a href="https://trinket.io/" target="_blank">
+                                <li class="resource-item hover-lift">
+                                    <a href="https://trinket.io/" target="_blank" data-tooltip="Trinket for Python and HTML">
                                         <i class="fas fa-external-link-alt"></i> Trinket
                                     </a>
                                     <p>Browser-based Python and HTML environments for education.</p>
@@ -429,9 +476,9 @@
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>
-    </footer>
-
-    <!-- JavaScript Files -->
+    </footer>    <!-- JavaScript Files -->
     <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
+    <script src="js/pages/resources.js"></script>
 </body>
 </html>

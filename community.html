@@ -1,0 +1,114 @@
+<!--
+File: community.html
+Purpose: Community Engagement Hub for DD Coder Dojo. Showcases upcoming events, fundraisers, movie nights, and ways to get involved. Includes WhatsApp and parent resources.
+Last updated: 2025-05-25
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community | DD Coder Dojo</title>
+  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/pages/community.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- Navigation (copied from main nav, will update next) -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="logo">
+      <div class="logo-icon"><div class="orbit"></div><div class="core"></div></div>
+      <span>DD Coder Dojo</span>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="community.html" class="active">Community</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <main id="main-content" tabindex="-1">
+    <section class="community-header hero-section parallax-container fade-in">
+      <div class="parallax-layer" data-speed="0.5">
+        <div class="hero-content">
+          <h1 class="hero-title slide-in-left" data-animation-delay="0.2s">Community Engagement</h1>
+          <p class="hero-subtitle slide-in-right" data-animation-delay="0.4s">Get involved! See our upcoming events, fundraisers, and ways to connect with DD Coder Dojo.</p>
+          <div class="hero-buttons scale-in" data-animation-delay="0.6s">
+            <button class="btn btn-primary pulse-on-hover" data-tooltip="See upcoming events">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+              View Events
+            </button>
+            <button class="btn btn-secondary" data-tooltip="Join our WhatsApp group">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i>
+              Join WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="events-section fade-in" data-animation-delay="0.8s">
+      <div class="section-header text-center">
+        <h2 class="section-title slide-in-up">Upcoming Events</h2>
+        <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Don't miss out on our exciting community events</p>
+      </div>
+      <div class="events-grid" id="eventsGrid">
+        <!-- Events will be loaded here dynamically -->
+      </div>
+    </section>
+    
+    <section class="fundraisers-section fade-in" data-animation-delay="1.0s">
+      <div class="section-header text-center">
+        <h2 class="section-title slide-in-up">Fundraisers & Movie Nights</h2>
+        <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Support our mission while having fun with the community</p>
+      </div>
+      <div class="fundraisers-grid" id="fundraisersGrid">
+        <!-- Fundraisers will be loaded here dynamically -->
+      </div>
+    </section>
+    <section class="past-events-section">
+      <h2>Past Event Recaps</h2>
+      <div class="past-events-grid" id="pastEventsGrid">
+        <!-- Past events will be loaded here dynamically -->
+      </div>
+    </section>
+    <section class="community-tools-section">
+      <h2>Community Tools & Parent Info</h2>
+      <div class="community-tools-grid">
+        <div class="community-tool">
+          <h3>WhatsApp Group</h3>
+          <p>Join our WhatsApp group for updates and support. <a href="https://wa.me/27314613101" target="_blank">Join Now</a></p>
+        </div>
+        <div class="community-tool">
+          <h3>Parent Resources</h3>
+          <ul>
+            <li>Orientation sessions for new parents</li>
+            <li>Safety and communication guidelines</li>
+            <li>Feedback and support channels</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <!-- ...existing footer... -->
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>  <script src="js/main.js"></script>
+  <script src="js/enhancedAnimations.js"></script>
+  <script src="js/pages/community.js"></script>
+</body>
+</html>

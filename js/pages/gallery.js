@@ -56,205 +56,213 @@ class ProjectGallery {
     }
 
     async loadProjects() {
-        // In production, this would fetch from an API
-        this.projects = [
-            {
-                id: 1,
-                title: "Space Adventure Game",
-                student: "Amara K.",
-                age: 12,
-                program: "intermediate",
-                description: "An exciting space exploration game built with Scratch featuring multiple levels, power-ups, and challenging enemies. Players navigate through asteroid fields while collecting resources.",
-                tech: ["Scratch", "Game Design", "Animation"],
-                category: "scratch",
-                image: "/images/projects/space-game.jpg",
-                difficulty: "Intermediate",
-                likes: 23,
-                views: 156,
-                date: "2025-01-15",
-                featured: true,
-                completed: true,
-                projectUrl: "https://scratch.mit.edu/projects/12345",
-                screenshots: [
-                    "/images/projects/space-game-1.jpg",
-                    "/images/projects/space-game-2.jpg"
-                ]
-            },
-            {
-                id: 2,
-                title: "Weather Dashboard",
-                student: "Sipho M.",
-                age: 15,
-                program: "senior",
-                description: "A responsive web dashboard showing real-time weather data with beautiful charts, animations, and location-based forecasting capabilities.",
-                tech: ["HTML", "CSS", "JavaScript", "API"],
-                category: "web",
-                image: "/images/projects/weather-dashboard.jpg",
-                difficulty: "Advanced",
-                likes: 31,
-                views: 203,
-                date: "2025-01-12",
-                featured: true,
-                completed: true,
-                projectUrl: "https://github.com/student/weather-app",
-                screenshots: [
-                    "/images/projects/weather-1.jpg",
-                    "/images/projects/weather-2.jpg"
-                ]
-            },
-            {
-                id: 3,
-                title: "Digital Pet Care",
-                student: "Zanele N.",
-                age: 9,
-                program: "junior",
-                description: "A fun virtual pet game where you feed, play with, and take care of your digital companion. Features day/night cycles and pet emotions.",
-                tech: ["Scratch", "Animation", "Logic"],
-                category: "scratch",
-                image: "/images/projects/pet-care.jpg",
-                difficulty: "Beginner",
-                likes: 18,
-                views: 89,
-                date: "2025-01-10",
-                featured: false,
-                completed: true,
-                projectUrl: "https://scratch.mit.edu/projects/67890",
-                screenshots: [
-                    "/images/projects/pet-1.jpg",
-                    "/images/projects/pet-2.jpg"
-                ]
-            },
-            {
-                id: 4,
-                title: "Smart Home Prototype",
-                student: "Thabo L.",
-                age: 16,
-                program: "senior",
-                description: "A micro:bit-powered smart home system with sensors for temperature, light, and security. Includes mobile app control and data logging.",
-                tech: ["micro:bit", "Python", "IoT", "Mobile"],
-                category: "microbit",
-                image: "/images/projects/smart-home.jpg",
-                difficulty: "Advanced",
-                likes: 27,
-                views: 134,
-                date: "2025-01-08",
-                featured: true,
-                completed: true,
-                projectUrl: "https://github.com/student/smart-home",
-                screenshots: [
-                    "/images/projects/smart-home-1.jpg",
-                    "/images/projects/smart-home-2.jpg"
-                ]
-            },
-            {
-                id: 5,
-                title: "Math Quiz Master",
-                student: "Lerato P.",
-                age: 11,
-                program: "intermediate",
-                description: "An interactive math quiz game with different difficulty levels, score tracking, and adaptive learning that adjusts to student performance.",
-                tech: ["Scratch", "Logic", "Math", "Education"],
-                category: "scratch",
-                image: "/images/projects/math-quiz.jpg",
-                difficulty: "Intermediate",
-                likes: 15,
-                views: 78,
-                date: "2025-01-05",
-                featured: false,
-                completed: true,
-                projectUrl: "https://scratch.mit.edu/projects/11111",
-                screenshots: [
-                    "/images/projects/math-quiz-1.jpg"
-                ]
-            },
-            {
-                id: 6,
-                title: "Portfolio Website",
-                student: "Nomsa D.",
-                age: 14,
-                program: "senior",
-                description: "A personal portfolio website showcasing coding projects with responsive design, smooth animations, and contact form integration.",
-                tech: ["HTML", "CSS", "JavaScript", "Responsive"],
-                category: "web",
-                image: "/images/projects/portfolio.jpg",
-                difficulty: "Intermediate",
-                likes: 22,
-                views: 167,
-                date: "2025-01-03",
-                featured: false,
-                completed: true,
-                projectUrl: "https://student-portfolio.netlify.app",
-                screenshots: [
-                    "/images/projects/portfolio-1.jpg",
-                    "/images/projects/portfolio-2.jpg"
-                ]
-            },
-            {
-                id: 7,
-                title: "Team Calculator App",
-                student: "Junior Ninjas Group",
-                age: null,
-                program: "junior",
-                description: "A collaborative calculator app built by our Junior Ninjas team, featuring colorful interface and fun sound effects for math operations.",
-                tech: ["Scratch", "Teamwork", "Math"],
-                category: "team",
-                image: "/images/projects/team-calculator.jpg",
-                difficulty: "Beginner",
-                likes: 35,
-                views: 201,
-                date: "2025-01-01",
-                featured: true,
-                completed: true,
-                projectUrl: "https://scratch.mit.edu/projects/22222",
-                screenshots: [
-                    "/images/projects/team-calc-1.jpg",
-                    "/images/projects/team-calc-2.jpg"
-                ]
-            },
-            {
-                id: 8,
-                title: "Motion Sensor Game",
-                student: "Kabelo R.",
-                age: 13,
-                program: "intermediate",
-                description: "An innovative game that uses micro:bit's accelerometer for motion-controlled gameplay. Tilt to navigate obstacles and collect points.",
-                tech: ["micro:bit", "Python", "Sensors"],
-                category: "microbit",
-                image: "/images/projects/motion-game.jpg",
-                difficulty: "Intermediate",
-                likes: 19,
-                views: 93,
-                date: "2024-12-28",
-                featured: false,
-                completed: true,
-                projectUrl: "https://github.com/student/motion-game",
-                screenshots: [
-                    "/images/projects/motion-1.jpg"
-                ]
-            },
-            {
-                id: 9,
-                title: "Recipe Finder App",
-                student: "Ayanda M.",
-                age: 17,
-                program: "senior",
-                description: "A Python application that helps users find recipes based on available ingredients, with nutritional information and cooking time estimates.",
-                tech: ["Python", "API", "Database", "GUI"],
-                category: "python",
-                image: "/images/projects/recipe-app.jpg",
-                difficulty: "Advanced",
-                likes: 24,
-                views: 142,
-                date: "2024-12-25",
-                featured: false,
-                completed: true,
-                projectUrl: "https://github.com/student/recipe-finder",
-                screenshots: [
-                    "/images/projects/recipe-1.jpg",
-                    "/images/projects/recipe-2.jpg"
-                ]
-            }
-        ];
+        // Load projects from data/projects.json
+        try {
+            const response = await fetch('data/projects.json');
+            if (!response.ok) throw new Error('Failed to load projects.json');
+            this.projects = await response.json();
+        } catch (e) {
+            console.warn('Falling back to static projects:', e);
+            // Static fallback data
+            this.projects = [
+                {
+                    id: 1,
+                    title: "Space Adventure Game",
+                    student: "Amara K.",
+                    age: 12,
+                    program: "intermediate",
+                    description: "An exciting space exploration game built with Scratch featuring multiple levels, power-ups, and challenging enemies. Players navigate through asteroid fields while collecting resources.",
+                    tech: ["Scratch", "Game Design", "Animation"],
+                    category: "scratch",
+                    image: "/images/projects/space-game.jpg",
+                    difficulty: "Intermediate",
+                    likes: 23,
+                    views: 156,
+                    date: "2025-01-15",
+                    featured: true,
+                    completed: true,
+                    projectUrl: "https://scratch.mit.edu/projects/12345",
+                    screenshots: [
+                        "/images/projects/space-game-1.jpg",
+                        "/images/projects/space-game-2.jpg"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Weather Dashboard",
+                    student: "Sipho M.",
+                    age: 15,
+                    program: "senior",
+                    description: "A responsive web dashboard showing real-time weather data with beautiful charts, animations, and location-based forecasting capabilities.",
+                    tech: ["HTML", "CSS", "JavaScript", "API"],
+                    category: "web",
+                    image: "/images/projects/weather-dashboard.jpg",
+                    difficulty: "Advanced",
+                    likes: 31,
+                    views: 203,
+                    date: "2025-01-12",
+                    featured: true,
+                    completed: true,
+                    projectUrl: "https://github.com/student/weather-app",
+                    screenshots: [
+                        "/images/projects/weather-1.jpg",
+                        "/images/projects/weather-2.jpg"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Digital Pet Care",
+                    student: "Zanele N.",
+                    age: 9,
+                    program: "junior",
+                    description: "A fun virtual pet game where you feed, play with, and take care of your digital companion. Features day/night cycles and pet emotions.",
+                    tech: ["Scratch", "Animation", "Logic"],
+                    category: "scratch",
+                    image: "/images/projects/pet-care.jpg",
+                    difficulty: "Beginner",
+                    likes: 18,
+                    views: 89,
+                    date: "2025-01-10",
+                    featured: false,
+                    completed: true,
+                    projectUrl: "https://scratch.mit.edu/projects/67890",
+                    screenshots: [
+                        "/images/projects/pet-1.jpg",
+                        "/images/projects/pet-2.jpg"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Smart Home Prototype",
+                    student: "Thabo L.",
+                    age: 16,
+                    program: "senior",
+                    description: "A micro:bit-powered smart home system with sensors for temperature, light, and security. Includes mobile app control and data logging.",
+                    tech: ["micro:bit", "Python", "IoT", "Mobile"],
+                    category: "microbit",
+                    image: "/images/projects/smart-home.jpg",
+                    difficulty: "Advanced",
+                    likes: 27,
+                    views: 134,
+                    date: "2025-01-08",
+                    featured: true,
+                    completed: true,
+                    projectUrl: "https://github.com/student/smart-home",
+                    screenshots: [
+                        "/images/projects/smart-home-1.jpg",
+                        "/images/projects/smart-home-2.jpg"
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "Math Quiz Master",
+                    student: "Lerato P.",
+                    age: 11,
+                    program: "intermediate",
+                    description: "An interactive math quiz game with different difficulty levels, score tracking, and adaptive learning that adjusts to student performance.",
+                    tech: ["Scratch", "Logic", "Math", "Education"],
+                    category: "scratch",
+                    image: "/images/projects/math-quiz.jpg",
+                    difficulty: "Intermediate",
+                    likes: 15,
+                    views: 78,
+                    date: "2025-01-05",
+                    featured: false,
+                    completed: true,
+                    projectUrl: "https://scratch.mit.edu/projects/11111",
+                    screenshots: [
+                        "/images/projects/math-quiz-1.jpg"
+                    ]
+                },
+                {
+                    id: 6,
+                    title: "Portfolio Website",
+                    student: "Nomsa D.",
+                    age: 14,
+                    program: "senior",
+                    description: "A personal portfolio website showcasing coding projects with responsive design, smooth animations, and contact form integration.",
+                    tech: ["HTML", "CSS", "JavaScript", "Responsive"],
+                    category: "web",
+                    image: "/images/projects/portfolio.jpg",
+                    difficulty: "Intermediate",
+                    likes: 22,
+                    views: 167,
+                    date: "2025-01-03",
+                    featured: false,
+                    completed: true,
+                    projectUrl: "https://student-portfolio.netlify.app",
+                    screenshots: [
+                        "/images/projects/portfolio-1.jpg",
+                        "/images/projects/portfolio-2.jpg"
+                    ]
+                },
+                {
+                    id: 7,
+                    title: "Team Calculator App",
+                    student: "Junior Ninjas Group",
+                    age: null,
+                    program: "junior",
+                    description: "A collaborative calculator app built by our Junior Ninjas team, featuring colorful interface and fun sound effects for math operations.",
+                    tech: ["Scratch", "Teamwork", "Math"],
+                    category: "team",
+                    image: "/images/projects/team-calculator.jpg",
+                    difficulty: "Beginner",
+                    likes: 35,
+                    views: 201,
+                    date: "2025-01-01",
+                    featured: true,
+                    completed: true,
+                    projectUrl: "https://scratch.mit.edu/projects/22222",
+                    screenshots: [
+                        "/images/projects/team-calc-1.jpg",
+                        "/images/projects/team-calc-2.jpg"
+                    ]
+                },
+                {
+                    id: 8,
+                    title: "Motion Sensor Game",
+                    student: "Kabelo R.",
+                    age: 13,
+                    program: "intermediate",
+                    description: "An innovative game that uses micro:bit's accelerometer for motion-controlled gameplay. Tilt to navigate obstacles and collect points.",
+                    tech: ["micro:bit", "Python", "Sensors"],
+                    category: "microbit",
+                    image: "/images/projects/motion-game.jpg",
+                    difficulty: "Intermediate",
+                    likes: 19,
+                    views: 93,
+                    date: "2024-12-28",
+                    featured: false,
+                    completed: true,
+                    projectUrl: "https://github.com/student/motion-game",
+                    screenshots: [
+                        "/images/projects/motion-1.jpg"
+                    ]
+                },
+                {
+                    id: 9,
+                    title: "Recipe Finder App",
+                    student: "Ayanda M.",
+                    age: 17,
+                    program: "senior",
+                    description: "A Python application that helps users find recipes based on available ingredients, with nutritional information and cooking time estimates.",
+                    tech: ["Python", "API", "Database", "GUI"],
+                    category: "python",
+                    image: "/images/projects/recipe-app.jpg",
+                    difficulty: "Advanced",
+                    likes: 24,
+                    views: 142,
+                    date: "2024-12-25",
+                    featured: false,
+                    completed: true,
+                    projectUrl: "https://github.com/student/recipe-finder",
+                    screenshots: [
+                        "/images/projects/recipe-1.jpg",
+                        "/images/projects/recipe-2.jpg"
+                    ]
+                }
+            ];
+        }
     }
 
     setupGalleryGrid() {
@@ -857,4 +865,103 @@ class ProjectGallery {
         // Return focus to the project card
         const projectCard = document.querySelector(`[data-project-id="${this.currentProjectId}"]`);
         if (projectCard) {
-            project
+            projectCard.focus();
+        }
+    }
+
+    isModalOpen() {
+        return this.projectModal.style.display === 'block';
+    }
+
+    isGalleryInFocus() {
+        const activeElement = document.activeElement;
+        return this.galleryGrid.contains(activeElement) || this.projectModal.contains(activeElement);
+    }
+
+    navigateToNextProject() {
+        const currentIndex = this.getCurrentProjectIndex();
+        const nextProject = this.getFilteredProjects()[currentIndex + 1];
+        
+        if (nextProject) {
+            this.openProjectModal(nextProject.id);
+        }
+    }
+
+    navigateToPrevProject() {
+        const currentIndex = this.getCurrentProjectIndex();
+        const prevProject = this.getFilteredProjects()[currentIndex - 1];
+        
+        if (prevProject) {
+            this.openProjectModal(prevProject.id);
+        }
+    }
+
+    getCurrentProjectIndex() {
+        const activeElement = document.activeElement;
+        if (!activeElement || !activeElement.classList.contains('project-card')) {
+            return -1;
+        }
+
+        return Array.from(this.galleryGrid.querySelectorAll('.project-card')).indexOf(activeElement);
+    }
+
+    debounce(func, delay) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+    }
+
+    truncateDescription(description, maxLength) {
+        if (description.length <= maxLength) return description;
+        const truncated = description.slice(0, maxLength - 3) + '...';
+        return truncated;
+    }
+
+    formatDate(dateString) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+
+    getProgramName(programCode) {
+        const programNames = {
+            junior: 'Junior Coders',
+            intermediate: 'Intermediate Coders',
+            senior: 'Senior Coders'
+        };
+        return programNames[programCode] || programCode;
+    }
+
+    getStudentInitials(studentName) {
+        return studentName.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
+    }
+
+    trackProjectView(project) {
+        // Placeholder for analytics or tracking code
+        console.log(`Project viewed: ${project.title} by ${project.student}`);
+    }
+
+    toggleLike(projectId) {
+        const project = this.projects.find(p => p.id == projectId);
+        if (!project) return;
+
+        // Toggle like status (naive implementation)
+        project.likes = project.likes ? project.likes + 1 : 1;
+
+        // Update UI
+        const likeBtn = this.projectModal.querySelector('.like-btn');
+        if (likeBtn) {
+            likeBtn.innerHTML = `<i class="fas fa-heart"></i> Liked (${project.likes})`;
+        }
+
+        // Optionally, send like action to server
+        console.log(`Project liked: ${project.title} by ${project.student}`);
+    }
+}
+
+// Initialize the gallery when the document is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new ProjectGallery();
+});

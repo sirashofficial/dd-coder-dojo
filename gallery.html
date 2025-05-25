@@ -16,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/main.css">
+    <!-- CSS Files -->    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/gallery.css">
 </head>
 <body>
@@ -56,58 +56,56 @@
         <svg viewBox="0 0 24 24" class="moon-icon">
             <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
         </svg>
-    </button>
-
-    <main id="main-content" tabindex="-1">
+    </button>    <main id="main-content" tabindex="-1">
         <!-- Gallery Header -->
-        <section class="gallery-header">
-            <h1>Student Project Gallery</h1>
-            <p>Discover the amazing projects created by our young coders at DD Coder Dojo!</p>
+        <section class="gallery-header fade-in">
+            <h1 class="slide-in-left">Student Project Gallery</h1>
+            <p class="scale-in" style="animation-delay: 0.2s">Discover the amazing projects created by our young coders at DD Coder Dojo!</p>
         </section>
 
         <!-- Gallery Section -->
         <section class="gallery-section">
             <div class="gallery-container">
                 <!-- Filter Buttons -->
-                <div class="gallery-filters">
-                    <button class="filter-btn active" data-filter="all">All Projects</button>
-                    <button class="filter-btn" data-filter="scratch">Scratch Games</button>
-                    <button class="filter-btn" data-filter="web">Websites</button>
-                    <button class="filter-btn" data-filter="python">Python Apps</button>
-                    <button class="filter-btn" data-filter="microbit">micro:bit</button>
-                    <button class="filter-btn" data-filter="team">Team Projects</button>
+                <div class="gallery-filters fade-in" style="animation-delay: 0.3s">
+                    <button class="filter-btn active bounce-on-hover" data-filter="all">All Projects</button>
+                    <button class="filter-btn bounce-on-hover" data-filter="scratch">Scratch Games</button>
+                    <button class="filter-btn bounce-on-hover" data-filter="web">Websites</button>
+                    <button class="filter-btn bounce-on-hover" data-filter="python">Python Apps</button>
+                    <button class="filter-btn bounce-on-hover" data-filter="microbit">micro:bit</button>
+                    <button class="filter-btn bounce-on-hover" data-filter="team">Team Projects</button>
                 </div>
 
                 <!-- Gallery Grid -->
-                <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-grid fade-in" id="galleryGrid" style="animation-delay: 0.4s" data-loading="true">
                     <!-- Projects will be dynamically loaded by JavaScript -->
                 </div>
 
                 <!-- Load More Button -->
-                <div class="load-more">
-                    <button class="load-more-btn" id="loadMoreBtn">
+                <div class="load-more fade-in" style="animation-delay: 0.6s">
+                    <button class="load-more-btn btn-enhanced pulse-on-hover" id="loadMoreBtn">
                         <i class="fas fa-plus-circle"></i> Load More Projects
                     </button>
                 </div>
 
                 <!-- Gallery Stats -->
-                <div class="stats-section">
-                    <h2>Gallery Statistics</h2>
+                <div class="stats-section fade-in" style="animation-delay: 0.5s">
+                    <h2 class="slide-in-right">Gallery Statistics</h2>
                     <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">127</span>
+                        <div class="stat-item card-modern scale-in" style="animation-delay: 0.7s">
+                            <span class="stat-number" data-count="127">0</span>
                             <span class="stat-label">Total Projects</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">89</span>
+                        <div class="stat-item card-modern scale-in" style="animation-delay: 0.8s">
+                            <span class="stat-number" data-count="89">0</span>
                             <span class="stat-label">Students Featured</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">1,240</span>
+                        <div class="stat-item card-modern scale-in" style="animation-delay: 0.9s">
+                            <span class="stat-number" data-count="1240">0</span>
                             <span class="stat-label">Total Views</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">356</span>
+                        <div class="stat-item card-modern scale-in" style="animation-delay: 1.0s">
+                            <span class="stat-number" data-count="356">0</span>
                             <span class="stat-label">Project Likes</span>
                         </div>
                     </div>
@@ -161,10 +159,9 @@
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>
-    </footer>
-
-    <!-- JavaScript Files -->
+    </footer>    <!-- JavaScript Files -->
     <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/gallery.js"></script>
 </body>
 </html>

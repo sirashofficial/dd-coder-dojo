@@ -264,3 +264,162 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AboutPageManager;
 }
+
+// === Advanced jQuery Effects & Enhancements ===
+$(function() {
+  // 1. Animated Timeline Reveal
+  $('.timeline-item').css({opacity:0, transform:'translateY(40px)'});
+  function revealTimeline() {
+    $('.timeline-item').each(function(i, el) {
+      if ($(el).offset().top < $(window).scrollTop() + $(window).height() - 60) {
+        $(el).css({opacity:1, transform:'translateY(0)', transition:'all 0.7s cubic-bezier(0.4,0,0.2,1) '+(i*120)+'ms'});
+      }
+    });
+  }
+  $(window).on('scroll resize', revealTimeline);
+  revealTimeline();
+  // 2. Team Member Card Simple Hover Effect (no 3D movement)
+  $(document).on('mouseenter', '.team-member', function(e) {
+    const $card = $(this);
+    // Simple subtle lift effect only
+    $card.css('transform', 'translateY(-2px)');
+  });
+  $(document).on('mouseleave', '.team-member', function() {
+    $(this).css('transform', 'translateY(0)');
+  });
+  // Modal popup for team member
+  $(document).on('click', '.team-member', function() {
+    const $card = $(this);
+    const name = $card.find('h3').text();
+    const role = $card.find('.role').text();
+    const bio = $card.find('.member-bio').text();
+    const img = $card.find('img').attr('src');
+    const socials = $card.find('.member-social').html() || '';
+    const modal = $(
+      `<div class="team-modal-overlay" tabindex="0">
+        <div class="team-modal" role="dialog" aria-modal="true">
+          <button class="modal-close" aria-label="Close">&times;</button>
+          <img src="${img}" alt="${name}" class="modal-img"/>
+          <h3>${name}</h3>
+          <p class="role">${role}</p>
+          <div class="modal-bio">${bio}</div>
+          <div class="modal-social">${socials}</div>
+        </div>
+      </div>`
+    );
+    $('body').append(modal);
+    setTimeout(()=>modal.addClass('active'),10);
+    modal.focus();
+  });
+  $(document).on('click keydown', '.modal-close, .team-modal-overlay', function(e) {
+    if (e.type === 'click' || e.key === 'Escape') {
+      $('.team-modal-overlay').removeClass('active');
+      setTimeout(()=>$('.team-modal-overlay').remove(),300);
+    }
+  });
+  $(document).on('click', '.team-modal', function(e) { e.stopPropagation(); });
+
+  // 3. Special Section Pulse on Hover + Animated Counters
+  $('.special-item').hover(
+    function() { $(this).css({'box-shadow':'0 0 24px 0 var(--secondary-color)','transform':'scale(1.04)'}); },
+    function() { $(this).css({'box-shadow':'','transform':'scale(1)'}); }
+  );
+  function animateCounters() {
+    $('.special-counter').each(function() {
+      const $el = $(this);
+      if ($el.data('animated')) return;
+      if ($el.offset().top < $(window).scrollTop() + $(window).height() - 40) {
+        $el.data('animated',true);
+        const target = +$el.data('target');
+        let count = 0;
+        const step = Math.ceil(target/60);
+        function update() {
+          count += step;
+          if (count >= target) { $el.text(target); return; }
+          $el.text(count);
+          setTimeout(update, 20);
+        }
+        update();
+      }
+    });
+  }
+  $(window).on('scroll resize', animateCounters);
+  animateCounters();
+
+  // 4. Smooth Scroll for Anchor Links
+  $('a[href^="#"]').on('click', function(e) {
+    const target = $(this.getAttribute('href'));
+    if (target.length) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: target.offset().top - 40}, 700);
+      target.addClass('section-in-view');
+      setTimeout(()=>target.removeClass('section-in-view'), 1200);
+    }
+  });
+
+  // 5. Testimonials Carousel
+  let tIndex = 0;
+  const $testimonials = $('.testimonial');
+  function showTestimonial(idx) {
+    $testimonials.removeClass('active').eq(idx).addClass('active');
+  }
+  $('.testimonial-next').on('click', function() {
+    tIndex = (tIndex+1)%$testimonials.length;
+    showTestimonial(tIndex);
+  });
+  $('.testimonial-prev').on('click', function() {
+    tIndex = (tIndex-1+$testimonials.length)%$testimonials.length;
+    showTestimonial(tIndex);
+  });
+  setInterval(function(){
+    tIndex = (tIndex+1)%$testimonials.length;
+    showTestimonial(tIndex);
+  }, 7000);
+
+  // 6. Parallax About Header
+  $(window).on('scroll', function() {
+    const scroll = $(window).scrollTop();
+    $('.about-header').css('background-position', 'center '+(scroll*0.3)+'px');
+  });
+
+  // 7. Accessibility: Focus trap for modal
+  $(document).on('keydown', '.team-modal-overlay', function(e) {
+    if (e.key === 'Tab') {
+      const focusable = $(this).find('button, [tabindex]:not([tabindex="-1"])');
+      const first = focusable.first()[0];
+      const last = focusable.last()[0];
+      if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      }
+    }
+  });
+
+  // 8. Lazy-load team images
+  $('img[loading="lazy"]').each(function(){
+    if (!$(this).attr('src')) $(this).attr('src', $(this).data('src'));
+  });
+
+  // 9. Dark mode: smooth transition, remember preference
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedTheme = localStorage.getItem('theme');
+  if(savedTheme) $('body').toggleClass('dark-mode', savedTheme==='dark');
+  $('#darkModeToggle').on('click', function() {
+    $('body').toggleClass('dark-mode');
+    localStorage.setItem('theme', $('body').hasClass('dark-mode') ? 'dark' : 'light');
+  });
+  $('body').css('transition','background 0.5s, color 0.5s');
+
+  // 10. Mobile: swipe for testimonials
+  let startX = null;
+  $('.testimonials-carousel').on('touchstart', function(e){
+    startX = e.originalEvent.touches[0].clientX;
+  });
+  $('.testimonials-carousel').on('touchend', function(e){
+    if(startX===null) return;
+    let endX = e.originalEvent.changedTouches[0].clientX;
+    if(endX-startX > 40) $('.testimonial-prev').click();
+    else if(startX-endX > 40) $('.testimonial-next').click();
+    startX = null;
+  });
+});

@@ -15,9 +15,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS Files -->
+      <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/programs.css">
 </head>
 <body>
@@ -56,124 +56,45 @@
         <svg viewBox="0 0 24 24" class="moon-icon">
             <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
         </svg>
-    </button>
-
-    <main id="main-content" tabindex="-1">
+    </button>    <main id="main-content" tabindex="-1">
         <!-- Programs Header -->
-        <header class="programs-header">
-            <div class="header-background">
+        <header class="programs-header fade-in">
+            <div class="header-background" data-parallax="0.1">
                 <div class="floating-code-snippets">
-                    <div class="code-snippet">&lt;html&gt;</div>
-                    <div class="code-snippet">function()</div>
-                    <div class="code-snippet">{code}</div>
-                    <div class="code-snippet">print()</div>
-                    <div class="code-snippet">&lt;/div&gt;</div>
+                    <div class="code-snippet rotate-on-hover">&lt;html&gt;</div>
+                    <div class="code-snippet pulse-on-hover">function()</div>
+                    <div class="code-snippet bounce-on-hover">{code}</div>
+                    <div class="code-snippet rotate-on-hover">print()</div>
+                    <div class="code-snippet pulse-on-hover">&lt;/div&gt;</div>
                 </div>
             </div>
-            <h1>Our Learning Programs</h1>
-            <p>Age-appropriate coding education paths for young innovators</p>
+            <h1 class="slide-in-left">Our Learning Programs</h1>
+            <p class="scale-in" style="animation-delay: 0.2s">Age-appropriate coding education paths for young innovators</p>
             
-            <div class="program-tabs">
-                <button class="program-tab active" data-program="junior" aria-controls="junior" aria-selected="true">
-                    <i class="fas fa-child"></i>
+            <div class="program-tabs fade-in" style="animation-delay: 0.4s">
+                <button class="program-tab active card-modern" data-program="junior" aria-controls="junior" aria-selected="true">
+                    <i class="fas fa-child pulse-on-hover"></i>
                     <span>Junior Ninjas</span>
                     <small>(Ages 7-10)</small>
                 </button>
-                <button class="program-tab" data-program="intermediate" aria-controls="intermediate" aria-selected="false">
-                    <i class="fas fa-code"></i>
+                <button class="program-tab card-modern" data-program="intermediate" aria-controls="intermediate" aria-selected="false">
+                    <i class="fas fa-code pulse-on-hover"></i>
                     <span>Code Explorers</span>
                     <small>(Ages 11-13)</small>
                 </button>
-                <button class="program-tab" data-program="senior" aria-controls="senior" aria-selected="false">
-                    <i class="fas fa-laptop-code"></i>
+                <button class="program-tab card-modern" data-program="senior" aria-controls="senior" aria-selected="false">
+                    <i class="fas fa-laptop-code pulse-on-hover"></i>
                     <span>Tech Innovators</span>
                     <small>(Ages 14-17)</small>
                 </button>
             </div>
         </header>
 
-        <!-- Program Details -->
-        <section class="program-details">
-            <div class="program-container">
-                <!-- Junior Program -->
-                <div id="junior" class="program active">
-                    <div class="program-image">
-                        <img src="images/programs/junior-ninjas.jpg" alt="Junior students learning Scratch programming" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h2>Junior Ninjas Program</h2>
-                        <p>Introducing young minds to computational thinking through block-based programming and interactive games. Our youngest coders learn the fundamentals of programming logic through visual, drag-and-drop interfaces that make coding fun and accessible.</p>
-                        <div class="program-info">
-                            <h3>What You'll Learn</h3>
-                            <ul>
-                                <li>Scratch Programming Basics</li>
-                                <li>Game Design Fundamentals</li>
-                                <li>Logic Building Exercises</li>
-                                <li>Creative Problem Solving</li>
-                                <li>Basic Computer Navigation</li>
-                                <li>Digital Storytelling</li>
-                            </ul>
-                        </div>
-                        <div class="schedule-info">
-                            <h4><i class="fas fa-calendar-alt"></i> Class Schedule</h4>
-                            <p><strong>Thursday:</strong> 14:00-15:00 | <strong>Friday:</strong> 13:00-15:00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Intermediate Program -->
-                <div id="intermediate" class="program">
-                    <div class="program-image">
-                        <img src="images/programs/code-explorers.jpg" alt="Intermediate students working on web development" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h2>Code Explorers Program</h2>
-                        <p>Transitioning to text-based programming with real-world web development projects. Students begin their journey into professional coding languages while building websites and simple applications.</p>
-                        <div class="program-info">
-                            <h3>What You'll Learn</h3>
-                            <ul>
-                                <li>HTML & CSS Foundations</li>
-                                <li>JavaScript Basics</li>
-                                <li>Python Programming</li>
-                                <li>Simple Web Projects</li>
-                                <li>Version Control (Git)</li>
-                                <li>Database Basics</li>
-                            </ul>
-                        </div>
-                        <div class="schedule-info">
-                            <h4><i class="fas fa-calendar-alt"></i> Class Schedule</h4>
-                            <p><strong>Tuesday & Wednesday:</strong> 14:00-16:00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Senior Program -->
-                <div id="senior" class="program">
-                    <div class="program-image">
-                        <img src="images/programs/tech-innovators.jpg" alt="Advanced students working on robotics and AI projects" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h2>Tech Innovators Program</h2>
-                        <p>Advanced programming and physical computing for real-world problem solving. Our senior students work on complex projects that prepare them for tech careers and university computer science programs.</p>
-                        <div class="program-info">
-                            <h3>What You'll Learn</h3>
-                            <ul>
-                                <li>Full Stack Web Development</li>
-                                <li>Advanced JavaScript & Python</li>
-                                <li>Raspberry Pi Projects</li>
-                                <li>Machine Learning Basics</li>
-                                <li>Real-world App Development</li>
-                                <li>Career Preparation & Portfolio Building</li>
-                            </ul>
-                        </div>
-                        <div class="schedule-info">
-                            <h4><i class="fas fa-calendar-alt"></i> Class Schedule</h4>
-                            <p><strong>Monday:</strong> 14:00-16:00</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Program Details (Dynamic) -->
+        <section class="program-details fade-in" style="animation-delay: 0.6s">
+            <div id="programsGrid" class="programs-grid" data-loading="true"></div>
         </section>
+        <script src="js/pages/programs.js"></script>
 
         <!-- Call to Action -->
         <section class="cta-section">
@@ -232,8 +153,8 @@
         </div>
     </footer>
 
-    <!-- JavaScript Files -->
-    <script src="js/main.js"></script>
+    <!-- JavaScript Files -->    <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
+    <script src="js/pages/programs.js"></script>
 </body>
 </html>
-                

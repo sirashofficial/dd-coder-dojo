@@ -1,4 +1,4 @@
-/* ===== ABOUT PAGE SPECIFIC STYLES ===== */
+/* ===== ENHANCED ABOUT PAGE STYLES ===== */
 .about-header {
   padding: 8rem 5% 4rem;
   background: linear-gradient(135deg, var(--dark-color) 0%, #1a0d2e 50%, #16213e 100%);
@@ -32,7 +32,7 @@
 
 .about-header h1 {
   font-family: var(--title-font);
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
   background-size: 300% 300%;
@@ -78,18 +78,14 @@
 }
 
 .mission-vision-box {
-  background: var(--surface-color);
-  padding: 3rem;
-  border-radius: 15px;
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mission-vision-box:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: var(--transition-smooth);
 }
 
 .mission-vision-box::before {
@@ -102,6 +98,29 @@
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
 }
 
+.mission-vision-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: 0;
+}
+
+.mission-vision-box:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--secondary-color);
+}
+
+.mission-vision-box:hover::after {
+  opacity: 0.05;
+}
+
 .mission-vision-box h3 {
   font-family: var(--title-font);
   font-size: 1.8rem;
@@ -110,6 +129,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .mission-vision-box h3 i {
@@ -462,6 +483,135 @@
   box-shadow: 0 15px 30px rgba(102, 0, 255, 0.4);
 }
 
+/* Parallax About Header */
+.about-header {
+  background: url('../images/about-header.jpg') center/cover no-repeat fixed;
+  background-position: center 0;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-primary);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Animated Counters */
+.special-counter {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-top: 1rem;
+  transition: color 0.3s, transform 0.3s;
+}
+.counter-label {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+/* Team Modal Popup */
+.team-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.team-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.team-modal {
+  background: var(--surface-color);
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  max-width: 350px;
+  width: 90vw;
+  text-align: center;
+  position: relative;
+  animation: section-fade-in 0.5s;
+}
+.team-modal .modal-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.team-modal .modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+/* Testimonials Carousel */
+.testimonials-section {
+  background: var(--surface-color-alt);
+  padding: 3rem 0 2rem 0;
+  text-align: center;
+}
+.testimonials-carousel {
+  position: relative;
+  min-height: 120px;
+  margin-bottom: 1.5rem;
+}
+.testimonial {
+  display: none;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-color);
+  transition: opacity 0.5s;
+}
+.testimonial.active {
+  display: block;
+  opacity: 1;
+}
+.testimonial cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--secondary-color);
+}
+.testimonial-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.testimonial-controls button {
+  background: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.testimonial-controls button:hover {
+  background: var(--primary-color);
+}
+
+/* Accessibility: Focus ring for modal */
+.team-modal:focus, .team-modal-overlay:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .about-header h1 {
@@ -493,4 +643,10 @@
     left: 18px;
     right: auto;
   }
+}
+
+@media (max-width: 700px) {
+  .about-header { min-height: 180px; padding: 2rem 0; }
+  .team-modal { padding: 1.2rem 0.5rem; }
+  .testimonials-section { padding: 2rem 0 1rem 0; }
 }

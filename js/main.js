@@ -646,3 +646,45 @@ window.DDCoderDojo = {
     // State
     isReady: () => ddApp?.isReady() || false
 };
+
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.setAttribute('data-animate', 'visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+// ===== ANIMATED CODE EFFECT =====
+function animateCodeLines() {
+  const codeLines = document.querySelectorAll('.code-line');
+  
+  codeLines.forEach((line, index) => {
+    // Add typing cursor animation
+    const cursor = line.querySelector('.code-cursor');
+    if (cursor) {
+      cursor.style.animationDelay = `${index * 0.3}s`;
+    }
+    
+    // Add hover effect
+    line.addEventListener('mouseenter', () => {
+      line.style.transform = 'translateX(10px)';
+      line.style.background = 'rgba(0, 217, 255, 0.05)';
+      line.style.transition = 'all 0.3s ease';
+    });
+    
+    line.addEventListener('mouseleave', () => {
+      line.style.transform = 'translateX(0)';
+      line.style.background = 'transparent';
+    });
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', animateCodeLines);
+
+// Enhanced form handler for contact and registration forms
+import './formHandler.js';

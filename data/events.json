@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2025-07-26",
+    "title": "Annual Hackathon",
+    "description": "Join our biggest coding event of the year! Open to all ages. Prizes for top teams. <a href=\"#\" class=\"btn-small\">How to Enter</a>",
+    "type": "event",
+    "image": "images/events/hackathon.jpg"
+  },
+  {
+    "date": "2025-06-15",
+    "title": "Family Movie Night",
+    "description": "Bring your family for a fun movie night and snacks. All proceeds go to our equipment fund.",
+    "type": "fundraiser",
+    "image": "images/events/movie-night.jpg"
+  },
+  {
+    "date": "2025-08-10",
+    "title": "Parent Info Session",
+    "description": "Learn about our curriculum, meet the mentors, and ask questions.",
+    "type": "event",
+    "image": "images/events/parent-info.jpg"
+  },
+  {
+    "date": "2025-05-01",
+    "title": "Coding for a Cause",
+    "description": "Our students build apps to support local charities. Showcase and support their work!",
+    "type": "fundraiser",
+    "image": "images/events/coding-cause.jpg"
+  }
+]

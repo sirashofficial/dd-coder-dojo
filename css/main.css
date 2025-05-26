@@ -131,12 +131,14 @@ body {
   background-color: var(--dark-color);
   color: var(--text-color);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   transition: background-color 0.3s ease, color 0.3s ease;
   font-size: var(--font-base);
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  width: 100%; /* Ensure full width */
+  max-width: 100vw; /* Prevent exceeding viewport width */
 }
 
 /* Enhanced base styles for mobile */
@@ -149,6 +151,9 @@ body {
 html {
   scroll-behavior: smooth;
   font-size: 16px; /* Base 16px for accessibility */
+  overflow-x: hidden; /* Prevent horizontal scrolling at root level */
+  width: 100%;
+  max-width: 100vw;
 }
 
 /* ===== IMPROVED LIGHT MODE WITH BETTER CONTRAST ===== */
@@ -760,6 +765,41 @@ body.light-mode .dark-mode-toggle .moon-icon {
   opacity: 0.8;
 }
 
+/* ===== FOOTER RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem var(--space-md) 2rem; /* Use consistent spacing variables */
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 100%;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2rem var(--space-sm) 1.5rem; /* Even smaller padding for small screens */
+  }
+  
+  .footer-content {
+    gap: 1.5rem;
+  }
+  
+  .footer-section {
+    text-align: center; /* Center content on very small screens */
+  }
+  
+  .footer-section h3 {
+    font-size: 1.125rem;
+  }
+}
+
 /* ===== UTILITY CLASSES ===== */
 .container {
   max-width: 1200px;
@@ -928,6 +968,23 @@ body.light-mode .dark-mode-toggle .moon-icon {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 var(--space-md); /* 16px on mobile */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* Mobile-specific container adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-md);
+    max-width: 100%;
+    width: calc(100% - 2rem); /* Account for padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-sm);
+    width: calc(100% - 1rem); /* Account for smaller padding */
+  }
 }
 
 /* Mobile-first section spacing */

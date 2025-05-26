@@ -5,14 +5,15 @@ Last updated: 2025-05-25
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+<head>  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Community | DD Coder Dojo</title>
-  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">  <link rel="stylesheet" href="css/main.css">
+  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">  
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/enhancements.css">
   <link rel="stylesheet" href="css/pages/home.css">
   <link rel="stylesheet" href="css/pages/community.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -54,13 +55,77 @@ Last updated: 2025-05-25
         </div>
       </div>
     </section>
-    
-    <section class="events-section fade-in" data-animation-delay="0.8s">
+      <section class="events-section fade-in" data-animation-delay="0.8s">
       <div class="section-header text-center">
-        <h2 class="section-title slide-in-up">Upcoming Events</h2>
-        <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Don't miss out on our exciting community events</p>
+        <h2 class="section-title slide-in-up">Events Calendar</h2>
+        <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Stay up to date with all our exciting community events</p>
       </div>
-      <div class="events-grid" id="eventsGrid">
+      
+      <!-- Quick Class Schedule Section (Mobile-Friendly) -->
+      <div class="quick-schedule-section">
+        <h3>This Week's Classes</h3>
+        <div class="quick-schedule-grid" id="quickScheduleGrid">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <button class="btn btn-outline view-full-calendar" onclick="document.querySelector('.calendar-container').scrollIntoView({behavior: 'smooth'})">
+          <i class="fas fa-calendar-alt"></i>
+          View Full Calendar
+        </button>
+      </div>
+      
+      <!-- Calendar Navigation -->
+      <div class="calendar-navigation">
+        <button class="nav-btn prev-month" id="prevMonth" aria-label="Previous month">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <h3 class="current-month" id="currentMonth">May 2025</h3>
+        <button class="nav-btn next-month" id="nextMonth" aria-label="Next month">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <!-- Calendar Grid -->
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <div class="day-label">Sun</div>
+          <div class="day-label">Mon</div>
+          <div class="day-label">Tue</div>
+          <div class="day-label">Wed</div>
+          <div class="day-label">Thu</div>
+          <div class="day-label">Fri</div>
+          <div class="day-label">Sat</div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid">
+          <!-- Calendar days will be generated here -->
+        </div>
+      </div>
+      
+      <!-- Event Details Modal -->
+      <div class="event-modal" id="eventModal">
+        <div class="modal-content">
+          <button class="modal-close" id="modalClose" aria-label="Close event details">
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="modal-body" id="modalBody">
+            <!-- Event details will be populated here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Events List View Toggle -->
+      <div class="view-toggle">
+        <button class="toggle-btn calendar-view active" id="calendarViewBtn">
+          <i class="fas fa-calendar-alt"></i>
+          Calendar View
+        </button>
+        <button class="toggle-btn list-view" id="listViewBtn">
+          <i class="fas fa-list"></i>
+          List View
+        </button>
+      </div>
+      
+      <!-- Traditional Events Grid (for list view) -->
+      <div class="events-grid hidden" id="eventsGrid">
         <!-- Events will be loaded here dynamically -->
       </div>
     </section>
@@ -107,7 +172,28 @@ Last updated: 2025-05-25
         <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
       </div>
     </div>
-  </footer>  <script src="js/main.js"></script>
+  </footer>  
+  <!-- Mobile Floating Action Button -->
+  <div class="mobile-fab-container">
+    <button class="mobile-fab" id="mobileFab" aria-label="Quick actions">
+      <i class="fas fa-plus"></i>
+    </button>
+    <div class="fab-menu" id="fabMenu">
+      <button class="fab-option" onclick="window.location.href='contact.html?action=enroll'">
+        <i class="fas fa-user-plus"></i>
+        <span>Enroll in Class</span>
+      </button>
+      <button class="fab-option" onclick="window.communityCalendar?.exportCalendar()">
+        <i class="fas fa-calendar-download"></i>
+        <span>Export Schedule</span>
+      </button>
+      <button class="fab-option" onclick="window.location.href='contact.html'">
+        <i class="fas fa-phone"></i>
+        <span>Contact Us</span>
+      </button>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
   <script src="js/enhancedAnimations.js"></script>
   <script src="js/pages/community.js"></script>
 </body>

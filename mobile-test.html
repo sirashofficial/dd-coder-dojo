@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DD Coder Dojo - Mobile Width Test</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages/home.css">
+    <link rel="stylesheet" href="css/mobile-accessibility.css">
+    <style>
+        /* Test-specific styles */
+        .test-container {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid red;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+        
+        .width-indicator {
+            background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff);
+            height: 20px;
+            width: 100%;
+            margin: 0.5rem 0;
+            position: relative;
+        }
+        
+        .width-indicator::after {
+            content: attr(data-width);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2px 8px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        
+        .test-info {
+            background: var(--surface-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .overflow-test {
+            background: rgba(255, 255, 0, 0.2);
+            border: 2px dashed orange;
+            padding: 1rem;
+            margin: 1rem 0;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        
+        .viewport-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Viewport Information -->
+    <div class="viewport-info" id="viewportInfo">
+        Viewport: <span id="viewportSize"></span>
+    </div>
+
+    <!-- Navigation (same as main site) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                DD Coder Dojo
+            </div>
+            <div class="nav-links">
+                <a href="#test-hero">Hero Test</a>
+                <a href="#test-footer">Footer Test</a>
+                <a href="#test-overflow">Overflow Test</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Test Hero Section -->
+    <section class="hero" id="test-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Mobile Width Test</h1>
+                <p class="hero-subtitle">Testing hero section mobile responsiveness</p>
+                <div class="test-info">
+                    <h3>Hero Section Test</h3>
+                    <p>This hero section should fit perfectly within mobile viewports without causing horizontal scrolling.</p>
+                    <div class="width-indicator" data-width="Hero Container Width"></div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#test-overflow" class="btn btn-primary">Test Overflow</a>
+                    <a href="#test-footer" class="btn btn-secondary">Test Footer</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Mobile Test</div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code>// Testing mobile width
+function checkMobileWidth() {
+  const viewport = window.innerWidth;
+  const hasOverflow = document.body.scrollWidth > viewport;
+  
+  console.log({
+    viewport: viewport + 'px',
+    bodyWidth: document.body.scrollWidth + 'px',
+    hasHorizontalOverflow: hasOverflow
+  });
+  
+  return !hasOverflow;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overflow Test Section -->
+    <section id="test-overflow" style="padding: 4rem 0; background: var(--surface-color);">
+        <div class="container">
+            <h2 class="text-center">Overflow Test Section</h2>
+            
+            <div class="test-info">
+                <h3>Width Overflow Tests</h3>
+                <p>These tests check if content properly fits within mobile viewports:</p>
+            </div>
+
+            <!-- Test 1: Container Width -->
+            <div class="test-container">
+                <h4>Test 1: Container Width</h4>
+                <p>Container should not exceed viewport width:</p>
+                <div class="width-indicator" data-width="Container Width"></div>
+            </div>
+
+            <!-- Test 2: Long Content -->
+            <div class="test-container">
+                <h4>Test 2: Long Text Content</h4>
+                <p>This is a very long line of text that should wrap properly on mobile devices and not cause horizontal scrolling issues in the viewport area.</p>
+                <div class="overflow-test">
+                    <span>This content intentionally overflows horizontally to test scroll behavior: </span>
+                    <span style="color: red;">This should scroll horizontally within this container only ↔️ not the entire viewport ↔️ testing overflow-x behavior ↔️</span>
+                </div>
+            </div>
+
+            <!-- Test 3: Grid Layout -->
+            <div class="test-container">
+                <h4>Test 3: Grid Layout Mobile Responsiveness</h4>
+                <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="background: var(--primary-color); padding: 1rem; border-radius: 8px; color: white;">Grid Item 1</div>
+                    <div style="background: var(--secondary-color); padding: 1rem; border-radius: 8px; color: white;">Grid Item 2</div>
+                    <div style="background: var(--accent-color); padding: 1rem; border-radius: 8px; color: black;">Grid Item 3</div>
+                </div>
+            </div>
+
+            <!-- Test 4: Button Layout -->
+            <div class="test-container">
+                <h4>Test 4: Button Layout</h4>
+                <div class="hero-buttons" style="margin-top: 1rem;">
+                    <a href="#" class="btn btn-primary">Primary Button</a>
+                    <a href="#" class="btn btn-secondary">Secondary Button</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Footer Section -->
+    <footer class="footer" id="test-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Mobile Test Footer</h3>
+                <p>This footer section tests mobile responsiveness and width constraints.</p>
+                <div class="width-indicator" data-width="Footer Width"></div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#test-hero">Hero Test</a></li>
+                    <li><a href="#test-overflow">Overflow Test</a></li>
+                    <li><a href="#test-footer">Footer Test</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: test@ddcoderdojo.com</p>
+                <p>Phone: (555) 123-4567</p>
+                <div class="social-links" style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <a href="#" style="color: var(--secondary-color);">📧</a>
+                    <a href="#" style="color: var(--secondary-color);">📱</a>
+                    <a href="#" style="color: var(--secondary-color);">🌐</a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>&copy; 2025 DD Coder Dojo - Mobile Width Test</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for testing -->
+    <script>
+        // Update viewport information
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const bodyWidth = document.body.scrollWidth;
+            const hasHorizontalOverflow = bodyWidth > width;
+            
+            document.getElementById('viewportSize').textContent = 
+                `${width}×${height} | Body: ${bodyWidth}px | Overflow: ${hasHorizontalOverflow ? 'YES ❌' : 'NO ✅'}`;
+            
+            // Update width indicators
+            document.querySelectorAll('.width-indicator').forEach(indicator => {
+                const rect = indicator.getBoundingClientRect();
+                indicator.style.background = hasHorizontalOverflow ? 
+                    'linear-gradient(90deg, #ff0000, #ff4444, #ff0000)' : 
+                    'linear-gradient(90deg, #00ff00, #44ff44, #00ff00)';
+            });
+            
+            // Log test results
+            console.log('Mobile Width Test Results:', {
+                viewport: `${width}×${height}`,
+                bodyWidth: bodyWidth + 'px',
+                hasHorizontalOverflow: hasHorizontalOverflow,
+                testStatus: hasHorizontalOverflow ? 'FAILED ❌' : 'PASSED ✅'
+            });
+        }
+
+        // Test mobile width on load and resize
+        window.addEventListener('load', updateViewportInfo);
+        window.addEventListener('resize', updateViewportInfo);
+
+        // Test different mobile breakpoints
+        function testBreakpoints() {
+            const breakpoints = [
+                { name: 'Small Mobile', width: 320 },
+                { name: 'Mobile', width: 480 },
+                { name: 'Large Mobile', width: 768 },
+                { name: 'Tablet', width: 992 },
+                { name: 'Desktop', width: 1200 }
+            ];
+            
+            const currentWidth = window.innerWidth;
+            const currentBreakpoint = breakpoints.find(bp => currentWidth <= bp.width) || 
+                                    { name: 'Large Desktop', width: currentWidth };
+            
+            console.log('Current Breakpoint:', currentBreakpoint);
+            return currentBreakpoint;
+        }
+
+        // Run tests
+        setTimeout(() => {
+            updateViewportInfo();
+            testBreakpoints();
+            
+            // Check for specific mobile issues
+            const heroContainer = document.querySelector('.hero .container');
+            const footerContent = document.querySelector('.footer-content');
+            
+            if (heroContainer) {
+                const heroRect = heroContainer.getBoundingClientRect();
+                console.log('Hero Container Width:', heroRect.width + 'px');
+            }
+            
+            if (footerContent) {
+                const footerRect = footerContent.getBoundingClientRect();
+                console.log('Footer Content Width:', footerRect.width + 'px');
+            }
+        }, 500);
+    </script>
+</body>
+</html>

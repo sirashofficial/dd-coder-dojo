@@ -6,6 +6,92 @@
 
 console.log('Home page script loaded');
 
+// Program Tabs Class for filtering program cards
+class ProgramTabs {
+    constructor() {
+        this.tabs = document.querySelectorAll('.program-tab');
+        this.programCards = document.querySelectorAll('.program-card');
+        this.init();
+    }
+
+    init() {
+        if (this.tabs.length === 0) {
+            console.log('No program tabs found on this page, skipping tab initialization');
+            return;
+        }
+        
+        if (this.programCards.length === 0) {
+            console.log('No program cards found, skipping tab initialization');
+            return;
+        }
+
+        this.tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => this.handleTabClick(e));
+            
+            // Add keyboard support
+            tab.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.handleTabClick(e);
+                }
+            });
+        });
+
+        // Show all programs by default
+        this.showPrograms('all');
+        console.log('Program tabs initialized successfully');
+    }
+
+    handleTabClick(e) {
+        const clickedTab = e.currentTarget;
+        const program = clickedTab.getAttribute('data-program');
+
+        // Update tab states
+        this.tabs.forEach(tab => {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-selected', 'false');
+        });
+
+        clickedTab.classList.add('active');
+        clickedTab.setAttribute('aria-selected', 'true');
+
+        // Filter program cards
+        this.showPrograms(program);
+
+        // Add visual feedback
+        clickedTab.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            clickedTab.style.transform = '';
+        }, 100);
+    }
+
+    showPrograms(program) {
+        this.programCards.forEach(card => {
+            const cardProgram = card.getAttribute('data-program');
+            
+            if (program === 'all' || cardProgram === program) {
+                card.style.display = 'block';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                // Animate in
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(-20px)';
+                
+                // Hide after animation
+                setTimeout(() => {
+                    card.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+}
+
 // Example: jQuery fade-in for all .card elements on page load
 $(document).ready(function() {
   $('.card').hide().fadeIn(1000);

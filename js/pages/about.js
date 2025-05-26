@@ -422,4 +422,140 @@ $(function() {
     else if(startX-endX > 40) $('.testimonial-next').click();
     startX = null;
   });
+
+  // --- Accessibility: Section skip links (optional, for screen readers) ---
+  const skipLinkHtml = `
+    <div class="skip-links" style="position:absolute; top:-40px; left:0; width:100%;">
+      <a href="#team-grid" class="skip-link" style="
+        display:inline-block; 
+        margin:0.5rem 0; 
+        padding:0.5rem 1rem; 
+        background:var(--primary-color); 
+        color:white; 
+        border-radius:4px;
+        text-decoration:none;
+        transition: top 0.3s;
+      ">
+        Skip to Team Section
+      </a>
+      <a href="#contact" class="skip-link" style="
+        display:inline-block; 
+        margin:0.5rem 0; 
+        padding:0.5rem 1rem; 
+        background:var(--primary-color); 
+        color:white; 
+        border-radius:4px;
+        text-decoration:none;
+        transition: top 0.3s;
+      ">
+        Skip to Contact
+      </a>
+    </div>
+  `;
+  $('body').prepend(skipLinkHtml);
+  $('.skip-link').on('focus', function() {
+    $(this).css('top', '0');
+  }).on('blur', function() {
+    $(this).css('top', '-40px');
+  });
+
+  // --- Animate new About page sections on scroll with staggered effect ---
+  function revealSoftSections() {
+    $('.success-stories-section, .for-parents-section, .learning-outcomes-section').each(function() {
+      const section = $(this);
+      if (section.offset().top < $(window).scrollTop() + $(window).height() * 0.85 && !section.hasClass('revealed')) {
+        section.addClass('revealed');
+        
+        // First animate the section title with fade and slide
+        section.find('h2').css({
+          opacity: 0,
+          transform: 'translateY(-20px)'
+        }).animate({
+          opacity: 1,
+          transform: 'translateY(0)'
+        }, 600);
+        
+        // Then animate the intro text
+        setTimeout(() => {
+          section.find('.section-intro').css({
+            opacity: 0,
+            transform: 'translateY(-15px)'
+          }).animate({
+            opacity: 1,
+            transform: 'translateY(0)'
+          }, 600);
+        }, 200);
+        
+        // Then animate each card with staggered delay
+        const cards = section.find('.success-story, .outcome-card, .parents-guidance, .parents-faq');
+        cards.each(function(i) {
+          const card = $(this);
+          setTimeout(() => {
+            card.css({
+              opacity: 0,
+              transform: 'translateY(30px)'
+            }).animate({
+              opacity: 1,
+              transform: 'translateY(0)'
+            }, 600, 'easeOutQuad');
+          }, 400 + (i * 150));
+        });
+        
+        // Finally animate the footer with button
+        setTimeout(() => {
+          section.find('.section-footer').css({
+            opacity: 0,
+            transform: 'translateY(20px)'
+          }).animate({
+            opacity: 1, 
+            transform: 'translateY(0)'
+          }, 600);
+        }, 400 + (cards.length * 150));
+      }
+    });
+  }
+  
+  // Add easing function if not already available
+  if ($.easing.easeOutQuad === undefined) {
+    $.easing.easeOutQuad = function(x) {
+      return 1 - (1 - x) * (1 - x);
+    };
+  }
+
+  // Set initial state
+  $('.success-stories-section, .for-parents-section, .learning-outcomes-section').css({opacity: 1});
+  $('.success-stories-section h2, .success-stories-section .section-intro, .success-stories-section .success-story, .success-stories-section .section-footer').css({opacity: 0});
+  $('.for-parents-section h2, .for-parents-section .section-intro, .for-parents-section .parents-guidance, .for-parents-section .parents-faq, .for-parents-section .section-footer').css({opacity: 0});
+  $('.learning-outcomes-section h2, .learning-outcomes-section .section-intro, .learning-outcomes-section .outcome-card, .learning-outcomes-section .section-footer').css({opacity: 0});
+  
+  // Trigger animations on scroll
+  $(window).on('scroll resize', revealSoftSections);
+  
+  // Initial check
+  setTimeout(revealSoftSections, 100);
+  
+  // --- Interactive highlights for program cards ---
+  $('.outcome-card').hover(function() {
+    $(this).siblings().css('opacity', '0.7');
+  }, function() {
+    $(this).siblings().css('opacity', '1');
+  });
+  
+  // --- Interactive FAQ expand/collapse ---
+  $('.parents-faq dt').on('click', function() {
+    const dt = $(this);
+    const dd = dt.next('dd');
+    
+    if (dd.hasClass('expanded')) {
+      dd.slideUp(300).removeClass('expanded');
+      dt.find('i').removeClass('fa-angle-down').addClass('fa-angle-right');
+    } else {
+      dd.slideDown(300).addClass('expanded');
+      dt.find('i').removeClass('fa-angle-right').addClass('fa-angle-down');
+    }
+  });
+  
+  // Initialize FAQ items (collapsed by default)
+  $('.parents-faq dd').hide();
+  $('.parents-faq dt').find('i').removeClass('fa-angle-right').addClass('fa-angle-right');
 });

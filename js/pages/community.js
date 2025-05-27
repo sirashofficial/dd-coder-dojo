@@ -20,18 +20,44 @@ class EventCalendar {
     this.init();
   }  async init() {
     console.log('🚀 EventCalendar initializing...');
-    await this.loadEvents();
-    console.log('📅 Events loaded:', this.events.length);
-    await this.loadClassSchedule();
-    console.log('📚 Class schedule loaded:', this.classSchedule.length);
-    this.generateYearlyClassEvents();
-    console.log('🔄 Yearly events generated, total events now:', this.events.length);
-    this.setupEventListeners();
-    this.renderCalendar();
-    this.renderEventsGrid();
-    this.renderQuickSchedule();
-    this.setupMobileOptimizations();
-  }  async loadEvents() {
+    
+    // Show loading state
+    this.showLoadingState();
+    
+    try {
+      await this.loadEvents();
+      console.log('📅 Events loaded:', this.events.length);
+      await this.loadClassSchedule();
+      console.log('📚 Class schedule loaded:', this.classSchedule.length);
+      this.generateYearlyClassEvents();
+      console.log('🔄 Yearly events generated, total events now:', this.events.length);
+      
+      // Create Google Calendar-style events
+      this.createCoderDojoAvailabilityEvents();
+      
+      this.setupEventListeners();
+      this.renderCalendar();
+      this.renderEventsGrid();
+      this.renderQuickSchedule();
+      this.renderWeeklySchedule(); // Add weekly schedule display
+      this.setupMobileOptimizations();
+      
+      // Setup FullCalendar integration
+      this.setupCalendarViewToggle();
+      this.setupExportButtons();
+      
+      // Initialize FullCalendar by default with a small delay
+      setTimeout(() => {
+        this.initFullCalendar();
+        this.hideLoadingState();
+      }, 100);
+    } catch (error) {
+      console.error('Error initializing calendar:', error);
+      this.showErrorState();
+    }
+  }
+
+  async loadEvents() {
     try {
       const response = await fetch('data/events.json');
       if (!response.ok) throw new Error('Failed to load events.json');
@@ -816,14 +842,14 @@ class EventCalendar {
       const dateCompare = a.displayDate - b.displayDate;
       if (dateCompare !== 0) return dateCompare;
       return a.time.localeCompare(b.time);
-    });
-
-    if (thisWeekClasses.length === 0) {
+    });    if (thisWeekClasses.length === 0) {
       quickScheduleGrid.innerHTML = `
         <div class="no-classes-message" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--text-secondary);">
-             }
-
-    console.log('This week classes total:', thisWeekClasses.length);
+          <i class="fas fa-calendar-times" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+          <h3>No classes scheduled this week</h3>
+          <p>Check back soon for new class announcements!</p>
+        </div>
+      `;
       return;
     }
 
@@ -864,12 +890,521 @@ class EventCalendar {
           </div>
         </div>
       `;
-    }).join('');
-
-    quickScheduleGrid.innerHTML = quickClassCards;
+    }).join('');    quickScheduleGrid.innerHTML = quickClassCards;
     
     // Add global reference for click handlers
     window.communityCalendar = this;
+  }
+
+  // Create Google Calendar-style events showing when Coder Dojo is available
+  createCoderDojoAvailabilityEvents() {
+    console.log('📅 Creating Coder Dojo availability events...');
+    
+    const today = new Date();
+    const endDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()); // One year ahead
+    
+    // Generate availability events for weekdays (Mon-Fri)
+    for (let date = new Date(today); date <= endDate; date.setDate(date.getDate() + 1)) {
+      const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+      
+      // Skip weekends (Saturday = 6, Sunday = 0)
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        continue;
+      }
+      
+      // Check if there's already a specific event for this date
+      const dateStr = date.toISOString().split('T')[0];
+      const hasSpecificEvent = this.events.some(event => 
+        event.date === dateStr || 
+        (event.start && event.start.startsWith(dateStr))
+      );
+      
+      // Only add availability if no specific event exists
+      if (!hasSpecificEvent) {
+        const dayName = this.dayNames[dayOfWeek].toLowerCase();
+        const classesForDay = this.classSchedule.filter(cls => cls.day === dayName);
+        
+        if (classesForDay.length > 0) {
+          // Add a general availability event
+          this.events.push({
+            date: dateStr,
+            title: `Coder Dojo Classes Available`,
+            description: `${classesForDay.length} classes available today. Click to see details.`,
+            type: 'coder-dojo-available',
+            time: 'Multiple times',
+            location: 'DD Coder Dojo',
+            classCount: classesForDay.length,
+            classes: classesForDay.map(cls => ({
+              title: cls.title,
+              time: cls.time,
+              ageGroup: cls.ageGroup,
+              level: cls.level,
+              teacher: cls.teacher.name
+            }))
+          });
+        }
+      }
+    }
+    
+    console.log(`✅ Added ${this.events.filter(e => e.type === 'coder-dojo-available').length} availability events`);
+  }
+
+  // Render the weekly schedule overview
+  renderWeeklySchedule() {
+    const container = document.getElementById('weeklySchedule');
+    if (!container) return;
+    
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const daySchedules = [];
+    
+    days.forEach(day => {
+      const dayLower = day.toLowerCase();
+      const classesForDay = this.classSchedule.filter(cls => cls.day === dayLower);
+      
+      const isWeekend = day === 'Saturday' || day === 'Sunday';
+      const hasClasses = classesForDay.length > 0;
+      
+      daySchedules.push({
+        day: day,
+        isWeekend: isWeekend,
+        hasClasses: hasClasses,
+        classes: classesForDay,
+        status: isWeekend ? 'closed' : (hasClasses ? 'active' : 'limited')
+      });
+    });
+    
+    container.innerHTML = daySchedules.map(daySchedule => `
+      <div class="schedule-day ${!daySchedule.hasClasses || daySchedule.isWeekend ? 'no-classes' : ''}">
+        <div class="schedule-day-header">
+          <span class="day-name">${daySchedule.day}</span>
+          <span class="day-status ${daySchedule.status === 'active' ? 'status-active' : 'status-closed'}">
+            ${daySchedule.isWeekend ? 'Closed' : 
+              daySchedule.hasClasses ? `${daySchedule.classes.length} Classes` : 'No Classes'}
+          </span>
+        </div>
+        ${daySchedule.hasClasses ? 
+          daySchedule.classes.map(cls => `
+            <div class="schedule-class">
+              <div class="class-title">${cls.title}</div>
+              <div class="class-details">
+                <div class="class-time">
+                  <i class="fas fa-clock"></i>
+                  <span>${cls.time}</span>
+                </div>
+                <div class="class-age">
+                  <i class="fas fa-users"></i>
+                  <span>Ages ${cls.ageGroup} • ${cls.level}</span>
+                </div>
+                <div class="class-teacher">
+                  <i class="fas fa-user"></i>
+                  <span>${cls.teacher.name}</span>
+                </div>
+              </div>
+            </div>
+          `).join('') : 
+          `<div class="no-classes-message">
+            <i class="fas fa-${daySchedule.isWeekend ? 'moon' : 'calendar-times'}"></i>
+            <span>${daySchedule.isWeekend ? 'Weekend - Enjoy your time off!' : 'No regular classes scheduled'}</span>
+          </div>`
+        }
+      </div>
+    `).join('');
+  }
+  // FullCalendar integration methods
+  initFullCalendar() {
+    if (typeof FullCalendar === 'undefined') {
+      console.warn('FullCalendar library not loaded');
+      return;
+    }
+
+    const calendarEl = document.getElementById('fullCalendar');
+    if (!calendarEl) {
+      console.warn('FullCalendar container not found');
+      return;
+    }
+
+    console.log('🚀 Initializing FullCalendar...');
+
+    try {
+      this.fullCalendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,listMonth'
+        },
+        height: 'auto',
+        events: this.transformEventsForFullCalendar(),
+        eventClick: (info) => {
+          this.showEventDetails(info.event);
+        },
+        eventMouseEnter: (info) => {
+          info.el.style.cursor = 'pointer';
+        },
+        dateClick: (info) => {
+          // Show day events when clicking on a date
+          const clickedDate = new Date(info.dateStr);
+          const dayEvents = this.getEventsForDate(clickedDate);
+          if (dayEvents.length > 0) {
+            this.showDayEvents(clickedDate, dayEvents);
+          } else {
+            // Check if it's a weekend
+            const dayOfWeek = clickedDate.getDay();
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+              this.showNotification('No classes on weekends. DD Coder Dojo is closed Saturdays and Sundays.', 'info');
+            } else {
+              this.showNotification('No classes scheduled for this day.', 'info');
+            }
+          }
+        },
+        eventDidMount: (info) => {
+          // Add custom styling and tooltips
+          const event = info.event;
+          const category = event.extendedProps?.category || 'general';
+          
+          // Add category class for styling
+          info.el.classList.add(`fc-event-${category}`);
+          
+          // Create detailed tooltip
+          let tooltipText = event.title;
+          if (event.start) {
+            tooltipText += `\n${event.start.toLocaleDateString()}`;
+            if (event.start.toTimeString() !== '00:00:00 GMT+0200 (South Africa Standard Time)') {
+              tooltipText += ` at ${event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+            }
+          }
+          if (event.extendedProps?.description) {
+            tooltipText += `\n${event.extendedProps.description}`;
+          }
+          if (event.extendedProps?.instructor) {
+            tooltipText += `\nInstructor: ${event.extendedProps.instructor}`;
+          }
+          
+          info.el.setAttribute('title', tooltipText);
+        },
+        dayCellDidMount: (info) => {
+          // Mark weekends as closed
+          const dayOfWeek = info.date.getDay();
+          if (dayOfWeek === 0 || dayOfWeek === 6) {
+            info.el.classList.add('fc-day-weekend-closed');
+            info.el.style.backgroundColor = '#f8f9fa';
+            info.el.style.color = '#6c757d';
+            info.el.setAttribute('title', 'DD Coder Dojo is closed on weekends');
+          } else {
+            // Check if there are classes this day
+            const dayEvents = this.getEventsForDate(info.date);
+            const hasClasses = dayEvents.some(event => event.type === 'class' || event.type === 'coder-dojo-available');
+            
+            if (hasClasses) {
+              info.el.classList.add('fc-day-has-classes');
+              info.el.setAttribute('title', `${dayEvents.length} class(es) available - Click to see details`);
+            } else {
+              info.el.setAttribute('title', 'No classes scheduled');
+            }
+          }
+        },
+        loading: (isLoading) => {
+          if (isLoading) {
+            console.log('📅 Loading calendar events...');
+          } else {
+            console.log('✅ Calendar loaded successfully');
+          }
+        }
+      });
+
+      this.fullCalendar.render();
+      console.log('✅ FullCalendar initialized successfully');
+      
+      // Store reference globally for mobile FAB
+      window.communityCalendar = this;
+      
+    } catch (error) {
+      console.error('❌ Error initializing FullCalendar:', error);
+      this.showErrorState();
+    }
+  }
+
+  transformEventsForFullCalendar() {
+    const allEvents = [];
+    
+    // Add regular events
+    if (this.events) {
+      this.events.forEach(event => {
+        allEvents.push({
+          id: `event-${event.id || Math.random()}`,
+          title: event.title,
+          start: event.date,
+          end: event.endDate || event.date,
+          description: event.description,
+          location: event.location,
+          category: event.category || 'event',
+          className: `fc-event-${(event.category || 'event').toLowerCase()}`,
+          extendedProps: {
+            originalEvent: event
+          }
+        });
+      });
+    }
+
+    // Add class schedule events
+    if (this.classSchedule) {
+      this.classSchedule.forEach(classItem => {
+        const startDate = new Date(classItem.date);
+        const endDate = new Date(startDate);
+        
+        // Parse time and set end time
+        if (classItem.time) {
+          const [timeStr, period] = classItem.time.split(' ');
+          let [hours, minutes] = timeStr.split(':').map(Number);
+          
+          if (period === 'PM' && hours !== 12) hours += 12;
+          if (period === 'AM' && hours === 12) hours = 0;
+          
+          startDate.setHours(hours, minutes || 0);
+          endDate.setHours(hours + 2, minutes || 0); // Assume 2-hour classes
+        }
+
+        allEvents.push({
+          id: `class-${classItem.id || Math.random()}`,
+          title: `${classItem.class_name} (${classItem.age_group})`,
+          start: startDate,
+          end: endDate,
+          description: classItem.description,
+          instructor: classItem.instructor,
+          category: 'class',
+          className: 'fc-event-class',
+          backgroundColor: '#28a745',
+          borderColor: '#28a745',
+          extendedProps: {
+            originalEvent: classItem,
+            instructor: classItem.instructor,
+            ageGroup: classItem.age_group
+          }
+        });
+      });
+    }
+
+    return allEvents;
+  }
+
+  setupCalendarViewToggle() {
+    const standardBtn = document.getElementById('standardCalendarBtn');
+    const interactiveBtn = document.getElementById('interactiveCalendarBtn');
+    const standardCalendar = document.getElementById('standardCalendarContainer');
+    const interactiveCalendar = document.getElementById('fullCalendarContainer');
+
+    if (!standardBtn || !interactiveBtn || !standardCalendar || !interactiveCalendar) {
+      console.warn('Calendar toggle elements not found');
+      return;
+    }
+
+    standardBtn.addEventListener('click', () => {
+      standardCalendar.style.display = 'block';
+      interactiveCalendar.style.display = 'none';
+      standardBtn.classList.add('active');
+      interactiveBtn.classList.remove('active');
+    });
+
+    interactiveBtn.addEventListener('click', () => {
+      standardCalendar.style.display = 'none';
+      interactiveCalendar.style.display = 'block';
+      interactiveBtn.classList.add('active');
+      standardBtn.classList.remove('active');
+      
+      // Initialize FullCalendar when switching to interactive view
+      if (!this.fullCalendar) {
+        this.initFullCalendar();
+      }
+    });
+
+    // Set initial state - show interactive calendar by default
+    interactiveBtn.classList.add('active');
+    standardCalendar.style.display = 'none';
+  }
+
+  showEventDetails(event) {
+    const modal = document.getElementById('eventModal');
+    const modalBody = document.getElementById('modalBody');
+
+    if (!modal || !modalBody) return;
+
+    // Populate modal content
+    const startDate = new Date(event.start);
+    const endDate = event.end ? new Date(event.end) : null;
+    
+    let dateText = startDate.toLocaleDateString();
+    if (endDate && endDate.getTime() !== startDate.getTime()) {
+      dateText = `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+    }
+
+    modalBody.innerHTML = `
+      <h3 class="modal-event-title">${event.title}</h3>
+      <div class="modal-event-date">${dateText}</div>
+      <div class="modal-event-description">${event.extendedProps?.originalEvent?.description || event.title}</div>
+      ${event.extendedProps?.originalEvent?.location ? `<div class="modal-event-location"><i class="fas fa-map-marker-alt"></i> ${event.extendedProps.originalEvent.location}</div>` : ''}
+      ${event.extendedProps?.instructor ? `<div class="modal-event-instructor"><i class="fas fa-user"></i> Instructor: ${event.extendedProps.instructor}</div>` : ''}
+      ${event.extendedProps?.ageGroup ? `<div class="modal-event-age"><i class="fas fa-users"></i> Age Group: ${event.extendedProps.ageGroup}</div>` : ''}
+    `;    // Show modal
+    modal.style.display = 'flex';
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal() {
+    const modal = document.getElementById('eventModal');
+    if (modal) {
+      modal.style.display = 'none';
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  setupExportButtons() {
+    const exportBtn = document.getElementById('exportCalendarBtn');
+    const printBtn = document.getElementById('printCalendarBtn');
+
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        this.exportFullCalendar();
+      });
+    }
+
+    if (printBtn) {
+      printBtn.addEventListener('click', () => {
+        this.printFullCalendar();
+      });
+    }
+  }
+
+  exportFullCalendar() {
+    // Enhanced export for FullCalendar events
+    const allEvents = this.transformEventsForFullCalendar();
+    
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//DD Coder Dojo//Enhanced Calendar//EN',
+      'CALSCALE:GREGORIAN'
+    ];
+
+    allEvents.forEach(event => {
+      const startDate = new Date(event.start);
+      const endDate = new Date(event.end || event.start);
+      
+      icsContent.push(
+        'BEGIN:VEVENT',
+        `UID:${event.id}@ddcoderdojo.org`,
+        `DTSTART:${this.formatDateForICS(startDate)}`,
+        `DTEND:${this.formatDateForICS(endDate)}`,
+        `SUMMARY:${event.title}`,
+        `DESCRIPTION:${event.description || event.title}`,
+        `LOCATION:${event.location || 'DD Coder Dojo'}`,
+        `CATEGORIES:${event.category}`,
+        'END:VEVENT'
+      );
+    });
+
+    icsContent.push('END:VCALENDAR');
+
+    const blob = new Blob([icsContent.join('\r\n')], { type: 'text/calendar' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dd-coder-dojo-calendar.ics';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }
+
+  formatDateForICS(date) {
+    return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  }
+
+  printFullCalendar() {
+    if (this.fullCalendar) {
+      window.print();
+    }
+  }
+
+  showLoadingState() {
+    const containers = ['fullCalendarContainer', 'standardCalendarContainer', 'quickScheduleGrid'];
+    containers.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.innerHTML = `
+          <div class="loading-state" style="text-align: center; padding: 3rem; color: var(--text-secondary);">
+            <div class="loading-spinner" style="width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+            <p>Loading calendar...</p>
+          </div>
+        `;
+      }
+    });
+    
+    // Add spinner animation
+    if (!document.querySelector('#calendar-loading-styles')) {
+      const style = document.createElement('style');
+      style.id = 'calendar-loading-styles';
+      style.textContent = `
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+
+  hideLoadingState() {
+    const loadingElements = document.querySelectorAll('.loading-state');
+    loadingElements.forEach(element => {
+      element.remove();
+    });
+  }
+
+  showErrorState() {
+    const containers = ['fullCalendarContainer', 'standardCalendarContainer'];
+    containers.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.innerHTML = `
+          <div class="error-state" style="text-align: center; padding: 3rem; color: var(--danger-color);">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.7;"></i>
+            <h3>Unable to load calendar</h3>
+            <p>Please check your internet connection and try refreshing the page.</p>
+            <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 1rem;">
+              <i class="fas fa-refresh"></i> Retry
+            </button>
+          </div>
+        `;
+      }
+    });
+  }
+
+  // Utility helper methods
+  formatDisplayDate(dateString) {
+    const date = new Date(dateString + 'T00:00:00');
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      weekday: 'long'
+    });
+  }
+
+  hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? 
+      `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : 
+      '79, 172, 254'; // Default blue
+  }
+
+  closeModal() {
+    const modal = document.getElementById('eventModal');
+    if (modal) {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
   }
 }
 

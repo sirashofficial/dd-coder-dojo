@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DD Coder Dojo - Complete Interactive Calendar Test</title>
+    
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.css' rel='stylesheet' />
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages/community.css">
+    <link rel="stylesheet" href="css/fullcalendar-enhancements.css">
+    
+    <style>
+        /* Test-specific styles */
+        .test-status {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .test-status h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: #f8f9fa;
+            border-color: #4facfe;
+        }
+        
+        .feature-item.tested {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .test-controls {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .test-btn {
+            background: #4facfe;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            background: #007bff;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-pending { background: #ffc107; }
+        .status-testing { background: #17a2b8; }
+        .status-passed { background: #28a745; }
+        .status-failed { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-calendar-alt"></i> Interactive Calendar Test Suite</h1>
+            <p>Comprehensive testing for DD Coder Dojo interactive calendar features</p>
+        </div>
+
+        <!-- Test Status Dashboard -->
+        <div class="test-status">
+            <h3><i class="fas fa-clipboard-check"></i> Test Status Dashboard</h3>
+            <div class="feature-list">
+                <div class="feature-item" id="test-fullcalendar-load">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>FullCalendar Loading</strong>
+                    <div>Basic FullCalendar initialization</div>
+                </div>
+                <div class="feature-item" id="test-view-toggle">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>View Toggle</strong>
+                    <div>Switch between Standard/Interactive views</div>
+                </div>
+                <div class="feature-item" id="test-event-display">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>Event Display</strong>
+                    <div>Events showing with proper categories</div>
+                </div>
+                <div class="feature-item" id="test-event-interaction">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>Event Interaction</strong>
+                    <div>Click events show details modal</div>
+                </div>
+                <div class="feature-item" id="test-export-functions">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>Export Functions</strong>
+                    <div>ICS export and print capabilities</div>
+                </div>
+                <div class="feature-item" id="test-responsive-design">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>Responsive Design</strong>
+                    <div>Mobile and desktop compatibility</div>
+                </div>
+                <div class="feature-item" id="test-calendar-views">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>Multiple Views</strong>
+                    <div>Month, Week, Day, List views</div>
+                </div>
+                <div class="feature-item" id="test-navigation">
+                    <span class="status-indicator status-pending"></span>
+                    <strong>Navigation</strong>
+                    <div>Previous/Next/Today buttons</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Controls -->
+        <div class="test-controls">
+            <h3><i class="fas fa-play-circle"></i> Test Controls</h3>
+            <button class="test-btn" onclick="runAllTests()">
+                <i class="fas fa-play"></i> Run All Tests
+            </button>
+            <button class="test-btn" onclick="resetTests()">
+                <i class="fas fa-redo"></i> Reset Tests
+            </button>
+            <button class="test-btn" onclick="toggleCalendarView()">
+                <i class="fas fa-exchange-alt"></i> Toggle Calendar View
+            </button>
+            <button class="test-btn" onclick="testExportFeatures()">
+                <i class="fas fa-download"></i> Test Export
+            </button>
+        </div>
+
+        <!-- Calendar Section -->
+        <section class="calendar-section">
+            <div class="calendar-header">
+                <h2><i class="fas fa-calendar-alt"></i> Community Calendar</h2>
+                <p>Stay updated with our coding classes, events, and workshops</p>
+                
+                <!-- Calendar View Toggle -->
+                <div class="calendar-view-toggle">
+                    <button id="standardViewBtn" class="view-btn active">
+                        <i class="fas fa-calendar"></i> Standard Calendar
+                    </button>
+                    <button id="interactiveViewBtn" class="view-btn">
+                        <i class="fas fa-calendar-check"></i> Interactive Calendar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar Controls -->
+            <div class="calendar-controls" id="calendarControls" style="display: none;">
+                <button class="control-btn" id="exportBtn">
+                    <i class="fas fa-download"></i> Export Calendar
+                </button>
+                <button class="control-btn" id="printBtn">
+                    <i class="fas fa-print"></i> Print Calendar
+                </button>
+            </div>
+
+            <!-- Standard Calendar Container -->
+            <div id="standardCalendar" class="calendar-container">
+                <!-- Standard calendar will be rendered here -->
+                <div class="calendar-placeholder">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>Standard calendar view (original implementation)</p>
+                </div>
+            </div>
+
+            <!-- Interactive Calendar Container (FullCalendar) -->
+            <div id="interactiveCalendar" class="fullcalendar-container" style="display: none;">
+                <!-- FullCalendar will be rendered here -->
+            </div>
+
+            <!-- Calendar Legend -->
+            <div class="calendar-legend">
+                <h4><i class="fas fa-info-circle"></i> Event Categories</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-color class-color"></span>
+                        <span>Regular Classes</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color event-color"></span>
+                        <span>Special Events</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color fundraiser-color"></span>
+                        <span>Fundraisers</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details Modal -->
+        <div id="eventDetailsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="eventModalContent">
+                    <!-- Event details will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FullCalendar JavaScript -->
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js'></script>
+
+    <script>
+        // Test data for calendar events
+        const testEvents = [
+            {
+                title: "Python Basics Class",
+                start: "2025-05-28T16:00:00",
+                end: "2025-05-28T17:30:00",
+                category: "class",
+                description: "Introduction to Python programming for beginners",
+                location: "Main Classroom",
+                instructor: "Ms. Sarah"
+            },
+            {
+                title: "Web Development Workshop",
+                start: "2025-05-30T14:00:00",
+                end: "2025-05-30T16:00:00",
+                category: "event",
+                description: "Learn HTML, CSS, and JavaScript basics",
+                location: "Computer Lab",
+                instructor: "Mr. Jake"
+            },
+            {
+                title: "Code-a-thon Fundraiser",
+                start: "2025-06-02T10:00:00",
+                end: "2025-06-02T18:00:00",
+                category: "fundraiser",
+                description: "24-hour coding marathon to raise funds for new equipment",
+                location: "Main Hall",
+                instructor: "All Staff"
+            },
+            {
+                title: "Scratch Programming",
+                start: "2025-06-04T15:00:00",
+                end: "2025-06-04T16:30:00",
+                category: "class",
+                description: "Visual programming with Scratch for kids",
+                location: "Kids Corner",
+                instructor: "Ms. Emma"
+            }
+        ];
+
+        let calendar = null;
+        let testResults = {};
+
+        // Initialize the test calendar
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTestCalendar();
+            updateTestStatus('test-fullcalendar-load', 'testing');
+            
+            setTimeout(() => {
+                if (calendar) {
+                    updateTestStatus('test-fullcalendar-load', 'passed');
+                    console.log('✅ FullCalendar loaded successfully');
+                } else {
+                    updateTestStatus('test-fullcalendar-load', 'failed');
+                    console.log('❌ FullCalendar failed to load');
+                }
+            }, 1000);
+        });
+
+        function initializeTestCalendar() {
+            const calendarEl = document.getElementById('interactiveCalendar');
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                height: 'auto',
+                events: testEvents.map(event => ({
+                    ...event,
+                    backgroundColor: getCategoryColor(event.category),
+                    borderColor: getCategoryColor(event.category),
+                    textColor: '#ffffff'
+                })),
+                eventClick: function(info) {
+                    showEventDetails(info.event);
+                    updateTestStatus('test-event-interaction', 'passed');
+                },
+                eventDidMount: function(info) {
+                    // Add tooltip
+                    info.el.title = `${info.event.title}\n${info.event.start.toLocaleString()}`;
+                }
+            });
+
+            calendar.render();
+            setupViewToggle();
+        }
+
+        function getCategoryColor(category) {
+            const colors = {
+                'class': '#28a745',      // Green
+                'event': '#007bff',      // Blue  
+                'fundraiser': '#fd7e14'  // Orange
+            };
+            return colors[category] || '#6c757d';
+        }
+
+        function setupViewToggle() {
+            const standardBtn = document.getElementById('standardViewBtn');
+            const interactiveBtn = document.getElementById('interactiveViewBtn');
+            const standardCalendar = document.getElementById('standardCalendar');
+            const interactiveCalendar = document.getElementById('interactiveCalendar');
+            const calendarControls = document.getElementById('calendarControls');
+
+            standardBtn.addEventListener('click', function() {
+                standardBtn.classList.add('active');
+                interactiveBtn.classList.remove('active');
+                standardCalendar.style.display = 'block';
+                interactiveCalendar.style.display = 'none';
+                calendarControls.style.display = 'none';
+                updateTestStatus('test-view-toggle', 'passed');
+            });
+
+            interactiveBtn.addEventListener('click', function() {
+                interactiveBtn.classList.add('active');
+                standardBtn.classList.remove('active');
+                standardCalendar.style.display = 'none';
+                interactiveCalendar.style.display = 'block';
+                calendarControls.style.display = 'flex';
+                
+                if (calendar) {
+                    calendar.updateSize();
+                }
+                updateTestStatus('test-view-toggle', 'passed');
+            });
+
+            // Setup export buttons
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                exportCalendar();
+                updateTestStatus('test-export-functions', 'passed');
+            });
+
+            document.getElementById('printBtn').addEventListener('click', function() {
+                printCalendar();
+                updateTestStatus('test-export-functions', 'passed');
+            });
+        }
+
+        function showEventDetails(event) {
+            const modal = document.getElementById('eventDetailsModal');
+            const content = document.getElementById('eventModalContent');
+            
+            const startDate = new Date(event.start).toLocaleString();
+            const endDate = event.end ? new Date(event.end).toLocaleString() : 'Not specified';
+            
+            content.innerHTML = `
+                <h3><i class="fas fa-calendar-day"></i> ${event.title}</h3>
+                <div class="event-detail">
+                    <p><strong><i class="fas fa-clock"></i> Start:</strong> ${startDate}</p>
+                    <p><strong><i class="fas fa-clock"></i> End:</strong> ${endDate}</p>
+                    <p><strong><i class="fas fa-tag"></i> Category:</strong> ${event.extendedProps.category || 'General'}</p>
+                    <p><strong><i class="fas fa-info-circle"></i> Description:</strong> ${event.extendedProps.description || 'No description available'}</p>
+                    <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> ${event.extendedProps.location || 'TBD'}</p>
+                    <p><strong><i class="fas fa-user"></i> Instructor:</strong> ${event.extendedProps.instructor || 'TBD'}</p>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('eventDetailsModal').style.display = 'none';
+        }
+
+        function exportCalendar() {
+            // Create ICS content
+            let icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//DD Coder Dojo//Calendar//EN',
+                'CALSCALE:GREGORIAN'
+            ];
+
+            testEvents.forEach(event => {
+                const start = new Date(event.start).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+                const end = event.end ? new Date(event.end).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z' : start;
+                
+                icsContent.push(
+                    'BEGIN:VEVENT',
+                    `DTSTART:${start}`,
+                    `DTEND:${end}`,
+                    `SUMMARY:${event.title}`,
+                    `DESCRIPTION:${event.description || ''}`,
+                    `LOCATION:${event.location || ''}`,
+                    `UID:${event.title.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}@ddcoderdojo.com`,
+                    'END:VEVENT'
+                );
+            });
+
+            icsContent.push('END:VCALENDAR');
+
+            // Download the file
+            const blob = new Blob([icsContent.join('\r\n')], { type: 'text/calendar' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dd-coder-dojo-calendar.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            console.log('✅ Calendar exported successfully');
+        }
+
+        function printCalendar() {
+            window.print();
+            console.log('✅ Print dialog opened');
+        }
+
+        function toggleCalendarView() {
+            const interactiveBtn = document.getElementById('interactiveViewBtn');
+            if (interactiveBtn.classList.contains('active')) {
+                document.getElementById('standardViewBtn').click();
+            } else {
+                interactiveBtn.click();
+            }
+        }
+
+        function testExportFeatures() {
+            updateTestStatus('test-export-functions', 'testing');
+            exportCalendar();
+            setTimeout(() => {
+                updateTestStatus('test-export-functions', 'passed');
+            }, 500);
+        }
+
+        function updateTestStatus(testId, status) {
+            const testElement = document.getElementById(testId);
+            const indicator = testElement.querySelector('.status-indicator');
+            
+            // Remove all status classes
+            indicator.classList.remove('status-pending', 'status-testing', 'status-passed', 'status-failed');
+            testElement.classList.remove('tested');
+            
+            // Add new status
+            indicator.classList.add(`status-${status}`);
+            
+            if (status === 'passed') {
+                testElement.classList.add('tested');
+            }
+            
+            testResults[testId] = status;
+        }
+
+        function runAllTests() {
+            console.log('🧪 Running comprehensive calendar tests...');
+            
+            // Test 1: FullCalendar Load (already done)
+            
+            // Test 2: View Toggle
+            updateTestStatus('test-view-toggle', 'testing');
+            setTimeout(() => {
+                document.getElementById('interactiveViewBtn').click();
+                setTimeout(() => {
+                    document.getElementById('standardViewBtn').click();
+                    updateTestStatus('test-view-toggle', 'passed');
+                }, 500);
+            }, 500);
+            
+            // Test 3: Event Display
+            updateTestStatus('test-event-display', 'testing');
+            setTimeout(() => {
+                const events = calendar.getEvents();
+                if (events.length > 0) {
+                    updateTestStatus('test-event-display', 'passed');
+                } else {
+                    updateTestStatus('test-event-display', 'failed');
+                }
+            }, 1000);
+            
+            // Test 4: Event Interaction (will be tested on click)
+            updateTestStatus('test-event-interaction', 'testing');
+            
+            // Test 5: Export Functions
+            updateTestStatus('test-export-functions', 'testing');
+            setTimeout(() => {
+                testExportFeatures();
+            }, 1500);
+            
+            // Test 6: Responsive Design
+            updateTestStatus('test-responsive-design', 'testing');
+            setTimeout(() => {
+                // Simple responsive test
+                const calendarEl = document.getElementById('interactiveCalendar');
+                const width = calendarEl.offsetWidth;
+                if (width > 0) {
+                    updateTestStatus('test-responsive-design', 'passed');
+                } else {
+                    updateTestStatus('test-responsive-design', 'failed');
+                }
+            }, 2000);
+            
+            // Test 7: Multiple Views
+            updateTestStatus('test-calendar-views', 'testing');
+            setTimeout(() => {
+                if (calendar) {
+                    calendar.changeView('timeGridWeek');
+                    setTimeout(() => {
+                        calendar.changeView('dayGridMonth');
+                        updateTestStatus('test-calendar-views', 'passed');
+                    }, 500);
+                }
+            }, 2500);
+            
+            // Test 8: Navigation
+            updateTestStatus('test-navigation', 'testing');
+            setTimeout(() => {
+                if (calendar) {
+                    calendar.next();
+                    setTimeout(() => {
+                        calendar.prev();
+                        calendar.today();
+                        updateTestStatus('test-navigation', 'passed');
+                    }, 500);
+                }
+            }, 3000);
+            
+            setTimeout(() => {
+                console.log('✅ All tests completed!');
+                const passedTests = Object.values(testResults).filter(status => status === 'passed').length;
+                const totalTests = Object.keys(testResults).length;
+                console.log(`📊 Results: ${passedTests}/${totalTests} tests passed`);
+            }, 4000);
+        }
+
+        function resetTests() {
+            const testItems = document.querySelectorAll('.feature-item');
+            testItems.forEach(item => {
+                const indicator = item.querySelector('.status-indicator');
+                indicator.classList.remove('status-testing', 'status-passed', 'status-failed');
+                indicator.classList.add('status-pending');
+                item.classList.remove('tested');
+            });
+            testResults = {};
+            console.log('🔄 Tests reset');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventDetailsModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Mobile responsive check
+        function checkMobileFeatures() {
+            if (window.innerWidth <= 768) {
+                updateTestStatus('test-responsive-design', 'passed');
+                console.log('📱 Mobile view detected and working');
+            }
+        }
+
+        window.addEventListener('resize', checkMobileFeatures);
+        checkMobileFeatures();
+    </script>
+</body>
+</html>

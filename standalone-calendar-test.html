@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DD Coder Dojo - Standalone Calendar Test</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' />
+    
+    <!-- Inline CSS for standalone testing -->
+    <style>
+        :root {
+            --primary-color: #4facfe;
+            --primary-dark: #007bff;
+            --secondary-color: #00d9ff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+            --gradient-primary: linear-gradient(135deg, #4facfe 0%, #00d9ff 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            margin: 1rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .calendar-section {
+            padding: 2rem;
+        }
+        
+        .view-toggle-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .view-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+        }
+        
+        .view-btn.active {
+            background: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+        
+        .calendar-legend {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.95));
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .calendar-legend h4 {
+            margin: 0 0 1rem 0;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-items {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .legend-color.class-event {
+            background: var(--success-color);
+        }
+        
+        .legend-color.special-event {
+            background: var(--secondary-color);
+        }
+        
+        .legend-color.fundraiser-event {
+            background: var(--warning-color);
+        }
+        
+        .fullcalendar-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .calendar-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .calendar-control-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .calendar-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+        }
+        
+        .status-message {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid #bee5eb;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* FullCalendar customizations */
+        .fc-event.fc-event-class {
+            background: var(--success-color) !important;
+            border-color: var(--success-color) !important;
+        }
+        
+        .fc-event.fc-event-special-event,
+        .fc-event.fc-event-event {
+            background: var(--secondary-color) !important;
+            border-color: var(--secondary-color) !important;
+        }
+        
+        .fc-event.fc-event-fundraiser {
+            background: var(--warning-color) !important;
+            border-color: var(--warning-color) !important;
+        }
+        
+        .fc-button-group .fc-button {
+            background: var(--gradient-primary) !important;
+            border-color: var(--primary-color) !important;
+            color: white !important;
+            font-weight: 500 !important;
+        }
+        
+        .fc-button-group .fc-button:hover {
+            background: var(--primary-dark) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .calendar-section {
+                padding: 1rem;
+            }
+            
+            .legend-items {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗓️ DD Coder Dojo Calendar</h1>
+            <p>Interactive Community Calendar - Standalone Test</p>
+        </div>
+        
+        <div class="calendar-section">
+            <div class="status-message">
+                <strong>📋 Standalone Calendar Test</strong><br>
+                This is a standalone version of the interactive calendar that works without a local server.
+                All calendar functionality should work, including FullCalendar integration.
+            </div>
+            
+            <!-- View Toggle Buttons -->
+            <div class="view-toggle-buttons">
+                <button class="view-btn" id="standardCalendarBtn">
+                    <i class="fas fa-calendar"></i>
+                    Standard View
+                </button>
+                <button class="view-btn active" id="fullCalendarBtn">
+                    <i class="fas fa-calendar-week"></i>
+                    Interactive View
+                </button>
+            </div>
+            
+            <!-- Calendar Legend -->
+            <div class="calendar-legend">
+                <h4>📅 Event Categories</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-color class-event"></span>
+                        <span class="legend-label">Classes & Workshops</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color special-event"></span>
+                        <span class="legend-label">Special Events</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color fundraiser-event"></span>
+                        <span class="legend-label">Fundraisers</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FullCalendar Container -->
+            <div class="fullcalendar-container" id="fullCalendarContainer">
+                <div class="calendar-controls">
+                    <button class="calendar-control-btn" id="exportCalendarBtn">
+                        <i class="fas fa-download"></i>
+                        Export Calendar
+                    </button>
+                    <button class="calendar-control-btn" id="printCalendarBtn">
+                        <i class="fas fa-print"></i>
+                        Print
+                    </button>
+                </div>
+                <div id='fullCalendar'></div>
+            </div>
+            
+            <!-- Standard Calendar (hidden by default) -->
+            <div class="fullcalendar-container hidden" id="standardCalendarContainer">
+                <div class="status-message">
+                    <strong>Standard Calendar View</strong><br>
+                    This would show the original custom calendar implementation.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FullCalendar JavaScript -->
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js'></script>
+
+    <script>
+        // Sample event data for testing
+        const sampleEvents = [
+            {
+                id: 'class-1',
+                title: 'Tech Innovators (Ages 14-17)',
+                start: '2025-05-26T14:00:00',
+                end: '2025-05-26T16:00:00',
+                className: 'fc-event-class',
+                extendedProps: {
+                    instructor: 'Ashley Johnson',
+                    ageGroup: '14-17',
+                    category: 'class'
+                }
+            },
+            {
+                id: 'class-2',
+                title: 'Creative Coders (Ages 7-10)',
+                start: '2025-05-27T10:00:00',
+                end: '2025-05-27T12:00:00',
+                className: 'fc-event-class',
+                extendedProps: {
+                    instructor: 'Sarah Wilson',
+                    ageGroup: '7-10',
+                    category: 'class'
+                }
+            },
+            {
+                id: 'event-1',
+                title: 'Summer Hackathon 2025',
+                start: '2025-07-26',
+                className: 'fc-event-special-event',
+                extendedProps: {
+                    category: 'special-event',
+                    description: 'Annual summer hackathon with prizes and fun activities!'
+                }
+            },
+            {
+                id: 'fundraiser-1',
+                title: 'Pizza Fundraiser',
+                start: '2025-06-15',
+                className: 'fc-event-fundraiser',
+                extendedProps: {
+                    category: 'fundraiser',
+                    description: 'Help us raise funds for new equipment!'
+                }
+            }
+        ];
+
+        let calendar;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCalendar();
+            setupEventListeners();
+        });
+
+        function initializeCalendar() {
+            const calendarEl = document.getElementById('fullCalendar');
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                events: sampleEvents,
+                eventClick: function(info) {
+                    showEventDetails(info.event);
+                },
+                height: 'auto',
+                eventDisplay: 'block',
+                dayMaxEvents: 3,
+                moreLinkClick: 'popover',
+                eventTimeFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    meridiem: 'short'
+                },
+                aspectRatio: window.innerWidth < 768 ? 0.8 : 1.35,
+                eventDidMount: function(info) {
+                    info.el.setAttribute('title', info.event.title);
+                }
+            });
+
+            calendar.render();
+        }
+
+        function setupEventListeners() {
+            // View toggle
+            document.getElementById('standardCalendarBtn').addEventListener('click', function() {
+                document.getElementById('fullCalendarContainer').classList.add('hidden');
+                document.getElementById('standardCalendarContainer').classList.remove('hidden');
+                this.classList.add('active');
+                document.getElementById('fullCalendarBtn').classList.remove('active');
+            });
+
+            document.getElementById('fullCalendarBtn').addEventListener('click', function() {
+                document.getElementById('standardCalendarContainer').classList.add('hidden');
+                document.getElementById('fullCalendarContainer').classList.remove('hidden');
+                this.classList.add('active');
+                document.getElementById('standardCalendarBtn').classList.remove('active');
+            });
+
+            // Export button
+            document.getElementById('exportCalendarBtn').addEventListener('click', function() {
+                exportCalendar();
+            });
+
+            // Print button
+            document.getElementById('printCalendarBtn').addEventListener('click', function() {
+                window.print();
+            });
+        }
+
+        function showEventDetails(event) {
+            const details = `
+Event: ${event.title}
+Date: ${event.start.toLocaleDateString()}
+${event.extendedProps.instructor ? 'Instructor: ' + event.extendedProps.instructor : ''}
+${event.extendedProps.ageGroup ? 'Age Group: ' + event.extendedProps.ageGroup : ''}
+${event.extendedProps.description ? 'Description: ' + event.extendedProps.description : ''}
+            `.trim();
+            
+            alert(details);
+        }
+
+        function exportCalendar() {
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//DD Coder Dojo//Test Calendar//EN',
+                'CALSCALE:GREGORIAN'
+            ];
+
+            sampleEvents.forEach(event => {
+                const startDate = new Date(event.start);
+                const endDate = new Date(event.end || event.start);
+                
+                icsContent.push(
+                    'BEGIN:VEVENT',
+                    `UID:${event.id}@ddcoderdojo.org`,
+                    `DTSTART:${formatDateForICS(startDate)}`,
+                    `DTEND:${formatDateForICS(endDate)}`,
+                    `SUMMARY:${event.title}`,
+                    `DESCRIPTION:${event.extendedProps?.description || event.title}`,
+                    `LOCATION:DD Coder Dojo`,
+                    `CATEGORIES:${event.extendedProps?.category || 'event'}`,
+                    'END:VEVENT'
+                );
+            });
+
+            icsContent.push('END:VCALENDAR');
+
+            const blob = new Blob([icsContent.join('\r\n')], { type: 'text/calendar' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dd-coder-dojo-test-calendar.ics';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function formatDateForICS(date) {
+            return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+        }
+    </script>
+</body>
+</html>

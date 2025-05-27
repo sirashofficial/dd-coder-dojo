@@ -8,12 +8,13 @@ Last updated: 2025-05-25
 <head>  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Community | DD Coder Dojo</title>
-  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">  
-  <link rel="stylesheet" href="css/main.css">
+  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">    <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/enhancements.css">
-  <link rel="stylesheet" href="css/pages/home.css">
-  <link rel="stylesheet" href="css/pages/community.css">
+  <link rel="stylesheet" href="css/pages/home.css">  <link rel="stylesheet" href="css/pages/community.css">
+  <link rel="stylesheet" href="css/fullcalendar-enhancements.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- FullCalendar CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -72,31 +73,92 @@ Last updated: 2025-05-25
           View Full Calendar
         </button>
       </div>
-      
-      <!-- Calendar Navigation -->
+        <!-- Calendar Navigation -->
       <div class="calendar-navigation">
-        <button class="nav-btn prev-month" id="prevMonth" aria-label="Previous month">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <h3 class="current-month" id="currentMonth">May 2025</h3>
-        <button class="nav-btn next-month" id="nextMonth" aria-label="Next month">
-          <i class="fas fa-chevron-right"></i>
-        </button>
+        <div class="view-toggle-buttons">
+          <button class="view-btn" id="standardCalendarBtn" data-tooltip="Switch to standard calendar view">
+            <i class="fas fa-calendar-alt"></i>
+            Standard View
+          </button>
+          <button class="view-btn active" id="fullCalendarBtn" data-tooltip="Switch to interactive calendar view">
+            <i class="fas fa-calendar-week"></i>
+            Interactive View
+          </button>        </div>
       </div>
       
-      <!-- Calendar Grid -->
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <div class="day-label">Sun</div>
-          <div class="day-label">Mon</div>
-          <div class="day-label">Tue</div>
-          <div class="day-label">Wed</div>
-          <div class="day-label">Thu</div>
-          <div class="day-label">Fri</div>
-          <div class="day-label">Sat</div>
+      <!-- Calendar Legend -->
+      <div class="calendar-legend">
+        <h4>Event Categories</h4>
+        <div class="legend-items">
+          <div class="legend-item">
+            <span class="legend-color class-event"></span>
+            <span class="legend-label">Classes & Workshops</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color special-event"></span>
+            <span class="legend-label">Special Events</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color fundraiser-event"></span>
+            <span class="legend-label">Fundraisers</span>
+          </div>
         </div>
-        <div class="calendar-grid" id="calendarGrid">
-          <!-- Calendar days will be generated here -->
+      </div>
+        <!-- FullCalendar Container - Google Calendar Style -->
+      <div class="fullcalendar-container" id="fullCalendarContainer">
+        <div class="calendar-controls">
+          <div class="calendar-info">
+            <h4><i class="fas fa-info-circle"></i> DD Coder Dojo Schedule</h4>
+            <p>Classes run Monday-Friday. No sessions on weekends.</p>
+          </div>
+          <div class="calendar-actions">
+            <button class="calendar-control-btn" id="exportCalendarBtn" data-tooltip="Export calendar to your device">
+              <i class="fas fa-download"></i>
+              Export Calendar
+            </button>
+            <button class="calendar-control-btn" id="printCalendarBtn" data-tooltip="Print calendar">
+              <i class="fas fa-print"></i>
+              Print
+            </button>
+          </div>
+        </div>
+        <div id='fullCalendar'></div>
+        
+        <!-- Quick Schedule Overview -->
+        <div class="schedule-overview">
+          <h4><i class="fas fa-clock"></i> Regular Class Schedule</h4>
+          <div class="weekly-schedule" id="weeklySchedule">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Original Calendar (kept for fallback) -->
+      <div class="standard-calendar-container hidden" id="standardCalendarContainer">
+        <div class="calendar-navigation">
+          <button class="nav-btn prev-month" id="prevMonth" aria-label="Previous month">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <h3 class="current-month" id="currentMonth">May 2025</h3>
+          <button class="nav-btn next-month" id="nextMonth" aria-label="Next month">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        
+        <!-- Calendar Grid -->
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <div class="day-label">Sun</div>
+            <div class="day-label">Mon</div>
+            <div class="day-label">Tue</div>
+            <div class="day-label">Wed</div>
+            <div class="day-label">Thu</div>
+            <div class="day-label">Fri</div>
+            <div class="day-label">Sat</div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <!-- Calendar days will be generated here -->
+          </div>
         </div>
       </div>
       
@@ -192,9 +254,14 @@ Last updated: 2025-05-25
         <span>Contact Us</span>
       </button>
     </div>
-  </div>
-  <script src="js/main.js"></script>
+  </div>  <script src="js/main.js"></script>
   <script src="js/enhancedAnimations.js"></script>
+  <!-- FullCalendar JavaScript -->
+  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'></script>
   <script src="js/pages/community.js"></script>
 </body>
 </html>

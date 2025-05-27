@@ -1,0 +1,231 @@
+/* ===== MOBILE-FIRST ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Improved touch targets for mobile */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced mobile typography */
+@media (max-width: 767px) {
+  /* Improve text readability on mobile */
+  body {
+    font-size: 16px; /* Prevent zoom on iOS */
+    line-height: 1.5;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+  }
+  
+  p {
+    margin-bottom: var(--space-md);
+    max-width: none; /* Allow full width on mobile */
+  }
+  
+  /* Enhanced mobile forms */
+  input, textarea, select {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-light);
+    background: var(--surface-color);
+    color: var(--text-color);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--focus-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+  }
+  
+  /* Mobile-optimized cards */
+  .card {
+    margin: var(--space-md) 0;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--surface-color);
+    border: 1px solid var(--border-light);
+  }
+  
+  /* Mobile navigation improvements */
+  .nav-links.active {
+    /* Prevent body scroll when menu is open */
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Mobile-specific spacing */
+  section {
+    padding: var(--space-2xl) 0;
+  }
+  
+  .container {
+    padding: 0 var(--space-md);
+  }
+  
+  /* Mobile image optimization */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+  
+  /* Mobile table responsiveness */
+  table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+  
+  /* Mobile-friendly modals */
+  .modal {
+    margin: var(--space-md);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+}
+
+/* Mobile landscape adjustments */
+@media (max-width: 767px) and (orientation: landscape) {
+  .navbar {
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .nav-links {
+    top: 50px;
+    height: calc(100vh - 50px);
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  /* Reduce vertical spacing in landscape */
+  section {
+    padding: var(--space-xl) 0;
+  }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+  .btn {
+    border: 3px solid currentColor;
+  }
+  
+  .card {
+    border: 2px solid var(--text-color);
+  }
+  
+  .nav-links a {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: var(--space-sm);
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating-elements,
+  .matrix-rain,
+  .floating-particles {
+    display: none !important;
+  }
+}
+
+/* Focus management for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Enhanced mobile loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Mobile-specific utility classes */
+.mobile-only {
+  display: block;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* Safe area handling for devices with notches */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(var(--space-md), env(safe-area-inset-left));
+    padding-right: max(var(--space-md), env(safe-area-inset-right));
+  }
+  
+  .container {
+    padding-left: max(var(--space-md), env(safe-area-inset-left));
+    padding-right: max(var(--space-md), env(safe-area-inset-right));
+  }
+}

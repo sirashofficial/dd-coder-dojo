@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tech-innovators-monday",
+    "title": "Tech Innovators",
+    "day": "monday",
+    "time": "14:00-16:00",
+    "ageGroup": "14-17",
+    "level": "Advanced",
+    "teacher": {
+      "name": "Ashley Johnson",
+      "email": "ashley@kcasa.org.za",
+      "phone": "031 461 3101",
+      "bio": "Lead instructor with 8+ years experience in web development and youth education. Passionate about empowering young people through technology.",
+      "avatar": "images/team/ashley.jpg",
+      "specialties": ["Python", "JavaScript", "Web Development", "Project Management"]
+    },
+    "description": "Advanced programming for teenagers. Focus on real-world projects, portfolio building, and career preparation.",
+    "technologies": ["Python", "JavaScript", "React", "Node.js", "Git"],
+    "location": "Main Lab",
+    "capacity": 12,
+    "enrolled": 8,
+    "type": "regular-class",
+    "recurring": true,
+    "color": "#ff6b6b"
+  },
+  {
+    "id": "code-explorers-tuesday",
+    "title": "Code Explorers",
+    "day": "tuesday", 
+    "time": "14:00-16:00",
+    "ageGroup": "11-13",
+    "level": "Intermediate",
+    "teacher": {
+      "name": "Michael Chen",
+      "email": "michael@kcasa.org.za",
+      "phone": "031 461 3101",
+      "bio": "Computer Science graduate with a passion for teaching web development to young learners. Specializes in making complex concepts accessible.",
+      "avatar": "images/team/michael.jpg",
+      "specialties": ["HTML/CSS", "Python", "Scratch", "Game Development"]
+    },
+    "description": "Bridge programming course introducing web development and Python basics for intermediate students.",
+    "technologies": ["HTML", "CSS", "Python", "Scratch", "GitHub"],
+    "location": "Main Lab",
+    "capacity": 12,
+    "enrolled": 10,
+    "type": "regular-class",
+    "recurring": true,
+    "color": "#4ecdc4"
+  },
+  {
+    "id": "code-explorers-wednesday",
+    "title": "Code Explorers",
+    "day": "wednesday",
+    "time": "14:00-16:00", 
+    "ageGroup": "11-13",
+    "level": "Intermediate",
+    "teacher": {
+      "name": "Sarah Williams",
+      "email": "sarah@kcasa.org.za",
+      "phone": "031 461 3101",
+      "bio": "Experienced educator with background in creative technology. Loves helping students discover the artistic side of programming.",
+      "avatar": "images/team/sarah.jpg",
+      "specialties": ["Creative Coding", "UI/UX Design", "Digital Art", "Animation"]
+    },
+    "description": "Continuation of Code Explorers program with focus on creative projects and collaborative learning.",
+    "technologies": ["HTML", "CSS", "Python", "Processing", "Design Tools"],
+    "location": "Main Lab",
+    "capacity": 12,
+    "enrolled": 9,
+    "type": "regular-class",
+    "recurring": true,
+    "color": "#4ecdc4"
+  },
+  {
+    "id": "junior-ninjas-thursday",
+    "title": "Junior Ninjas",
+    "day": "thursday",
+    "time": "14:00-15:00",
+    "ageGroup": "7-10",
+    "level": "Beginner",
+    "teacher": {
+      "name": "Emma Thompson",
+      "email": "emma@kcasa.org.za",
+      "phone": "031 461 3101",
+      "bio": "Primary school teacher turned coding instructor. Expert at making programming fun and accessible for young children.",
+      "avatar": "images/team/emma.jpg",
+      "specialties": ["Scratch Jr", "Block Programming", "Educational Games", "Child Development"]
+    },
+    "description": "Introduction to programming for young learners using visual programming languages and creative projects.",
+    "technologies": ["Scratch", "ScratchJr", "Block Coding", "Digital Storytelling"],
+    "location": "Kids Lab",
+    "capacity": 10,
+    "enrolled": 7,
+    "type": "regular-class",
+    "recurring": true,
+    "color": "#a78bfa"
+  },
+  {
+    "id": "junior-ninjas-friday",
+    "title": "Junior Ninjas",
+    "day": "friday",
+    "time": "13:00-15:00",
+    "ageGroup": "7-10", 
+    "level": "Beginner",
+    "teacher": {
+      "name": "David Rodriguez",
+      "email": "david@kcasa.org.za",
+      "phone": "031 461 3101",
+      "bio": "Game developer and educator who brings energy and creativity to every class. Specializes in project-based learning.",
+      "avatar": "images/team/david.jpg",
+      "specialties": ["Game Design", "Storytelling", "Creative Projects", "Problem Solving"]
+    },
+    "description": "Extended Junior Ninjas session with more time for creative projects and hands-on learning.",
+    "technologies": ["Scratch", "Game Development", "Animation", "Digital Art"],
+    "location": "Kids Lab", 
+    "capacity": 10,
+    "enrolled": 6,
+    "type": "regular-class",
+    "recurring": true,
+    "color": "#a78bfa"
+  }
+]

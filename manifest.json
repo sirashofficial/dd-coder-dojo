@@ -1,0 +1,114 @@
+{
+  "name": "DD Coder Dojo",
+  "short_name": "DD Coder Dojo",
+  "description": "Empowering young minds through coding education in Austerville, Durban. Join our community of future innovators.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "technology", "community"],  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-16x16.png", 
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Programs",
+      "short_name": "Programs",
+      "description": "Browse our coding programs and courses",
+      "url": "/programs.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-programs.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Community Events",
+      "short_name": "Events",
+      "description": "Check upcoming community events",
+      "url": "/community.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-events.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Register Now",
+      "short_name": "Register",
+      "description": "Register for coding classes",
+      "url": "/register.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-register.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with DD Coder Dojo",
+      "url": "/contact.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-contact.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "DD Coder Dojo Homepage"
+    },
+    {
+      "src": "/images/screenshots/mobile-home.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "DD Coder Dojo Mobile View"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://ddcoderdojo.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "existing-client-navigate"
+}

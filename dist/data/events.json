@@ -1,0 +1,161 @@
+[
+  {
+    "date": "2025-07-26",
+    "title": "Annual Summer Hackathon 2025",
+    "description": "🏆 Our biggest coding event of the year! 48-hour hackathon with multiple age categories. Amazing prizes, mentorship from industry professionals, and fun activities for the whole family. Teams compete in web development, mobile apps, AI/ML projects, and robotics challenges. Free pizza, snacks, and swag included! Register early - limited spots available.",
+    "type": "special-event",
+    "image": "images/events/hackathon-2025.jpg",
+    "featured": true,
+    "categories": ["competition", "all-ages", "prizes", "48-hours"],
+    "time": "9:00 AM - 5:00 PM (Day 2)",
+    "location": "Main Campus",
+    "ageGroups": ["7-10", "11-13", "14-17", "18+"],
+    "prizes": ["$500 Grand Prize", "Tech Gadgets", "Certificates", "Internship Opportunities"]
+  },
+  {
+    "date": "2025-06-01",
+    "title": "Summer Coding Bootcamp Begins",
+    "description": "🚀 Intensive 8-week summer program covering web development, mobile apps, and game design. Perfect for students who want to take their coding skills to the next level!",
+    "type": "program",
+    "image": "images/events/summer-bootcamp.jpg",
+    "duration": "8 weeks",
+    "time": "9:00 AM - 3:00 PM",
+    "ageGroups": ["11-17"]
+  },
+  {
+    "date": "2025-06-15",
+    "title": "Family Movie Night",
+    "description": "🎬 Bring your family for a fun movie night and snacks. All proceeds go to our equipment fund. Featuring tech-themed movies and documentaries.",
+    "type": "fundraiser",
+    "image": "images/events/movie-night.jpg",
+    "time": "6:00 PM - 9:00 PM"
+  },
+  {
+    "date": "2025-08-10",
+    "title": "Parent Info Session",
+    "description": "📚 Learn about our curriculum, meet the mentors, and ask questions. Perfect for new families interested in joining our programs.",
+    "type": "event",
+    "image": "images/events/parent-info.jpg",
+    "time": "6:00 PM - 8:00 PM"
+  },
+  {
+    "date": "2025-08-15",
+    "title": "Back to School Tech Fair",
+    "description": "🎓 Showcase student projects and recruit for fall programs. Open to the community! Student presentations, tech demos, and enrollment opportunities.",
+    "type": "event",
+    "image": "images/events/tech-fair.jpg",
+    "time": "10:00 AM - 4:00 PM"
+  },
+  {
+    "date": "2025-09-10",
+    "title": "Parent-Child Coding Workshop",
+    "description": "👨‍👩‍👧‍👦 Learn to code together! A fun introduction to programming for families. No prior experience needed.",
+    "type": "workshop",
+    "image": "images/events/family-coding.jpg",
+    "time": "2:00 PM - 4:00 PM"
+  },
+  {
+    "date": "2025-10-31",
+    "title": "Halloween Coding Challenge",
+    "description": "🎃 Spooky-themed coding challenges and costume contest. Create your own Halloween games and animations!",
+    "type": "event",
+    "image": "images/events/halloween-coding.jpg",
+    "time": "3:00 PM - 6:00 PM"
+  },
+  {
+    "date": "2025-12-15",
+    "title": "Winter Showcase & Holiday Party",
+    "description": "❄️ Students present their year-end projects. Celebration with families and community. Awards ceremony and holiday treats!",
+    "type": "showcase",
+    "image": "images/events/winter-showcase.jpg",
+    "time": "6:00 PM - 8:30 PM"
+  },
+  {
+    "date": "2025-05-01",
+    "title": "Coding for a Cause",
+    "description": "💝 Our students build apps to support local charities. Showcase and support their work! Community impact through technology.",
+    "type": "fundraiser",
+    "image": "images/events/coding-cause.jpg",
+    "time": "5:00 PM - 8:00 PM"
+  },
+  {
+    "date": "2025-05-15",
+    "title": "Python Workshop",
+    "description": "🐍 Beginner-friendly Python programming workshop for new students. Learn the basics of one of the world's most popular programming languages.",
+    "type": "event",
+    "image": "images/events/python-workshop.jpg",
+    "time": "2:00 PM - 5:00 PM"
+  },
+  {
+    "date": "2025-05-22",
+    "title": "Web Design Challenge",
+    "description": "🌐 Students showcase their web design skills in a friendly competition. HTML, CSS, and JavaScript projects on display.",
+    "type": "event",
+    "image": "images/events/web-design.jpg",
+    "time": "4:00 PM - 7:00 PM"
+  },
+  {
+    "date": "2025-05-29",
+    "title": "Tech Talk: AI Basics",
+    "description": "🤖 Guest speaker introduces artificial intelligence concepts to our students. Learn about machine learning, neural networks, and the future of AI.",
+    "type": "event",
+    "image": "images/events/ai-talk.jpg",
+    "time": "6:00 PM - 7:30 PM"
+  },
+  {
+    "date": "2025-06-05",
+    "title": "Game Development Day",
+    "description": "🎮 Learn the basics of game development using Scratch and Unity. Create your own games and learn industry tools.",
+    "type": "event",
+    "image": "images/events/game-dev.jpg",
+    "time": "10:00 AM - 4:00 PM"
+  },
+  {
+    "date": "2025-06-12",
+    "title": "Community BBQ",
+    "description": "🍔 Join us for a community barbecue and fundraiser. Food, fun, and fellowship! Meet other coding families.",
+    "type": "fundraiser",
+    "image": "images/events/bbq.jpg",
+    "time": "12:00 PM - 4:00 PM"
+  },
+  {
+    "date": "2025-06-19",
+    "title": "Mobile App Workshop",
+    "description": "📱 Introduction to mobile app development for intermediate students. Build your first Android and iOS apps.",
+    "type": "event",
+    "image": "images/events/mobile-app.jpg",
+    "time": "1:00 PM - 5:00 PM"
+  },
+  {
+    "date": "2025-06-26",
+    "title": "Robotics Demo Day",
+    "description": "🤖 Students demonstrate their robotics projects to parents and community. See amazing robots in action!",
+    "type": "event",
+    "image": "images/events/robotics.jpg",
+    "time": "3:00 PM - 6:00 PM"
+  },
+  {
+    "date": "2025-07-03",
+    "title": "Summer Coding Camp",
+    "description": "☀️ Intensive week-long coding camp for enthusiastic young programmers. Daily coding challenges and projects.",
+    "type": "event",
+    "image": "images/events/summer-camp.jpg",
+    "time": "9:00 AM - 3:00 PM"
+  },
+  {
+    "date": "2025-07-10",
+    "title": "Tech Trivia Night",
+    "description": "🧠 Test your tech knowledge at our fundraising trivia night! Prizes for winning teams and lots of laughs.",
+    "type": "fundraiser",
+    "image": "images/events/trivia-night.jpg",
+    "time": "7:00 PM - 9:30 PM"
+  },
+  {
+    "date": "2025-07-17",
+    "title": "3D Printing Workshop",
+    "description": "🖨️ Learn the basics of 3D design and printing technology. Design and print your own custom objects!",
+    "type": "event",
+    "image": "images/events/3d-printing.jpg",
+    "time": "2:00 PM - 5:00 PM"
+  }
+]

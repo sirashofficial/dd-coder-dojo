@@ -9,47 +9,168 @@ Last updated: 2025-05-25
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DD Coder Dojo | Free Coding Classes for Kids</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="DD Coder Dojo offers free coding classes for kids aged 7-17 in Wentworth, Durban. Learn Scratch, Python, web development and more!">
-    <meta name="keywords" content="coding for kids, free coding classes, Wentworth, Durban, Scratch, Python, web development">
-    <meta name="author" content="DD Coder Dojo">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="DD Coder Dojo | Free Coding Classes">
-    <meta property="og:description" content="Empowering young minds through free coding education in Wentworth, Durban">
-    <meta property="og:type" content="website">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
+    <!-- Performance optimizations -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/mobile-accessibility.css">
-    <link rel="stylesheet" href="css/enhancements.css">
-    <link rel="stylesheet" href="css/pages/home.css">
     
-    <!-- Structured Data -->
+    <title>DD Coder Dojo | Free Coding Classes for Kids in Wentworth, Durban</title>
+    
+    <!-- Enhanced SEO Meta Tags -->
+    <meta name="description" content="DD Coder Dojo offers free coding classes for kids aged 7-17 in Wentworth, Durban. Learn Scratch, Python, web development, robotics and more! Join our community of young coders.">
+    <meta name="keywords" content="coding for kids, free coding classes, Wentworth, Durban, KwaZulu-Natal, Scratch programming, Python for kids, web development, robotics, STEM education, computer science education, youth empowerment">
+    <meta name="author" content="DD Coder Dojo">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Enhanced Open Graph Meta Tags -->
+    <meta property="og:title" content="DD Coder Dojo | Free Coding Classes for Kids">
+    <meta property="og:description" content="Empowering young minds through free coding education in Wentworth, Durban. Join our community of 500+ students learning Scratch, Python, web development and more!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dd-coder-dojo.org">
+    <meta property="og:site_name" content="DD Coder Dojo">
+    <meta property="og:locale" content="en_ZA">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DD Coder Dojo | Free Coding Classes for Kids">
+    <meta name="twitter:description" content="Free coding education for kids aged 7-17 in Wentworth, Durban. Learn programming, web development, and more!">
+      <!-- Favicon and app icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="msapplication-TileColor" content="#8b5cf6">
+    
+    <!-- Font loading optimization -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- Font Awesome with loading optimization -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
+    
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        /* Critical above-the-fold styles */
+        :root {
+            --primary-color: #8b5cf6;
+            --secondary-color: #0ea5e9;
+            --dark-color: #0f172a;
+            --text-color: #f1f5f9;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        main {
+            padding-top: 80px;
+        }
+    </style>
+    
+    <!-- CSS Files (non-critical, loaded asynchronously) -->
+    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/mobile-accessibility.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/enhancements.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/pages/home.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/mobile-accessibility.css">
+        <link rel="stylesheet" href="css/enhancements.css">
+        <link rel="stylesheet" href="css/pages/home.css">
+    </noscript>
+    
+    <!-- Enhanced Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "EducationalOrganization",
         "name": "DD Coder Dojo",
+        "alternateName": "DD Coder Dojo Wentworth",
+        "description": "Free coding classes for kids aged 7-17 in Wentworth, Durban. Teaching Scratch, Python, web development, and robotics.",
+        "url": "https://dd-coder-dojo.org",
+        "logo": "https://dd-coder-dojo.org/logo.png",
+        "image": "https://dd-coder-dojo.org/hero-image.jpg",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "178 Austerville Drive",
-            "addressLocality": "Wentworth, Durban",
+            "addressLocality": "Wentworth",
             "addressRegion": "KwaZulu-Natal",
             "postalCode": "4052",
             "addressCountry": "ZA"
         },
-        "email": "ashley@kcasa.org.za",
-        "telephone": "+27314613101"
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+27314613101",
+            "email": "ashley@kcasa.org.za",
+            "contactType": "customer service"
+        },
+        "sameAs": [
+            "https://facebook.com/ddcoderdojo",
+            "https://twitter.com/ddcoderdojo",
+            "https://instagram.com/ddcoderdojo"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "description": "Free coding classes for children",
+            "price": "0",
+            "priceCurrency": "ZAR"
+        },
+        "audience": {
+            "@type": "Audience",
+            "audienceType": "Children aged 7-17"
+        },
+        "educationalCredentialAwarded": "Certificate of Completion",
+        "hasCredential": {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Programming Fundamentals"
+        }
     }
+    </script>
+    
+    <!-- Performance monitoring (placeholder for analytics) -->
+    <script>
+        // Basic performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    if (perfData) {
+                        console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+                        console.log('DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart, 'ms');
+                    }
+                }, 0);
+            });
+        }
     </script>
 </head>
 <body>
@@ -880,13 +1001,33 @@ Last updated: 2025-05-25
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>
-    </footer>    <!-- JavaScript Files -->    <script src="js/effects/matrix.js"></script>
+    </footer>    <!-- jQuery CDN for DOM manipulation and effects (load first) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript Files -->
+    <script src="js/critical-optimizations.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/formHandler.js"></script>
     <script src="js/main.js"></script>
     <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/home.js"></script>
     <script src="js/pages/home_stats.js"></script>
     <script src="js/schedule-manager.js"></script>
-    <!-- jQuery CDN for DOM manipulation and effects -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3gJwYp4gU1p2+XQ6p6Yk9QbQxtB6pZ9l+8l+6p6Yk9Q=" crossorigin="anonymous"></script>
+      <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        } else if (window.location.protocol === 'file:') {
+            console.info('Service worker registration skipped for file:// protocol');
+        }
+    </script>
 </body>
 </html>

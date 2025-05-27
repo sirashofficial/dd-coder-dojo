@@ -499,13 +499,15 @@ class DDCoderDojoApp {
         
         // Show user-friendly error message
         this.showErrorMessage('Sorry, there was a problem loading the website. Please refresh the page.');
-    }
-
-    logError(type, error) {
-        console.error(`${type}:`, error);
+    }    logError(type, error) {
+        // Ensure error is not null
+        const safeError = error || new Error('Unknown error');
+        const errorType = type || 'Unknown Error';
+        
+        console.error(`${errorType}:`, safeError);
         
         // In production, you might want to send this to an error tracking service
-        // this.sendErrorToService(type, error);
+        // this.sendErrorToService(errorType, safeError);
     }
 
     showErrorMessage(message) {
@@ -687,4 +689,4 @@ function animateCodeLines() {
 document.addEventListener('DOMContentLoaded', animateCodeLines);
 
 // Enhanced form handler for contact and registration forms
-import './formHandler.js';
+// Note: formHandler.js is loaded separately in HTML

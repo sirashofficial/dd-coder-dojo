@@ -1,0 +1,44 @@
+# DD Coder Dojo - Git Ignore
+
+# Development files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+node_modules/
+dist/build/
+*.min.js
+*.min.css
+
+# Test files (keep in archive/)
+*test*.html
+*debug*.html
+*demo*.html
+*benchmark*.html
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# System files
+.env
+.env.local
+.env.production
+
+# Cache
+.cache/
+*.cache
+
+# Temporary development
+temp/
+tmp/

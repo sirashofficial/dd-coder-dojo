@@ -1,0 +1,323 @@
+/* ===== PRODUCTION PERFORMANCE OPTIMIZATIONS ===== */
+/* Core Web Vitals & Performance Optimization for DD Coder Dojo */
+
+/* ===== CRITICAL PERFORMANCE OPTIMIZATIONS ===== */
+
+/* 1. Hardware Acceleration & GPU Utilization */
+.gpu-accelerated,
+.hero-visual,
+.floating-particles,
+.matrix-rain,
+.btn:hover,
+.card:hover,
+.program-card:hover {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Remove will-change after animation completes for memory optimization */
+.animation-complete {
+  will-change: auto;
+}
+
+/* 2. Optimize Repaints and Reflows - CSS Containment */
+.layout-optimized {
+  contain: layout style paint;
+}
+
+.hero-title,
+.section-title,
+.card-title {
+  contain: layout;
+}
+
+/* 3. Critical Font Loading Optimization */
+.font-optimized {
+  font-display: swap;
+  font-synthesis: none;
+}
+
+/* 4. Lazy Loading Optimization */
+.lazy-load {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skeleton loading states for better perceived performance */
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.1) 25%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 5. Image Optimization */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-image,
+.project-image,
+.gallery-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ===== CORE WEB VITALS OPTIMIZATIONS ===== */
+
+/* 1. Largest Contentful Paint (LCP) Optimization */
+.hero-content {
+  content-visibility: visible;
+  contain-intrinsic-size: 100% 600px;
+}
+
+.lcp-optimized {
+  font-display: swap;
+  contain: layout style;
+}
+
+/* 2. First Input Delay (FID) Optimization */
+.interactive-element {
+  touch-action: manipulation;
+}
+
+button, .btn, input[type="submit"] {
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* 3. Cumulative Layout Shift (CLS) Prevention */
+.aspect-ratio-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+}
+
+.aspect-ratio-16-9 {
+  padding-bottom: 56.25%;
+}
+
+.aspect-ratio-4-3 {
+  padding-bottom: 75%;
+}
+
+.aspect-ratio-1-1 {
+  padding-bottom: 100%;
+}
+
+.aspect-ratio-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Reserve space for dynamic content to prevent CLS */
+.dynamic-height {
+  min-height: 200px;
+}
+
+.stats-grid {
+  min-height: 300px;
+}
+
+.testimonials-section {
+  min-height: 400px;
+}
+
+/* ===== PERFORMANCE BASED ON USER PREFERENCES ===== */
+
+/* High contrast mode optimizations - disable expensive effects */
+@media (prefers-contrast: high) {
+  * {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+/* Reduced motion performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .floating-particles,
+  .matrix-rain,
+  .animated-background {
+    display: none !important;
+  }
+}
+
+/* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
+
+@media (max-width: 768px) {
+  /* Reduce complexity on mobile devices */
+  .complex-animation {
+    animation: none !important;
+  }
+  
+  .backdrop-filter {
+    backdrop-filter: none;
+    background: var(--surface-color);
+  }
+  
+  /* Optimize touch performance */
+  .touch-optimized {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Low-end device optimizations */
+@media (max-resolution: 150dpi) and (max-device-width: 768px) {
+  * {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+/* ===== BROWSER-SPECIFIC OPTIMIZATIONS ===== */
+
+/* Safari optimizations */
+@supports (-webkit-appearance: none) {
+  .safari-optimized {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Chrome optimizations */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  .chrome-optimized {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* ===== ACCESSIBILITY PERFORMANCE ===== */
+
+/* Screen reader optimizations */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus performance optimization */
+.focus-optimized:focus {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+  transition: outline-color 0.15s ease;
+}
+
+/* ===== PRODUCTION UTILITIES ===== */
+
+/* Performance monitoring helpers */
+.perf-marker {
+  contain: layout style paint;
+}
+
+/* Critical above-the-fold content */
+.above-fold {
+  content-visibility: visible;
+  contain-intrinsic-size: 100% 100vh;
+}
+
+/* Below-the-fold content optimization */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 100% 500px;
+}
+
+/* Memory management for large lists */
+.virtualized-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 100% 200px;
+}
+
+/* ===== NETWORK OPTIMIZATION ===== */
+
+/* Resource hints for critical assets */
+.preload-hint::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB2aWV3Qm94PSIwIDAgMSAxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==');
+}
+
+/* ===== ERROR HANDLING & GRACEFUL DEGRADATION ===== */
+
+/* Fallback for unsupported backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .glassmorphism {
+    background: var(--surface-color);
+    opacity: 0.95;
+  }
+}
+
+/* Fallback for unsupported content-visibility */
+@supports not (content-visibility: auto) {
+  .lazy-section {
+    display: block;
+  }
+}
+
+/* ===== PRODUCTION DEBUGGING (Remove in production) ===== */
+
+/* Performance debugging indicators - remove in production */
+.debug-performance {
+  position: relative;
+}
+
+.debug-performance::after {
+  content: '⚡';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ff0000;
+  color: white;
+  font-size: 12px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  z-index: 9999;
+  display: none; /* Hidden by default */
+}
+
+/* Show debug indicators in development */
+.debug-mode .debug-performance::after {
+  display: block;
+}

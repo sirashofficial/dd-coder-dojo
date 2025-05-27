@@ -5,16 +5,61 @@ Last updated: 2025-05-25
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>  <meta charset="UTF-8">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Community | DD Coder Dojo</title>
-  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">    <link rel="stylesheet" href="css/main.css">
+  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  
+  <!-- SEO & Social Media Meta Tags -->
+  <meta name="keywords" content="DD Coder Dojo, community, events, coding, education, fundraising">
+  <meta name="author" content="DD Coder Dojo">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ddcoderdojo.com/community.html">
+  <meta property="og:title" content="Community | DD Coder Dojo">
+  <meta property="og:description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta property="og:image" content="https://ddcoderdojo.com/images/dd-coder-dojo-community-og.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://ddcoderdojo.com/community.html">
+  <meta property="twitter:title" content="Community | DD Coder Dojo">
+  <meta property="twitter:description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta property="twitter:image" content="https://ddcoderdojo.com/images/dd-coder-dojo-community-twitter.jpg">
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="css/main.css" as="style">
+  <link rel="preload" href="css/production-optimizations.css" as="style">
+  <link rel="preload" href="css/pages/community.css" as="style">
+  <link rel="preload" href="js/critical-optimizations.js" as="script">
+  
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/production-optimizations.css">
   <link rel="stylesheet" href="css/enhancements.css">
-  <link rel="stylesheet" href="css/pages/home.css">  <link rel="stylesheet" href="css/pages/community.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/pages/community.css">
   <link rel="stylesheet" href="css/fullcalendar-enhancements.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- External Stylesheets (non-critical) -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  
   <!-- FullCalendar CSS -->
-  <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' />
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' /></noscript>
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  
+  <!-- Favicon -->  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -254,14 +299,80 @@ Last updated: 2025-05-25
         <span>Contact Us</span>
       </button>
     </div>
-  </div>  <script src="js/main.js"></script>
+  </div>  <!-- Critical Performance Scripts -->
+  <script src="js/critical-optimizations.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/enhancedAnimations.js"></script>
-  <!-- FullCalendar JavaScript -->
-  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'></script>
+  
+  <!-- FullCalendar JavaScript (Lazy Loaded) -->
+  <script>
+    // Lazy load FullCalendar when needed
+    window.loadFullCalendar = function() {
+      if (!window.FullCalendarLoaded) {
+        const scripts = [
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'
+        ];
+        
+        Promise.all(scripts.map(src => {
+          return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            document.head.appendChild(script);
+          });
+        })).then(() => {
+          window.FullCalendarLoaded = true;
+          // Initialize calendar after all scripts loaded
+          if (typeof initializeCalendar === 'function') {
+            initializeCalendar();
+          }
+        });
+      }
+    };
+    
+    // Load FullCalendar when calendar section is in view
+    if ('IntersectionObserver' in window) {
+      const calendarObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            window.loadFullCalendar();
+            calendarObserver.disconnect();
+          }
+        });
+      });
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        const calendarSection = document.querySelector('#calendar-section, .calendar-container');
+        if (calendarSection) {
+          calendarObserver.observe(calendarSection);
+        }
+      });
+    } else {
+      // Fallback for older browsers
+      window.loadFullCalendar();
+    }
+  </script>
+  
   <script src="js/pages/community.js"></script>
+    <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    } else if (window.location.protocol === 'file:') {
+      console.info('Service worker registration skipped for file:// protocol');
+    }
+  </script>
 </body>
 </html>

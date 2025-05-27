@@ -222,9 +222,7 @@ class EnhancedAnimations {
                 this.handleFormSubmission(form, e);
             });
         });
-    }
-
-    setupLoadingStates() {
+    }    setupLoadingStates() {
         // Create loading skeletons for content areas
         const contentAreas = document.querySelectorAll('[data-loading]');
         contentAreas.forEach(area => {
@@ -237,6 +235,45 @@ class EnhancedAnimations {
                 area.classList.add('loaded');
             }, 1000);
         });
+    }
+
+    createSkeleton(area) {
+        const skeleton = document.createElement('div');
+        skeleton.className = 'skeleton-loader';
+        
+        // Get dimensions from the area element
+        const rect = area.getBoundingClientRect();
+        const width = rect.width || '100%';
+        const height = rect.height || '20px';
+        
+        skeleton.style.cssText = `
+            width: ${typeof width === 'number' ? width + 'px' : width};
+            height: ${typeof height === 'number' ? height + 'px' : height};
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 2s infinite;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        `;
+        
+        // Add CSS animation if not already present
+        if (!document.querySelector('#skeleton-animation-style')) {
+            const style = document.createElement('style');
+            style.id = 'skeleton-animation-style';
+            style.textContent = `
+                @keyframes skeleton-loading {
+                    0% { background-position: 200% 0; }
+                    100% { background-position: -200% 0; }
+                }
+                .skeleton-loader {
+                    pointer-events: none;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        return skeleton;
     }
 
     setupMicroInteractions() {

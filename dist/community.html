@@ -1,0 +1,378 @@
+<!--
+File: community.html
+Purpose: Community Engagement Hub for DD Coder Dojo. Showcases upcoming events, fundraisers, movie nights, and ways to get involved. Includes WhatsApp and parent resources.
+Last updated: 2025-05-25
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community | DD Coder Dojo</title>
+  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  
+  <!-- SEO & Social Media Meta Tags -->
+  <meta name="keywords" content="DD Coder Dojo, community, events, coding, education, fundraising">
+  <meta name="author" content="DD Coder Dojo">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ddcoderdojo.com/community.html">
+  <meta property="og:title" content="Community | DD Coder Dojo">
+  <meta property="og:description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta property="og:image" content="https://ddcoderdojo.com/images/dd-coder-dojo-community-og.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://ddcoderdojo.com/community.html">
+  <meta property="twitter:title" content="Community | DD Coder Dojo">
+  <meta property="twitter:description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta property="twitter:image" content="https://ddcoderdojo.com/images/dd-coder-dojo-community-twitter.jpg">
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="css/main.css" as="style">
+  <link rel="preload" href="css/production-optimizations.css" as="style">
+  <link rel="preload" href="css/pages/community.css" as="style">
+  <link rel="preload" href="js/critical-optimizations.js" as="script">
+  
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/production-optimizations.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/pages/community.css">
+  <link rel="stylesheet" href="css/fullcalendar-enhancements.css">
+  
+  <!-- External Stylesheets (non-critical) -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  
+  <!-- FullCalendar CSS -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' /></noscript>
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- Navigation (copied from main nav, will update next) -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="logo">
+      <div class="logo-icon"><div class="orbit"></div><div class="core"></div></div>
+      <span>DD Coder Dojo</span>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="community.html" class="active">Community</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <main id="main-content" tabindex="-1">
+    <section class="community-header hero-section parallax-container fade-in">
+      <div class="parallax-layer" data-speed="0.5">
+        <div class="hero-content">
+          <h1 class="hero-title slide-in-left" data-animation-delay="0.2s">Community Engagement</h1>
+          <p class="hero-subtitle slide-in-right" data-animation-delay="0.4s">Get involved! See our upcoming events, fundraisers, and ways to connect with DD Coder Dojo.</p>
+          <div class="hero-buttons scale-in" data-animation-delay="0.6s">
+            <button class="btn btn-primary pulse-on-hover" data-tooltip="See upcoming events">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+              View Events
+            </button>
+            <button class="btn btn-secondary" data-tooltip="Join our WhatsApp group">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i>
+              Join WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+      <section class="events-section fade-in" data-animation-delay="0.8s">
+      <div class="section-header text-center">
+        <h2 class="section-title slide-in-up">Events Calendar</h2>
+        <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Stay up to date with all our exciting community events</p>
+      </div>
+      
+      <!-- Quick Class Schedule Section (Mobile-Friendly) -->
+      <div class="quick-schedule-section">
+        <h3>This Week's Classes</h3>
+        <div class="quick-schedule-grid" id="quickScheduleGrid">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <button class="btn btn-outline view-full-calendar" onclick="document.querySelector('.calendar-container').scrollIntoView({behavior: 'smooth'})">
+          <i class="fas fa-calendar-alt"></i>
+          View Full Calendar
+        </button>
+      </div>
+        <!-- Calendar Navigation -->
+      <div class="calendar-navigation">
+        <div class="view-toggle-buttons">
+          <button class="view-btn" id="standardCalendarBtn" data-tooltip="Switch to standard calendar view">
+            <i class="fas fa-calendar-alt"></i>
+            Standard View
+          </button>
+          <button class="view-btn active" id="fullCalendarBtn" data-tooltip="Switch to interactive calendar view">
+            <i class="fas fa-calendar-week"></i>
+            Interactive View
+          </button>        </div>
+      </div>
+      
+      <!-- Calendar Legend -->
+      <div class="calendar-legend">
+        <h4>Event Categories</h4>
+        <div class="legend-items">
+          <div class="legend-item">
+            <span class="legend-color class-event"></span>
+            <span class="legend-label">Classes & Workshops</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color special-event"></span>
+            <span class="legend-label">Special Events</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color fundraiser-event"></span>
+            <span class="legend-label">Fundraisers</span>
+          </div>
+        </div>
+      </div>
+        <!-- FullCalendar Container - Google Calendar Style -->
+      <div class="fullcalendar-container" id="fullCalendarContainer">
+        <div class="calendar-controls">
+          <div class="calendar-info">
+            <h4><i class="fas fa-info-circle"></i> DD Coder Dojo Schedule</h4>
+            <p>Classes run Monday-Friday. No sessions on weekends.</p>
+          </div>
+          <div class="calendar-actions">
+            <button class="calendar-control-btn" id="exportCalendarBtn" data-tooltip="Export calendar to your device">
+              <i class="fas fa-download"></i>
+              Export Calendar
+            </button>
+            <button class="calendar-control-btn" id="printCalendarBtn" data-tooltip="Print calendar">
+              <i class="fas fa-print"></i>
+              Print
+            </button>
+          </div>
+        </div>
+        <div id='fullCalendar'></div>
+        
+        <!-- Quick Schedule Overview -->
+        <div class="schedule-overview">
+          <h4><i class="fas fa-clock"></i> Regular Class Schedule</h4>
+          <div class="weekly-schedule" id="weeklySchedule">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Original Calendar (kept for fallback) -->
+      <div class="standard-calendar-container hidden" id="standardCalendarContainer">
+        <div class="calendar-navigation">
+          <button class="nav-btn prev-month" id="prevMonth" aria-label="Previous month">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <h3 class="current-month" id="currentMonth">May 2025</h3>
+          <button class="nav-btn next-month" id="nextMonth" aria-label="Next month">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        
+        <!-- Calendar Grid -->
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <div class="day-label">Sun</div>
+            <div class="day-label">Mon</div>
+            <div class="day-label">Tue</div>
+            <div class="day-label">Wed</div>
+            <div class="day-label">Thu</div>
+            <div class="day-label">Fri</div>
+            <div class="day-label">Sat</div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <!-- Calendar days will be generated here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Event Details Modal -->
+      <div class="event-modal" id="eventModal">
+        <div class="modal-content">
+          <button class="modal-close" id="modalClose" aria-label="Close event details">
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="modal-body" id="modalBody">
+            <!-- Event details will be populated here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Events List View Toggle -->
+      <div class="view-toggle">
+        <button class="toggle-btn calendar-view active" id="calendarViewBtn">
+          <i class="fas fa-calendar-alt"></i>
+          Calendar View
+        </button>
+        <button class="toggle-btn list-view" id="listViewBtn">
+          <i class="fas fa-list"></i>
+          List View
+        </button>
+      </div>
+      
+      <!-- Traditional Events Grid (for list view) -->
+      <div class="events-grid hidden" id="eventsGrid">
+        <!-- Events will be loaded here dynamically -->
+      </div>
+    </section>
+    
+    <section class="fundraisers-section fade-in" data-animation-delay="1.0s">
+      <div class="section-header text-center">
+        <h2 class="section-title slide-in-up">Fundraisers & Movie Nights</h2>
+        <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Support our mission while having fun with the community</p>
+      </div>
+      <div class="fundraisers-grid" id="fundraisersGrid">
+        <!-- Fundraisers will be loaded here dynamically -->
+      </div>
+    </section>
+    <section class="past-events-section">
+      <h2>Past Event Recaps</h2>
+      <div class="past-events-grid" id="pastEventsGrid">
+        <!-- Past events will be loaded here dynamically -->
+      </div>
+    </section>
+    <section class="community-tools-section">
+      <h2>Community Tools & Parent Info</h2>
+      <div class="community-tools-grid">
+        <div class="community-tool">
+          <h3>WhatsApp Group</h3>
+          <p>Join our WhatsApp group for updates and support. <a href="https://wa.me/27314613101" target="_blank">Join Now</a></p>
+        </div>
+        <div class="community-tool">
+          <h3>Parent Resources</h3>
+          <ul>
+            <li>Orientation sessions for new parents</li>
+            <li>Safety and communication guidelines</li>
+            <li>Feedback and support channels</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <!-- ...existing footer... -->
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>  
+  <!-- Mobile Floating Action Button -->
+  <div class="mobile-fab-container">
+    <button class="mobile-fab" id="mobileFab" aria-label="Quick actions">
+      <i class="fas fa-plus"></i>
+    </button>
+    <div class="fab-menu" id="fabMenu">
+      <button class="fab-option" onclick="window.location.href='contact.html?action=enroll'">
+        <i class="fas fa-user-plus"></i>
+        <span>Enroll in Class</span>
+      </button>
+      <button class="fab-option" onclick="window.communityCalendar?.exportCalendar()">
+        <i class="fas fa-calendar-download"></i>
+        <span>Export Schedule</span>
+      </button>
+      <button class="fab-option" onclick="window.location.href='contact.html'">
+        <i class="fas fa-phone"></i>
+        <span>Contact Us</span>
+      </button>
+    </div>
+  </div>  <!-- Critical Performance Scripts -->
+  <script src="js/critical-optimizations.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/enhancedAnimations.js"></script>
+  
+  <!-- FullCalendar JavaScript (Lazy Loaded) -->
+  <script>
+    // Lazy load FullCalendar when needed
+    window.loadFullCalendar = function() {
+      if (!window.FullCalendarLoaded) {
+        const scripts = [
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js',
+          'https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'
+        ];
+        
+        Promise.all(scripts.map(src => {
+          return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            document.head.appendChild(script);
+          });
+        })).then(() => {
+          window.FullCalendarLoaded = true;
+          // Initialize calendar after all scripts loaded
+          if (typeof initializeCalendar === 'function') {
+            initializeCalendar();
+          }
+        });
+      }
+    };
+    
+    // Load FullCalendar when calendar section is in view
+    if ('IntersectionObserver' in window) {
+      const calendarObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            window.loadFullCalendar();
+            calendarObserver.disconnect();
+          }
+        });
+      });
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        const calendarSection = document.querySelector('#calendar-section, .calendar-container');
+        if (calendarSection) {
+          calendarObserver.observe(calendarSection);
+        }
+      });
+    } else {
+      // Fallback for older browsers
+      window.loadFullCalendar();
+    }
+  </script>
+  
+  <script src="js/pages/community.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
+</body>
+</html>

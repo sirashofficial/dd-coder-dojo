@@ -4,19 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Programs | DD Coder Dojo</title>
-    
-    <!-- SEO Meta Tags -->
+      <!-- Enhanced SEO Meta Tags -->
     <meta name="description" content="Explore DD Coder Dojo's age-appropriate coding programs: Junior Ninjas (7-10), Code Explorers (11-13), and Tech Innovators (14-17).">
+    <meta name="keywords" content="DD Coder Dojo, programs, coding classes, Junior Ninjas, Code Explorers, Tech Innovators, ages 7-17">
+    <meta name="author" content="DD Coder Dojo">
+    <meta name="robots" content="index, follow">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ddcoderdojo.com/programs.html">
+    <meta property="og:title" content="Our Programs | DD Coder Dojo">
+    <meta property="og:description" content="Explore DD Coder Dojo's age-appropriate coding programs: Junior Ninjas (7-10), Code Explorers (11-13), and Tech Innovators (14-17).">
+    <meta property="og:image" content="https://ddcoderdojo.com/images/programs-og.jpg">
     
-    <!-- Google Fonts -->
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ddcoderdojo.com/programs.html">
+    <meta property="twitter:title" content="Our Programs | DD Coder Dojo">
+    <meta property="twitter:description" content="Explore DD Coder Dojo's age-appropriate coding programs: Junior Ninjas (7-10), Code Explorers (11-13), and Tech Innovators (14-17).">
+    <meta property="twitter:image" content="https://ddcoderdojo.com/images/programs-twitter.jpg">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Theme Colors & Favicon -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/production-optimizations.css" as="style">
+    <link rel="preload" href="css/pages/programs.css" as="style">
+    <link rel="preload" href="js/critical-optimizations.js" as="script">
+    
+    <!-- Font Awesome (Lazy Loaded) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Google Fonts (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-      <!-- CSS Files -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Critical CSS Files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/production-optimizations.css">
     <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/programs.css">
 </head>
@@ -151,10 +187,26 @@
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>
-    </footer>
-
-    <!-- JavaScript Files -->    <script src="js/main.js"></script>
+    </footer>    <!-- JavaScript Files -->
+    <script src="js/critical-optimizations.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/programs.js"></script>
+      <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        } else if (window.location.protocol === 'file:') {
+            console.info('Service worker registration skipped for file:// protocol');
+        }
+    </script>
 </body>
 </html>

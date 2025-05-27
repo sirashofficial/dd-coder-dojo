@@ -10,35 +10,57 @@ Last updated: 2025-05-25
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | DD Coder Dojo</title>
-    
-    <!-- SEO Meta Tags -->
+      <!-- Enhanced SEO Meta Tags -->
     <meta name="description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta name="keywords" content="DD Coder Dojo, about, mission, team, coding education, Austerville, Durban">
+    <meta name="author" content="DD Coder Dojo">
+    <meta name="robots" content="index, follow">
     
-    <!-- Open Graph & Twitter Card for SEO & Social Sharing -->
-    <meta property="og:title" content="About Us | DD Coder Dojo">
-    <meta property="og:description" content="Learn about DD Coder Dojo's mission, team, and journey in Austerville, Durban. Empowering young minds through coding.">
-    <meta property="og:image" content="images/about-header.jpg">
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/production-optimizations.css" as="style">
+    <link rel="preload" href="css/pages/about.css" as="style">
+    <link rel="preload" href="js/critical-optimizations.js" as="script">
+    
+    <!-- Enhanced Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/about.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About Us | DD Coder Dojo">
-    <meta name="twitter:description" content="Learn about DD Coder Dojo's mission, team, and journey in Austerville, Durban.">
-    <meta name="twitter:image" content="images/about-header.jpg">
+    <meta property="og:url" content="https://ddcoderdojo.com/about.html">
+    <meta property="og:title" content="About Us | DD Coder Dojo">
+    <meta property="og:description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta property="og:image" content="https://ddcoderdojo.com/images/about-header.jpg">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Enhanced Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ddcoderdojo.com/about.html">
+    <meta property="twitter:title" content="About Us | DD Coder Dojo">
+    <meta property="twitter:description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta property="twitter:image" content="https://ddcoderdojo.com/images/about-header.jpg">
     
-    <!-- Google Fonts -->
+    <!-- Theme Colors & Favicon -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <!-- Font Awesome (Lazy Loaded) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Google Fonts (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">      <!-- CSS Files -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Critical CSS Files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/production-optimizations.css">
     <link rel="stylesheet" href="css/mobile-accessibility.css">
     <link rel="stylesheet" href="css/enhancements.css">
     <link rel="stylesheet" href="css/pages/about.css">
     
     <!-- jQuery CDN for advanced effects -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3gJwYp4gU1p2+XQ6p6Yk9QbQxtB6pZ9l+8l+6p6Yk9Q=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- 
@@ -577,9 +599,27 @@ Last updated: 2025-05-25
     2. about.js - About page specific features (team loading)
     
     Don't change the order unless you know what you're doing!
-    ====================================
-    -->    <script src="js/main.js"></script>
+    ====================================    -->
+    <!-- Critical Performance Scripts -->
+    <script src="js/critical-optimizations.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/about.js"></script>
+    
+    <!-- Service Worker Registration -->    <script>
+        if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        } else if (window.location.protocol === 'file:') {
+            console.info('Service worker registration skipped for file:// protocol');
+        }
+    </script>
 </body>
 </html>

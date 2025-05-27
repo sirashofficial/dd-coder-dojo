@@ -1,0 +1,625 @@
+<!--
+File: about.html
+Purpose: About page for DD Coder Dojo. Describes the organization's mission, team, special features, history, and contact info. Enhanced with advanced jQuery effects for interactivity and modern user experience.
+Last updated: 2025-05-25
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | DD Coder Dojo</title>
+      <!-- Enhanced SEO Meta Tags -->
+    <meta name="description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta name="keywords" content="DD Coder Dojo, about, mission, team, coding education, Austerville, Durban">
+    <meta name="author" content="DD Coder Dojo">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/production-optimizations.css" as="style">
+    <link rel="preload" href="css/pages/about.css" as="style">
+    <link rel="preload" href="js/critical-optimizations.js" as="script">
+    
+    <!-- Enhanced Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ddcoderdojo.com/about.html">
+    <meta property="og:title" content="About Us | DD Coder Dojo">
+    <meta property="og:description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta property="og:image" content="https://ddcoderdojo.com/images/about-header.jpg">
+    
+    <!-- Enhanced Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ddcoderdojo.com/about.html">
+    <meta property="twitter:title" content="About Us | DD Coder Dojo">
+    <meta property="twitter:description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta property="twitter:image" content="https://ddcoderdojo.com/images/about-header.jpg">
+    
+    <!-- Theme Colors & Favicon -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <!-- Font Awesome (Lazy Loaded) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Google Fonts (Optimized) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Critical CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/production-optimizations.css">
+    <link rel="stylesheet" href="css/mobile-accessibility.css">
+    <link rel="stylesheet" href="css/enhancements.css">
+    <link rel="stylesheet" href="css/pages/about.css">
+    
+    <!-- jQuery CDN for advanced effects -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 
+    ====================================
+    SKIP LINK FOR ACCESSIBILITY
+    ====================================
+    Allows screen readers to skip to main content
+    Don't edit this unless you know about accessibility
+    ====================================
+    -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- 
+    ====================================
+    NAVIGATION SECTION
+    ====================================
+    Main site navigation - shared across all pages
+    To edit menu items: Update this section AND all other HTML pages
+    Navigation functionality: js/main.js
+    Navigation styles: css/main.css
+    ====================================
+    -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="orbit" aria-hidden="true"></div>
+                <div class="core" aria-hidden="true"></div>
+            </div>
+            <span>DD Coder Dojo</span>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </button>        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="about.html">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark/light mode">
+        <svg viewBox="0 0 24 24" class="sun-icon">
+            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+        </svg>
+        <svg viewBox="0 0 24 24" class="moon-icon">
+            <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+        </svg>
+    </button>
+
+    <main id="main-content" tabindex="-1">
+        <!-- 
+        ====================================
+        ABOUT HEADER SECTION
+        ====================================
+        Purpose: Page title and introduction
+        Content Manager: Edit the text below directly
+        Last Updated: 2025-01-15
+        
+        TO EDIT:
+        - Change title: Edit h1 text below
+        - Change description: Edit p text below
+        - Change background: Edit css/pages/about.css (line 15)
+        ====================================        -->
+        <section class="about-header fade-in">
+            <!-- EDITABLE CONTENT START -->
+            <h1 class="slide-in-left">DD (Digital Democracy) Coder Dojo</h1>
+            <p class="scale-in" style="animation-delay: 0.2s">From blocks to big ideas — come code with us! Free coding classes for ages 7-17, supported by KCA in partnership with Raspberry Pi Foundation</p>
+            <!-- EDITABLE CONTENT END -->
+        </section>
+
+        <!-- 
+        ====================================
+        MISSION & VISION SECTION
+        ====================================
+        Purpose: Organization mission and approach
+        Content Manager: Edit the text in the boxes below
+        Last Updated: 2025-01-15
+        
+        TO EDIT MISSION/VISION:
+        1. Find "EDITABLE CONTENT" markers below
+        2. Edit text between the markers
+        3. Keep HTML structure (h3, p tags) intact
+        4. Save file and refresh browser to see changes
+        ====================================
+        -->
+        <section class="mission-vision fade-in" style="animation-delay: 0.3s">
+            <h2 class="slide-in-right">Our Purpose</h2>
+            <div class="mission-vision-container">
+                <!-- MISSION BOX - EDITABLE CONTENT START -->
+                <div class="mission-vision-box card-modern scale-in" style="animation-delay: 0.4s">
+                    <h3><i class="fas fa-bullseye pulse-on-hover"></i>Our Mission</h3>
+                    <p>We believe that every child deserves access to quality technology education. DD (Digital Democracy) Coder Dojo provides free coding classes every weekday (Mon-Fri) for ages 7-17, teaching building games, apps & animations using Scratch, Python, & Web Development, while fostering problem-solving & creative thinking.</p>
+                </div>
+                <!-- MISSION BOX - EDITABLE CONTENT END -->
+                
+                <!-- APPROACH BOX - EDITABLE CONTENT START -->
+                <div class="mission-vision-box card-modern scale-in" style="animation-delay: 0.6s">
+                    <h3><i class="fas fa-heart pulse-on-hover"></i>Our Approach</h3>
+                    <p>From blocks to big ideas, we guide students through fun projects with peer mentors in a supportive community environment. Located at 178 Austerville Drive, Wentworth, Durban, we're supported by KCA (Keep A Child Alive) in partnership with the Raspberry Pi Foundation.</p>
+                </div>
+                <!-- APPROACH BOX - EDITABLE CONTENT END -->
+            </div>
+        </section>
+
+        <!-- 
+        ====================================
+        TEAM SECTION - DYNAMIC CONTENT
+        ====================================
+        Purpose: Display team members from data file
+        Data Source: data/team.json
+        JavaScript: js/pages/about.js (loads and displays team)
+        
+        FOR CONTENT EDITORS:
+        - TO ADD TEAM MEMBER: Edit data/team.json file
+        - TO REMOVE TEAM MEMBER: Set "active": false in data/team.json
+        - TO CHANGE TEAM MEMBER INFO: Edit their entry in data/team.json
+        
+        FOR DEVELOPERS:
+        - Team grid populated by JavaScript
+        - Styling in css/pages/about.css
+        - Loading logic in js/pages/about.js
+        
+        IMPORTANT: Don't edit the HTML below - edit data/team.json instead!
+        ====================================
+        -->
+        <section class="team-section">
+            <h2>Our Peer Mentors</h2>
+            <!-- 
+            TEAM GRID - POPULATED BY JAVASCRIPT
+            Content loaded from: data/team.json
+            Loading script: js/pages/about.js
+            If team members don't appear, check:
+            1. data/team.json file exists
+            2. js/pages/about.js is loading
+            3. Check browser console for errors (F12)
+            -->
+            <div class="team-grid" id="team-grid">
+                <!-- Team members inserted here by JavaScript -->
+                <!-- If you see this text, JavaScript hasn't loaded yet -->
+            </div>
+            
+            <!-- Loading indicator -->
+            <div class="team-loading" id="team-loading" style="text-align: center; padding: 2rem;">
+                <p>Loading team members...</p>
+            </div>        </section>
+
+        <!-- 
+        ====================================
+        WHAT MAKES US SPECIAL SECTION
+        ====================================
+        Purpose: Key information about programs and contact
+        Content Manager: Edit the content in each special-item below
+        Last Updated: 2025-05-25
+        ====================================
+        -->
+        <section class="special-section">
+            <div class="container">
+                <h2>What Makes Us Special</h2>
+                <div class="special-grid">
+                    <!-- WHAT WE TEACH - EDITABLE CONTENT START -->
+                    <div class="special-item">
+                        <div class="special-icon">📚</div>
+                        <h3>What We Teach</h3>
+                        <ul>
+                            <li>• Building games, apps & animations using <strong>Scratch</strong></li>
+                            <li>• <strong>Python</strong> programming fundamentals</li>
+                            <li>• <strong>Web Development</strong> with HTML, CSS & JavaScript</li>
+                            <li>• Problem-solving & creative thinking skills</li>
+                        </ul>
+                        <div class="special-counter" data-target="1200">0</div>
+                        <div class="counter-label">Students Taught</div>
+                    </div>
+                    <!-- WHAT WE TEACH - EDITABLE CONTENT END -->
+                    
+                    <!-- HOW TO JOIN - EDITABLE CONTENT START -->
+                    <div class="special-item">
+                        <div class="special-icon">📍</div>
+                        <h3>How to Join</h3>
+                        <ul>
+                            <li>• Collect an indemnity form from our offices</li>
+                            <li>• Fill in, sign, and submit the form</li>
+                            <li>• Attend our orientation session</li>
+                            <li>• Scan QR Code to join WhatsApp Community</li>
+                        </ul>
+                        <div class="special-counter" data-target="5">0</div>
+                        <div class="counter-label">Years Running</div>
+                    </div>
+                    <!-- HOW TO JOIN - EDITABLE CONTENT END -->
+                    
+                    <!-- CONTACT DETAILS - EDITABLE CONTENT START -->
+                    <div class="special-item">
+                        <div class="special-icon">📞</div>
+                        <h3>Contact Details</h3>
+                        <ul>
+                            <li>• <strong>Phone:</strong> 031 461 3101</li>
+                            <li>• <strong>Email:</strong> ashley@kcasa.org.za</li>
+                            <li>• <strong>Address:</strong> 178 Austerville Drive, Wentworth, Durban, 4052</li>
+                            <li>• <strong>Schedule:</strong> Every Weekday (Mon-Fri)</li>
+                        </ul>
+                        <div class="special-counter" data-target="30">0</div>
+                        <div class="counter-label">Peer Mentors</div>
+                    </div>
+                    <!-- CONTACT DETAILS - EDITABLE CONTENT END -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ====================================
+        SUCCESS STORIES SECTION
+        ====================================
+        Purpose: Showcase real student/parent/mentor journeys, progression, and career pathways
+        ====================================
+        -->
+        <section class="success-stories-section soft-bg">
+            <div class="container">
+                <h2><i class="fas fa-star section-icon"></i> Success Stories</h2>
+                <p class="section-intro">Meet some of our incredible students and their achievements</p>
+                <div class="success-stories-grid">
+                    <div class="success-story">
+                        <div class="story-icon"><i class="fas fa-award pulse-on-hover"></i></div>
+                        <h3>From Scratch to Scholarship</h3>
+                        <p>"I started at DD Coder Dojo with no coding experience. Now, I've built my own games and received a scholarship to study IT!"</p>
+                        <div class="story-divider"></div>
+                        <span class="story-author">– Thando, Age 16</span>
+                    </div>
+                    <div class="success-story">
+                        <div class="story-icon"><i class="fas fa-code pulse-on-hover"></i></div>
+                        <h3>Mentor to Role Model</h3>
+                        <p>"Being a peer mentor helped me develop leadership and communication skills. I'm now pursuing a career in software development."</p>
+                        <div class="story-divider"></div>
+                        <span class="story-author">– Zanele, Peer Mentor</span>
+                    </div>
+                    <div class="success-story">
+                        <div class="story-icon"><i class="fas fa-lightbulb pulse-on-hover"></i></div>
+                        <h3>Parent Perspective</h3>
+                        <p>"My daughter's confidence has grown so much. She's excited about technology and wants to become an engineer!"</p>
+                        <div class="story-divider"></div>
+                        <span class="story-author">– Mrs. Naidoo, Parent</span>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <a href="contact.html" class="btn btn-outline">Share Your Story</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ====================================
+        FOR PARENTS SECTION
+        ====================================
+        Purpose: Guidance, support tips, and FAQ for parents
+        ====================================
+        -->
+        <section class="for-parents-section soft-bg-alt">
+            <div class="container">
+                <h2><i class="fas fa-users section-icon"></i> For Parents</h2>
+                <p class="section-intro">Supporting your child on their coding journey</p>
+                <div class="parents-content">
+                    <div class="parents-guidance">
+                        <h3><i class="fas fa-hand-holding-heart"></i> How You Can Support Your Child</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Encourage regular attendance and celebrate progress</li>
+                            <li><i class="fas fa-check"></i> Ask your child to show you their projects</li>
+                            <li><i class="fas fa-check"></i> Help them find time for practice at home</li>
+                            <li><i class="fas fa-check"></i> Stay connected via our WhatsApp group for updates</li>
+                        </ul>
+                    </div>
+                    <div class="parents-faq">
+                        <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                        <dl>
+                            <dt><i class="fas fa-angle-right"></i> Do I need to know coding to help my child?</dt>
+                            <dd>No! Our mentors guide all students. Your encouragement is what matters most.</dd>
+                            <dt><i class="fas fa-angle-right"></i> Is there homework?</dt>
+                            <dd>There's no formal homework, but practicing at home is encouraged.</dd>
+                            <dt><i class="fas fa-angle-right"></i> How do I stay informed?</dt>
+                            <dd>Join our WhatsApp group and check our website for updates and resources.</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <a href="resources.html#parent-resources" class="btn btn-outline">Parent Resources</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ====================================
+        LEARNING OUTCOMES SECTION
+        ====================================
+        Purpose: Clarify what students gain from each program
+        ====================================
+        -->
+        <section class="learning-outcomes-section soft-bg">
+            <div class="container">
+                <h2><i class="fas fa-graduation-cap section-icon"></i> Learning Outcomes & Skill Progression</h2>
+                <p class="section-intro">Clear goals and milestones in each of our programs</p>
+                <div class="outcomes-grid">
+                    <div class="outcome-card">
+                        <div class="program-icon">🧩</div>
+                        <h3>Junior Ninjas (7-10)</h3>
+                        <p>By the end of this program, your child will:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Understand basic coding concepts using Scratch</li>
+                            <li><i class="fas fa-check-circle"></i> Create simple games and animations</li>
+                            <li><i class="fas fa-check-circle"></i> Work collaboratively and think creatively</li>
+                        </ul>
+                        <div class="progression-pathway">Pathway: Scratch → Teamwork → Creativity</div>
+                    </div>
+                    <div class="outcome-card">
+                        <div class="program-icon">🐍</div>
+                        <h3>Code Explorers (11-13)</h3>
+                        <p>By the end of this program, your child will:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Write code in Python and build web pages</li>
+                            <li><i class="fas fa-check-circle"></i> Solve real-world problems with technology</li>
+                            <li><i class="fas fa-check-circle"></i> Develop logical thinking and resilience</li>
+                        </ul>
+                        <div class="progression-pathway">Pathway: Python & Web → Problem Solving → Independence</div>
+                    </div>
+                    <div class="outcome-card">
+                        <div class="program-icon">💡</div>
+                        <h3>Tech Innovators (14-17)</h3>
+                        <p>By the end of this program, your child will:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Build advanced projects in Python & JavaScript</li>
+                            <li><i class="fas fa-check-circle"></i> Experiment with hardware (e.g., Micro:bit)</li>
+                            <li><i class="fas fa-check-circle"></i> Mentor others and develop leadership skills</li>
+                        </ul>
+                        <div class="progression-pathway">Pathway: Advanced Coding → Hardware → Leadership</div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <a href="programs.html" class="btn btn-outline">Explore Our Programs</a>
+                </div>
+            </div>
+        </section>
+
+        <!--
+        ====================================
+        TESTIMONIALS SECTION
+        ====================================
+        Purpose: Rotating testimonials from students, parents, or mentors
+        ====================================
+        -->
+        <section class="testimonials-section">
+            <div class="container">
+                <h2>What Our Community Says</h2>
+                <div class="testimonials-carousel">
+                    <div class="testimonial active">
+                        <blockquote>“My child loves coming to Coder Dojo! The mentors are so supportive.”</blockquote>
+                        <cite>- Parent</cite>
+                    </div>
+                    <div class="testimonial">
+                        <blockquote>“I learned to code my first game here. Now I want to be a developer!”</blockquote>
+                        <cite>- Student</cite>
+                    </div>
+                    <div class="testimonial">
+                        <blockquote>“It’s amazing to see kids grow in confidence and skills every week.”</blockquote>
+                        <cite>- Mentor</cite>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-prev" aria-label="Previous testimonial">&#8592;</button>
+                    <button class="testimonial-next" aria-label="Next testimonial">&#8594;</button>
+                </div>
+            </div>        </section>
+
+        <!-- 
+        ====================================
+        HISTORY & TIMELINE SECTION
+        ====================================
+        Purpose: Show DD Coder Dojo's journey through the years
+        Content Manager: Edit the timeline content below
+        Last Updated: 2025-01-16
+        ====================================
+        -->
+        <section class="history-section">
+            <div class="container">
+                <h2>Our Journey</h2>
+                <div class="timeline">
+                    <!-- 2022: Laying the Foundation -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="date">2022</div>
+                            <h3>Laying the Foundation</h3>
+                            <p>DD Coder Dojo began with a simple mission: to provide free, accessible digital literacy education to young minds in Austerville. We started with basic typing skills and introduced Scratch programming, building confidence and curiosity in our first cohort of students. The foundation was built on community support and the belief that every child deserves access to technology education.</p>
+                            <ul>
+                                <li>• Launched with 25 pioneer students</li>
+                                <li>• Focus on digital literacy and Scratch programming</li>
+                                <li>• Basic typing skills development</li>
+                                <li>• Established community partnerships</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2023: Growth and Structure -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="date">2023</div>
+                            <h3>Growth and Structure</h3>
+                            <p>The year of expansion and organization. We implemented structured weekly sessions, introduced Code.org curriculum, and established our peer mentor system. This year marked the transformation from a small community initiative to a structured educational program that could support more students effectively.</p>
+                            <ul>
+                                <li>• Weekly structured sessions established</li>
+                                <li>• Code.org curriculum integration</li>
+                                <li>• Peer mentor system launched</li>
+                                <li>• Student enrollment grew to 75</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2024: Innovation and Community -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="date">2024</div>
+                            <h3>Innovation and Community</h3>
+                            <p>A year of creative breakthroughs and technological exploration. We introduced themed coding events, brought micro:bit hardware programming into our curriculum, and celebrated our students' achievements with our first annual showcase. The community spirit flourished as we expanded our reach and impact.</p>
+                            <ul>
+                                <li>• Themed coding events and competitions</li>
+                                <li>• micro:bit hardware programming introduced</li>
+                                <li>• First annual student showcase</li>
+                                <li>• Community celebrations and recognition</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2025: Empowering Through Experience -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="date">2025</div>
+                            <h3>Empowering Through Experience</h3>
+                            <p>Building on our strong foundation, we're launching structured curriculum pathways, organizing our first hackathons, and enhancing community engagement through WhatsApp groups. This year represents our commitment to creating lasting impact and preparing students for future opportunities in technology.</p>
+                            <ul>
+                                <li>• Structured curriculum pathways</li>
+                                <li>• First DD Coder Dojo hackathons</li>
+                                <li>• Enhanced WhatsApp community engagement</li>
+                                <li>• Focus on real-world project applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ====================================
+        CALL TO ACTION SECTION
+        ====================================
+        Purpose: Encourage visitors to join
+        Content Manager: Edit heading, text, and button below
+        Last Updated: 2025-01-15
+        
+        TO EDIT:
+        - Heading: Edit h2 text
+        - Description: Edit p text
+        - Button text: Edit a text (but keep href="contact.html")
+        ====================================
+        -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <!-- EDITABLE CONTENT START -->
+                <h2>Join DD Coder Dojo Community</h2>
+                <p>Ready to start your coding journey? Registration is free and open to ages 7-17. Contact us at 031 461 3101 or ashley@kcasa.org.za to get started!</p>
+                <a href="contact.html" class="btn-large">Get Started Today</a>
+                <!-- EDITABLE CONTENT END -->
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+    ====================================
+    FOOTER SECTION
+    ====================================
+    Shared across all pages - same as other HTML files
+    To edit footer: Update this section AND all other HTML pages
+    ====================================
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DD (Digital Democracy) Coder Dojo</h3>
+                    <p>From blocks to big ideas — come code with us! Supported by KCA in partnership with Raspberry Pi Foundation.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Programs</h3>
+                    <ul>
+                        <li><a href="programs.html#junior">Junior Ninjas (7-10)</a></li>
+                        <li><a href="programs.html#intermediate">Code Explorers (11-13)</a></li>
+                        <li><a href="programs.html#senior">Tech Innovators (14-17)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> ashley@kcasa.org.za</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 178 Austerville Drive, Wentworth, Durban</p>
+                    <p><i class="fas fa-phone"></i> 031 461 3101</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
+                <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 
+    ====================================
+    JAVASCRIPT FILES
+    ====================================
+    Load order is important:
+    1. main.js - Global functionality (navigation, theme, etc.)
+    2. about.js - About page specific features (team loading)
+    
+    Don't change the order unless you know what you're doing!
+    ====================================    -->
+    <!-- Critical Performance Scripts -->
+    <script src="js/critical-optimizations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
+    <script src="js/pages/about.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

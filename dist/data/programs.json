@@ -1,0 +1,35 @@
+[
+  {
+    "id": "junior",
+    "name": "Junior Ninjas (7-10)",
+    "description": "Fun, block-based coding with Scratch. Learn logic, games, and animations.",
+    "icon": "🧩",
+    "details": [
+      "Scratch basics",
+      "Game and animation projects",
+      "Teamwork and creativity"
+    ]
+  },
+  {
+    "id": "intermediate",
+    "name": "Code Explorers (11-13)",
+    "description": "Transition to real code with Python and web basics. Build apps and solve problems.",
+    "icon": "🐍",
+    "details": [
+      "Python fundamentals",
+      "Web development (HTML, CSS, JS)",
+      "Problem-solving challenges"
+    ]
+  },
+  {
+    "id": "senior",
+    "name": "Tech Innovators (14-17)",
+    "description": "Advanced coding, real-world projects, and leadership. Prepare for tech careers.",
+    "icon": "💡",
+    "details": [
+      "Advanced Python & JavaScript",
+      "Micro:bit & hardware projects",
+      "Mentoring & leadership"
+    ]
+  }
+]

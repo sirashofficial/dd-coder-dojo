@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline | DD Coder Dojo</title>
+    <meta name="description" content="You're currently offline. Check out what's available offline at DD Coder Dojo.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Critical CSS Inline -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #fbbf24;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .offline-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .offline-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+        
+        .offline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .offline-features {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: #e5e7eb;
+        }
+        
+        .feature-icon {
+            color: #10b981;
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .connection-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .connection-status.online {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ef4444;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-indicator.online {
+            background: #10b981;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @media (max-width: 768px) {
+            .offline-container {
+                margin: 10px;
+                padding: 2rem 1.5rem;
+            }
+            
+            .offline-title {
+                font-size: 2rem;
+            }
+            
+            .offline-subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                min-width: 180px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-subtitle">
+            No internet connection detected. Don't worry! Some features are still available offline.
+        </p>
+        
+        <div class="offline-actions">
+            <button class="btn" onclick="window.location.reload()">
+                🔄 Try Again
+            </button>
+            <a href="/" class="btn btn-secondary">
+                🏠 Go to Homepage
+            </a>
+        </div>
+        
+        <div class="offline-features">
+            <h3 style="margin-bottom: 1rem; color: #ffffff;">Available Offline:</h3>
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    Browse cached pages you've visited
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    View program information
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    Access contact details
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    Read about our mission
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">⏳</span>
+                    Form submissions (saved for when online)
+                </li>
+            </ul>
+        </div>
+        
+        <div class="connection-status" id="connectionStatus">
+            <span class="status-indicator" id="statusIndicator"></span>
+            <span id="statusText">Connection lost</span>
+        </div>
+    </div>
+
+    <script>
+        // Monitor connection status
+        function updateConnectionStatus() {
+            const isOnline = navigator.onLine;
+            const statusIndicator = document.getElementById('statusIndicator');
+            const statusText = document.getElementById('statusText');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            if (isOnline) {
+                statusIndicator.classList.add('online');
+                connectionStatus.classList.add('online');
+                statusText.textContent = 'Connection restored! You can refresh the page.';
+            } else {
+                statusIndicator.classList.remove('online');
+                connectionStatus.classList.remove('online');
+                statusText.textContent = 'Connection lost';
+            }
+        }
+        
+        // Initial check
+        updateConnectionStatus();
+        
+        // Listen for connection changes
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Auto-reload when connection is restored
+        window.addEventListener('online', () => {
+            setTimeout(() => {
+                if (navigator.onLine) {
+                    window.location.href = '/';
+                }
+            }, 2000);
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const focused = document.activeElement;
+                if (focused && focused.tagName === 'BUTTON') {
+                    focused.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

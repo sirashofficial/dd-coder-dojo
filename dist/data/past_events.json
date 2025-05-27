@@ -1,0 +1,18 @@
+[
+  {
+    "date": "2025-04-20",
+    "title": "Scratch Game Jam Recap",
+    "description": "Our students created 12 new games in one day! See the winning projects and photos from the event.",
+    "type": "recap",
+    "image": "images/events/game-jam.jpg",
+    "gallery": ["images/events/game-jam1.jpg", "images/events/game-jam2.jpg"]
+  },
+  {
+    "date": "2025-03-10",
+    "title": "Women in Tech Panel Recap",
+    "description": "Guest speakers inspired our girls to pursue tech careers. Watch the highlights and read the Q&A.",
+    "type": "recap",
+    "image": "images/events/women-in-tech.jpg",
+    "gallery": ["images/events/women-in-tech1.jpg"]
+  }
+]

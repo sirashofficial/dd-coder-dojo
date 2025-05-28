@@ -451,12 +451,10 @@ class DDCoderDojoApp {
         
         // Set up resource hints
         this.setupResourceHints();
-    }
-
-    preloadCriticalResources() {
+    }    preloadCriticalResources() {
         const criticalImages = [
-            '/images/hero-bg.jpg',
-            '/images/logo.png'
+            'images/hero-bg.jpg',
+            'images/logo.png'
         ];
 
         criticalImages.forEach(src => {

@@ -1432,3 +1432,32 @@ section {
     display: none;
   }
 }
+
+/* ===== MISSING IMAGE PLACEHOLDER STYLES ===== */
+.missing-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0.7;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  min-height: 200px;
+}
+
+.missing-image-placeholder i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  opacity: 0.6;
+}
+
+.missing-image-placeholder span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}

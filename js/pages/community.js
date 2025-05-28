@@ -56,7 +56,6 @@ class EventCalendar {
       this.showErrorState();
     }
   }
-
   async loadEvents() {
     try {
       const response = await fetch('data/events.json');
@@ -64,7 +63,47 @@ class EventCalendar {
       this.events = await response.json();
     } catch (error) {
       console.error('Error loading events:', error);
-      this.events = [];
+      console.log('🔄 Using fallback events data for local development...');
+      
+      // Fallback data for local development when CORS blocks file:// requests
+      this.events = [
+        {
+          "id": 1,
+          "title": "Python Programming Workshop",
+          "date": "2025-05-30",
+          "time": "2:00 PM - 4:00 PM",
+          "description": "Learn the basics of Python programming in this hands-on workshop for beginners.",
+          "type": "event",
+          "location": "Main Classroom",
+          "image": "images/events/python-workshop.jpg",
+          "category": "workshop",
+          "color": "#3776ab"
+        },
+        {
+          "id": 2,
+          "title": "Web Development Showcase",
+          "date": "2025-06-15",
+          "time": "10:00 AM - 12:00 PM",
+          "description": "Students showcase their web development projects to families and community members.",
+          "type": "event",
+          "location": "Main Hall",
+          "image": "images/events/web-showcase.jpg",
+          "category": "showcase",
+          "color": "#f39c12"
+        },
+        {
+          "id": 3,
+          "title": "Summer Coding Camp Fundraiser",
+          "date": "2025-07-20",
+          "time": "6:00 PM - 9:00 PM",
+          "description": "Join us for a fun evening to raise funds for our summer coding camp program.",
+          "type": "fundraiser",
+          "location": "Community Center",
+          "image": "images/events/fundraiser.jpg",
+          "category": "fundraiser",
+          "color": "#e74c3c"
+        }
+      ];
     }
   }  async loadClassSchedule() {
     try {
@@ -73,7 +112,121 @@ class EventCalendar {
       this.classSchedule = await response.json();
     } catch (error) {
       console.error('Error loading class schedule:', error);
-      this.classSchedule = [];
+      console.log('🔄 Using fallback class schedule data for local development...');
+      
+      // Fallback data for local development when CORS blocks file:// requests
+      this.classSchedule = [
+        {
+          "id": 1,
+          "title": "Creative Coders (Ages 7-10)",
+          "day": "monday",
+          "time": "4:00 PM - 5:30 PM",
+          "ageGroup": "7-10",
+          "level": "Beginner",
+          "description": "Introduction to programming concepts through fun, creative projects using Scratch and basic web technologies.",
+          "capacity": 12,
+          "enrolled": 8,
+          "color": "#ff6b6b",
+          "location": "Creative Lab",
+          "technologies": ["Scratch", "HTML", "CSS"],
+          "teacher": {
+            "name": "Ms. Sarah Johnson",
+            "email": "sarah@ddcoderdojo.org",
+            "phone": "(555) 123-4567",
+            "avatar": "images/team/sarah-johnson.jpg",
+            "bio": "Sarah has 5+ years of experience teaching kids programming and loves making coding fun and accessible.",
+            "specialties": ["Scratch Programming", "Creative Coding", "Game Design"]
+          }
+        },
+        {
+          "id": 2,
+          "title": "Code Explorers (Ages 11-13)",
+          "day": "tuesday",
+          "time": "4:00 PM - 5:30 PM",
+          "ageGroup": "11-13",
+          "level": "Intermediate",
+          "description": "Build real projects with Python and JavaScript while learning programming fundamentals and problem-solving skills.",
+          "capacity": 15,
+          "enrolled": 12,
+          "color": "#4ecdc4",
+          "location": "Main Classroom",
+          "technologies": ["Python", "JavaScript", "HTML", "CSS"],
+          "teacher": {
+            "name": "Mr. David Chen",
+            "email": "david@ddcoderdojo.org",
+            "phone": "(555) 234-5678",
+            "avatar": "images/team/david-chen.jpg",
+            "bio": "David is a software engineer who enjoys teaching the next generation of coders.",
+            "specialties": ["Python", "Web Development", "Algorithm Design"]
+          }
+        },
+        {
+          "id": 3,
+          "title": "Tech Innovators (Ages 14-17)",
+          "day": "wednesday",
+          "time": "4:00 PM - 6:00 PM",
+          "ageGroup": "14-17",
+          "level": "Advanced",
+          "description": "Advanced programming concepts, web development, and preparation for computer science studies or careers.",
+          "capacity": 10,
+          "enrolled": 7,
+          "color": "#45b7d1",
+          "location": "Innovation Lab",
+          "technologies": ["React", "Node.js", "Python", "Git", "Databases"],
+          "teacher": {
+            "name": "Dr. Ashley Rodriguez",
+            "email": "ashley@ddcoderdojo.org",
+            "phone": "(555) 345-6789",
+            "avatar": "images/team/ashley-rodriguez.jpg",
+            "bio": "Dr. Rodriguez has a PhD in Computer Science and works in industry while teaching part-time.",
+            "specialties": ["Full-Stack Development", "Data Science", "Machine Learning"]
+          }
+        },
+        {
+          "id": 4,
+          "title": "Game Makers (Ages 10-14)",
+          "day": "thursday",
+          "time": "4:00 PM - 5:30 PM",
+          "ageGroup": "10-14",
+          "level": "Intermediate",
+          "description": "Design and build your own games using Unity, Scratch, and other game development tools.",
+          "capacity": 12,
+          "enrolled": 10,
+          "color": "#96ceb4",
+          "location": "Game Lab",
+          "technologies": ["Unity", "C#", "Scratch", "Game Design"],
+          "teacher": {
+            "name": "Ms. Emma Williams",
+            "email": "emma@ddcoderdojo.org",
+            "phone": "(555) 456-7890",
+            "avatar": "images/team/emma-williams.jpg",
+            "bio": "Emma is a game developer who loves sharing her passion for game creation with young developers.",
+            "specialties": ["Game Development", "Unity", "Interactive Design"]
+          }
+        },
+        {
+          "id": 5,
+          "title": "Web Wizards (Ages 12-16)",
+          "day": "friday",
+          "time": "4:00 PM - 5:30 PM",
+          "ageGroup": "12-16",
+          "level": "Intermediate",
+          "description": "Master modern web development with HTML, CSS, JavaScript, and popular frameworks like React.",
+          "capacity": 14,
+          "enrolled": 9,
+          "color": "#f7dc6f",
+          "location": "Web Lab",
+          "technologies": ["HTML", "CSS", "JavaScript", "React", "Bootstrap"],
+          "teacher": {
+            "name": "Mr. Michael Thompson",
+            "email": "michael@ddcoderdojo.org",
+            "phone": "(555) 567-8901",
+            "avatar": "images/team/michael-thompson.jpg",
+            "bio": "Michael is a front-end developer with expertise in modern web technologies and UX design.",
+            "specialties": ["Frontend Development", "React", "UI/UX Design"]
+          }
+        }
+      ];
     }
   }
 
@@ -832,10 +985,7 @@ class EventCalendar {
           dayName: this.dayNames[date.getDay()]
         });
       });
-    }
-
-    console.log('This week classes total:', thisWeekClasses.length);
-    debugInfo.innerHTML += `<br><strong>Total this week: ${thisWeekClasses.length}</strong>`;
+    }    console.log('This week classes total:', thisWeekClasses.length);
 
     // Sort by date and time
     thisWeekClasses.sort((a, b) => {
@@ -1431,6 +1581,47 @@ async function loadPastEvents() {
     }
   } catch (error) {
     console.error('Error loading past events:', error);
+    console.log('🔄 Using fallback past events data for local development...');
+    
+    // Fallback data for local development when CORS blocks file:// requests
+    const pastEventsGrid = document.getElementById('pastEventsGrid');
+    if (pastEventsGrid) {
+      const fallbackPastEvents = [
+        {
+          "title": "Python Basics Workshop",
+          "date": "2025-04-15",
+          "description": "Students learned fundamental Python programming concepts through interactive exercises and games.",
+          "image": "images/events/python-basics-past.jpg",
+          "gallery": []
+        },
+        {
+          "title": "Web Development Showcase",
+          "date": "2025-03-20",
+          "description": "Amazing student presentations featuring personal websites, portfolio projects, and creative web applications.",
+          "image": "images/events/web-showcase-past.jpg",
+          "gallery": ["images/gallery/showcase1.jpg", "images/gallery/showcase2.jpg"]
+        },
+        {
+          "title": "Game Development Challenge",
+          "date": "2025-02-28",
+          "description": "Students created and demonstrated their own games using Scratch and Unity in a fun competition format.",
+          "image": "images/events/game-challenge-past.jpg",
+          "gallery": ["images/gallery/games1.jpg", "images/gallery/games2.jpg", "images/gallery/games3.jpg"]
+        }
+      ];
+      
+      const pastEventItems = fallbackPastEvents.map(ev => `
+        <div class="past-event-card">
+          <img src="${ev.image}" alt="${ev.title}" class="event-img" style="width:100%;border-radius:12px 12px 0 0;max-height:160px;object-fit:cover;" onerror="this.style.display='none'"/>
+          <div class="event-date">${new Date(ev.date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+          <h3>${ev.title}</h3>
+          <p>${ev.description}</p>
+          ${ev.gallery && ev.gallery.length ? `<div class='event-gallery'>${ev.gallery.map(img => `<img src='${img}' alt='Event photo' style='width:60px;height:60px;border-radius:8px;margin:2px;object-fit:cover;'/>`).join('')}</div>` : ''}
+        </div>
+      `).join('');
+      
+      pastEventsGrid.innerHTML = pastEventItems || '<p style="text-align: center; color: var(--text-secondary);">No past events found.</p>';
+    }
   }
 }
 

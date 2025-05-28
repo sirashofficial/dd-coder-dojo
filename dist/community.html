@@ -1,6 +1,7 @@
 <!--
 File: community.html
-Purpose: Community Engagement Hub for DD Coder Dojo. Showcases upcoming events, fundraisers, movie nights, and ways to get involved. Includes WhatsApp and parent resources.
+Purpose: Community Engageme  <!-- FullCalendar CSS -->  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.17/main.min.css">
+  <noscript><link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.17/main.min.css' rel='stylesheet' /></noscript>Hub for DD Coder Dojo. Showcases upcoming events, fundraisers, movie nights, and ways to get involved. Includes WhatsApp and parent resources.
 Last updated: 2025-05-25
 -->
 <!DOCTYPE html>
@@ -14,6 +15,12 @@ Last updated: 2025-05-25
   <!-- SEO & Social Media Meta Tags -->
   <meta name="keywords" content="DD Coder Dojo, community, events, coding, education, fundraising">
   <meta name="author" content="DD Coder Dojo">
+  
+  <!-- Performance optimizations -->
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <meta name="robots" content="index, follow">
   
   <!-- Open Graph / Facebook -->
@@ -46,11 +53,15 @@ Last updated: 2025-05-25
   
   <!-- External Stylesheets (non-critical) -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   
-  <!-- FullCalendar CSS -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' /></noscript>
+  <!-- FullCalendar CSS with fallback -->
+  <style id="fullcalendar-css-fallback">
+    .calendar-loading { display: none; }
+    .calendar-error { display: none; background: #fee; border: 1px solid #fcc; padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.17/main.min.css" id="fc-css-primary">
+  <noscript><link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.17/main.min.css' rel='stylesheet' /></noscript>
   
   <!-- Theme Colors -->
   <meta name="theme-color" content="#2563eb">
@@ -304,38 +315,131 @@ Last updated: 2025-05-25
   <script src="js/critical-optimizations.js"></script>
   <script src="js/main.js"></script>
   <script src="js/enhancedAnimations.js"></script>
-  
-  <!-- FullCalendar JavaScript (Lazy Loaded) -->
+    <!-- FullCalendar JavaScript (Lazy Loaded with Robust Fallback) -->
   <script>
-    // Lazy load FullCalendar when needed
+    // Comprehensive CDN fallback system
     window.loadFullCalendar = function() {
       if (!window.FullCalendarLoaded) {
-        const scripts = [
-          'https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js',
-          'https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.min.js',
-          'https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js',
-          'https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js',
-          'https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/main.min.js'
-        ];
-        
-        Promise.all(scripts.map(src => {
-          return new Promise((resolve) => {
-            const script = document.createElement('script');
-            script.src = src;
-            script.onload = resolve;
-            document.head.appendChild(script);
-          });
-        })).then(() => {
-          window.FullCalendarLoaded = true;
-          // Initialize calendar after all scripts loaded
-          if (typeof initializeCalendar === 'function') {
-            initializeCalendar();
+        // Define multiple CDN sources for reliability
+        const cdnSources = {
+          primary: {
+            name: 'cdnjs.cloudflare.com',
+            baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.17/',
+            scripts: [
+              'main.min.js',
+              'interaction/main.min.js', 
+              'daygrid/main.min.js',
+              'timegrid/main.min.js',
+              'list/main.min.js'
+            ]
+          },
+          fallback1: {
+            name: 'unpkg.com',
+            baseUrl: 'https://unpkg.com/@fullcalendar/',
+            scripts: [
+              'core@6.1.17/main.min.js',
+              'interaction@6.1.17/main.min.js',
+              'daygrid@6.1.17/main.min.js', 
+              'timegrid@6.1.17/main.min.js',
+              'list@6.1.17/main.min.js'
+            ]
+          },
+          fallback2: {
+            name: 'jsdelivr.net (stable version)',
+            baseUrl: 'https://cdn.jsdelivr.net/npm/@fullcalendar/',
+            scripts: [
+              'core@6.1.10/main.min.js',
+              'interaction@6.1.10/main.min.js',
+              'daygrid@6.1.10/main.min.js',
+              'timegrid@6.1.10/main.min.js', 
+              'list@6.1.10/main.min.js'
+            ]
           }
+        };
+
+        // Function to load scripts from a specific CDN source
+        function loadFromSource(source) {
+          console.log(`Loading FullCalendar from ${source.name}...`);
+          const scriptUrls = source.scripts.map(script => source.baseUrl + script);
+          
+          return Promise.all(scriptUrls.map(src => {
+            return new Promise((resolve, reject) => {
+              const script = document.createElement('script');
+              script.src = src;
+              script.onload = () => {
+                console.log(`✓ Loaded: ${src}`);
+                resolve();
+              };
+              script.onerror = () => {
+                console.warn(`✗ Failed: ${src}`);
+                reject(new Error(`Failed to load ${src}`));
+              };
+              // Set timeout for slow loading
+              const timeout = setTimeout(() => {
+                console.warn(`⏱ Timeout: ${src}`);
+                reject(new Error(`Timeout loading ${src}`));
+              }, 10000);
+              
+              script.onload = () => {
+                clearTimeout(timeout);
+                console.log(`✓ Loaded: ${src}`);
+                resolve();
+              };
+              
+              document.head.appendChild(script);
+            });
+          }));
+        }
+
+        // Try CDN sources in order with automatic fallback
+        async function loadWithFallback() {
+          const sources = [cdnSources.primary, cdnSources.fallback1, cdnSources.fallback2];
+          
+          for (let i = 0; i < sources.length; i++) {
+            try {
+              await loadFromSource(sources[i]);
+              console.log(`✓ FullCalendar loaded successfully from ${sources[i].name}`);
+              window.FullCalendarLoaded = true;
+              
+              // Initialize calendar after successful load
+              if (typeof initializeCalendar === 'function') {
+                initializeCalendar();
+              }
+              return;
+            } catch (error) {
+              console.warn(`Failed to load from ${sources[i].name}:`, error.message);
+              if (i === sources.length - 1) {
+                // All sources failed
+                console.error('All FullCalendar CDN sources failed. Showing error message.');
+                showCalendarError();
+              }
+            }
+          }
+        }
+
+        // Show error message if all CDNs fail
+        function showCalendarError() {
+          const calendarContainer = document.querySelector('#calendar, .calendar-container');
+          if (calendarContainer) {
+            calendarContainer.innerHTML = `
+              <div class="calendar-error">
+                <h3>📅 Calendar Temporarily Unavailable</h3>
+                <p>We're having trouble loading the calendar. Please try refreshing the page or check back later.</p>
+                <button onclick="window.loadFullCalendar()" class="btn btn-primary">Try Again</button>
+              </div>
+            `;
+          }
+        }
+
+        // Start the loading process
+        loadWithFallback().catch(error => {
+          console.error('Critical error in FullCalendar loading:', error);
+          showCalendarError();
         });
       }
     };
-    
-    // Load FullCalendar when calendar section is in view
+
+    // Enhanced loading with intersection observer
     if ('IntersectionObserver' in window) {
       const calendarObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -344,21 +448,26 @@ Last updated: 2025-05-25
             calendarObserver.disconnect();
           }
         });
-      });
+      }, { threshold: 0.1 });
       
       document.addEventListener('DOMContentLoaded', () => {
-        const calendarSection = document.querySelector('#calendar-section, .calendar-container');
+        const calendarSection = document.querySelector('#calendar-section, .calendar-container, #calendar');
         if (calendarSection) {
           calendarObserver.observe(calendarSection);
+        } else {
+          // Fallback: load immediately if no calendar section found
+          setTimeout(() => window.loadFullCalendar(), 1000);
         }
       });
     } else {
       // Fallback for older browsers
-      window.loadFullCalendar();
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => window.loadFullCalendar(), 1000);
+      });
     }
   </script>
-  
-  <script src="js/pages/community.js"></script>
+
+  <script defer src="js/pages/community.js"></script>
   
   <!-- Service Worker Registration -->
   <script>

@@ -287,6 +287,29 @@
   filter: brightness(1.2);
 }
 
+.partner-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-color);
+  text-align: center;
+  opacity: 0.8;
+  height: 80px;
+}
+
+.partner-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.partner-placeholder span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
 .partner-info h3 {
   color: var(--light-color);
   font-family: var(--title-font);

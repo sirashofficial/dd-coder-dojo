@@ -366,19 +366,18 @@ function deleteFromStore(store, id) {
 self.addEventListener('fetch', event => {
   const startTime = performance.now();
   
-  event.waitUntil(
-    event.respondWith(
-      // Your existing fetch handling logic here
-      handleRequest(event.request).then(response => {
-        const endTime = performance.now();
-        const duration = endTime - startTime;
-        
-        // Log performance metrics
-        console.log(`Request ${event.request.url} took ${duration}ms`);
-        
-        return response;
-      })
-    )
+  event.respondWith(
+    handleRequest(event.request).then(response => {
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      
+      // Only log slow requests (>500ms) to reduce console noise
+      if (duration > 500) {
+        console.warn(`Slow request: ${event.request.url} took ${duration}ms`);
+      }
+      
+      return response;
+    })
   );
 });
 

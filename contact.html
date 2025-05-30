@@ -2,26 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | DD Coder Dojo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Contact | DD Coder Dojo</title>
       <!-- Enhanced SEO Meta Tags -->
-    <meta name="description" content="Contact DD Coder Dojo to register for free coding classes for ages 7-17 in Wentworth, Durban. Get in touch today!">
-    <meta name="keywords" content="DD Coder Dojo, contact, register, coding classes, Wentworth, Durban">
+    <meta name="description" content="Contact DD Coder Dojo for free coding classes for ages 7-17 in Wentworth, Durban. Get in touch today!">
+    <meta name="keywords" content="DD Coder Dojo, contact, coding classes, Wentworth, Durban">
     <meta name="author" content="DD Coder Dojo">
     <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
+      <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ddcoderdojo.com/contact.html">
-    <meta property="og:title" content="Contact Us | DD Coder Dojo">
-    <meta property="og:description" content="Contact DD Coder Dojo to register for free coding classes for ages 7-17 in Wentworth, Durban. Get in touch today!">
+    <meta property="og:title" content="Contact | DD Coder Dojo">
+    <meta property="og:description" content="Contact DD Coder Dojo for free coding classes for ages 7-17 in Wentworth, Durban. Get in touch today!">
     <meta property="og:image" content="https://ddcoderdojo.com/images/contact-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://ddcoderdojo.com/contact.html">
-    <meta property="twitter:title" content="Contact Us | DD Coder Dojo">
-    <meta property="twitter:description" content="Contact DD Coder Dojo to register for free coding classes for ages 7-17 in Wentworth, Durban. Get in touch today!">
+    <meta property="twitter:title" content="Contact | DD Coder Dojo">
+    <meta property="twitter:description" content="Contact DD Coder Dojo for free coding classes for ages 7-17 in Wentworth, Durban. Get in touch today!">
     <meta property="twitter:image" content="https://ddcoderdojo.com/images/contact-twitter.jpg">
     
     <!-- PWA Manifest -->
@@ -33,24 +31,24 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    
-    <!-- Preload Critical Resources -->
+      <!-- Preload Critical Resources -->
     <link rel="preload" href="css/main.css" as="style">
     <link rel="preload" href="css/production-optimizations.css" as="style">
     <link rel="preload" href="css/pages/contact.css" as="style">
     <link rel="preload" href="js/critical-optimizations.js" as="script">
-    
-    <!-- Font Awesome (Lazy Loaded) -->
+      <!-- Font Awesome (Lazy Loaded) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Chart.js for Business Intelligence Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Google Fonts (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    
-    <!-- Critical CSS Files -->
+      <!-- Critical CSS Files -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/production-optimizations.css">
     <link rel="stylesheet" href="css/enhancements.css">
@@ -77,12 +75,58 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="programs.html">Programs</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
+            <li class="dropdown">
+                <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
+                <ul class="dropdown-menu">
+                    <li><a href="community.html">Community Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
             <li class="active"><a href="contact.html">Contact</a></li>
-            <li><a href="community.html">Community</a></li>
         </ul>
+        <style>
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: #1e293b;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            border-radius: 0 0 8px 8px;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu li { width: 100%; }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75em 1.2em;
+            color: #f1f5f9;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 1em;
+        }
+        .dropdown-menu a:hover { background: #334155; color: #8b5cf6; }
+        .dropdown-toggle:after {
+            content: ' ▼';
+            font-size: 0.7em;
+        }
+        @media (max-width: 900px) {
+            .nav-links { flex-direction: column; gap: 0.5rem; }
+            .dropdown-menu { position: static; box-shadow: none; min-width: 0; border-radius: 0; }
+        }
+        </style>
     </nav>
 
     <!-- Dark Mode Toggle -->
@@ -95,16 +139,15 @@
         </svg>
     </button>
 
-    <main id="main-content" tabindex="-1">
-        <!-- Contact Header -->
+    <main id="main-content" tabindex="-1">        <!-- Contact Header -->
         <section class="contact-header">
-            <h1>Get In Touch</h1>
-            <p>Ready to start your coding journey? Contact us today to join DD Coder Dojo!</p>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="contact-container">
+            <h1>Contact</h1>
+            <p>Ready to start your coding journey? Get in touch for free coding classes today!</p>
+        </section>        <!-- Contact Tab -->
+        <div class="tab-content active" id="contactTab">
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <div class="contact-container">
                 <!-- Contact Information -->
                 <div class="contact-info">
                     <h2>Contact Information</h2>
@@ -134,32 +177,7 @@
                             <p><small>Monday to Friday: 9:00 AM - 5:00 PM</small></p>
                         </div>
                     </div>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <div>
-                            <h3>Class Schedule</h3>
-                            <p>Free coding classes every weekday:</p>
-                            <div class="schedule-grid">
-                                <div class="schedule-day">
-                                    <strong>Mon</strong>
-                                    <span>14:00-16:00<br>Tech Innovators</span>
-                                </div>
-                                <div class="schedule-day">
-                                    <strong>Tue-Wed</strong>
-                                    <span>14:00-16:00<br>Code Explorers</span>
-                                </div>
-                                <div class="schedule-day">
-                                    <strong>Thu</strong>
-                                    <span>14:00-15:00<br>Junior Ninjas</span>
-                                </div>
-                                <div class="schedule-day">
-                                    <strong>Fri</strong>
-                                    <span>13:00-15:00<br>Junior Ninjas</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  
                 </div>
                   <!-- Contact Form -->
                 <div class="contact-form fade-in" style="animation-delay: 0.3s">
@@ -239,8 +257,7 @@
                         <button type="submit" class="submit-btn btn-enhanced">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
-                    </form>
-                </div>
+                    </form>                </div>
             </div>
         </section>
         
@@ -281,6 +298,7 @@
                 </div>
             </div>
         </section>
+            </div>            
     </main>
 
     <!-- Footer -->
@@ -334,6 +352,13 @@
     <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/contact.js"></script>
     <script src="js/formHandler.js"></script>
+    
+    <!-- Phase 7: Data Management & Analytics -->
+    <script src="js/data-management/data-manager.js"></script>
+    <script src="js/analytics/advanced-analytics.js"></script>
+    <script src="js/business-intelligence/bi-dashboard.js"></script>
+    <script src="js/user-insights/user-insights.js"></script>
+    <script src="js/ab-testing/ab-testing.js"></script>
     
     <!-- Service Worker Registration -->
     <script>        if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {

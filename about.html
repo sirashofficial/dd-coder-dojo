@@ -41,10 +41,12 @@ Last updated: 2025-05-25
     <meta name="msapplication-TileColor" content="#2563eb">    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-      <!-- Font Awesome (Lazy Loaded) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">    <!-- Font Awesome (Lazy Loaded) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Chart.js for Business Intelligence Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Google Fonts (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,12 +100,59 @@ Last updated: 2025-05-25
         </button>        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li class="active"><a href="about.html">About</a></li>
-            <li><a href="programs.html">Programs</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="community.html">Community</a></li>
+            <li class="dropdown">
+                <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
+                <ul class="dropdown-menu">
+                    <li><a href="community.html">Community Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="register.html">Register</a></li>
         </ul>
+        <style>
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: #1e293b;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            border-radius: 0 0 8px 8px;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu li { width: 100%; }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75em 1.2em;
+            color: #f1f5f9;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 1em;
+        }
+        .dropdown-menu a:hover { background: #334155; color: #8b5cf6; }
+        .dropdown-toggle:after {
+            content: ' ▼';
+            font-size: 0.7em;
+        }
+        @media (max-width: 900px) {
+            .nav-links { flex-direction: column; gap: 0.5rem; }
+            .dropdown-menu { position: static; box-shadow: none; min-width: 0; border-radius: 0; }
+        }
+        </style>
     </nav>
 
     <!-- Dark Mode Toggle -->
@@ -597,12 +646,18 @@ Last updated: 2025-05-25
     Load order is important:
     1. main.js - Global functionality (navigation, theme, etc.)
     2. about.js - About page specific features (team loading)
-    
-    Don't change the order unless you know what you're doing!
-    ====================================    -->
-    <!-- Critical Performance Scripts -->
+        <!-- Critical Performance Scripts -->
     <script src="js/critical-optimizations.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/enhancedAnimations.js"></script>
+    <script src="js/pages/about.js"></script>
+    
+    <!-- Phase 7: Data Management & Analytics -->
+    <script src="js/data-management/data-manager.js"></script>
+    <script src="js/analytics/advanced-analytics.js"></script>
+    <script src="js/business-intelligence/bi-dashboard.js"></script>
+    <script src="js/user-insights/user-insights.js"></script>
+    <script src="js/ab-testing/ab-testing.js"></script>
     <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/about.js"></script>
     

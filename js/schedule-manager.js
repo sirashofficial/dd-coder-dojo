@@ -183,48 +183,143 @@ class WeeklyScheduleManager {
     }
 }
 
-// ===== HACKATHON COUNTDOWN TIMER =====
+// ===== ENHANCED HACKATHON COUNTDOWN TIMER =====
 class HackathonCountdown {
     constructor() {
         this.targetDate = new Date('2025-07-26T09:00:00'); // July 26, 2025 at 9:00 AM
+        this.totalDuration = this.targetDate.getTime() - new Date('2024-01-01').getTime(); // Calculate from a fixed start date
+        this.particles = [];
         this.init();
     }
 
     init() {
+        this.setupInteractiveElements();
+        this.initializeParticles();
         this.updateCountdown();
         this.startTimer();
+    }    setupInteractiveElements() {
+        // Add click effects to countdown units
+        const countdownUnits = document.querySelectorAll('.time-unit');
+        countdownUnits.forEach(unit => {
+            unit.addEventListener('click', () => {
+                this.triggerClickEffect(unit);
+            });
+
+            unit.addEventListener('mouseenter', () => {
+                this.triggerHoverEffect(unit, true);
+            });
+
+            unit.addEventListener('mouseleave', () => {
+                this.triggerHoverEffect(unit, false);
+            });
+        });
+
+        // Add excitement meter interactions
+        const excitementMeter = document.querySelector('.excitement-meter');
+        if (excitementMeter) {
+            excitementMeter.addEventListener('click', () => {
+                this.triggerExcitementBoost();
+            });
+        }
     }
 
-    updateCountdown() {
+    initializeParticles() {
+        const particlesContainer = document.querySelector('.particles-container');
+        if (particlesContainer) {
+            // Create additional dynamic particles for countdown excitement
+            for (let i = 0; i < 3; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'countdown-particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: rgba(255, 215, 0, 0.6);
+                    border-radius: 50%;
+                    animation: floatCountdownParticle ${3 + Math.random() * 2}s infinite ease-in-out;
+                    animation-delay: ${Math.random() * 2}s;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                `;
+                particlesContainer.appendChild(particle);
+                this.particles.push(particle);
+            }
+        }
+    }    updateCountdown() {
         const now = new Date().getTime();
         const distance = this.targetDate.getTime() - now;
 
         if (distance < 0) {
-            // Event has passed
             this.displayEventEnded();
             return;
-        }        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Update the display
-        const daysElement = document.getElementById('days');
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
+        // Update the display with modern circular progress
+        this.updateCountdownUnit('days', days, 365);
+        this.updateCountdownUnit('hours', hours, 24);
+        this.updateCountdownUnit('minutes', minutes, 60);
+        this.updateCountdownUnit('seconds', seconds, 60);
 
-        if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
-        if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
-        if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
-        if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
+        // Update excitement meter
+        this.updateExcitementMeter(distance);
 
-        // Add excitement as the date approaches
+        // Add visual effects based on urgency
         this.addCountdownEffects(days);
+    }    updateCountdownUnit(unit, value, maxValue) {
+        // Update the number display
+        const numberElement = document.getElementById(unit);
+        if (numberElement) {
+            numberElement.textContent = value.toString().padStart(2, '0');
+        }
+
+        // Update the circular progress using conic-gradient
+        const progressElement = document.querySelector(`.circle-progress[data-unit="${unit}"]`);
+        if (progressElement) {
+            const percentage = (value / maxValue) * 360; // Convert to degrees
+            progressElement.style.background = `conic-gradient(#0ea5e9 ${percentage}deg, transparent ${percentage}deg)`;
+        }
+    }updateExcitementMeter(distance) {
+        const excitementMeter = document.querySelector('.excitement-meter');
+        const excitementFill = document.querySelector('.meter-fill');
+        const excitementText = document.querySelector('.meter-text');
+        
+        if (!excitementMeter || !excitementFill || !excitementText) return;
+
+        const daysRemaining = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let excitementLevel, excitementMessage;
+
+        if (daysRemaining <= 1) {
+            excitementLevel = 100;
+            excitementMessage = "🔥 IT'S HAPPENING!";
+        } else if (daysRemaining <= 7) {
+            excitementLevel = 85;
+            excitementMessage = "⚡ Almost here!";
+        } else if (daysRemaining <= 30) {
+            excitementLevel = 65;
+            excitementMessage = "🚀 Getting excited!";
+        } else if (daysRemaining <= 90) {
+            excitementLevel = 40;
+            excitementMessage = "📅 Mark your calendar!";
+        } else {
+            excitementLevel = 20;
+            excitementMessage = "⏰ Save the date!";
+        }
+
+        excitementFill.style.width = `${excitementLevel}%`;
+        excitementText.textContent = excitementMessage;
+
+        // Add glow effect based on excitement
+        excitementMeter.style.setProperty('--excitement-glow', 
+            `rgba(255, 215, 0, ${excitementLevel / 100 * 0.6})`);
     }
 
     addCountdownEffects(daysRemaining) {
-        const countdownElement = document.getElementById('hackathonCountdown');
+        const countdownElement = document.querySelector('.modern-hackathon-section');
         if (!countdownElement) return;
 
         // Remove existing effect classes
@@ -232,6 +327,7 @@ class HackathonCountdown {
 
         if (daysRemaining <= 1) {
             countdownElement.classList.add('countdown-imminent');
+            this.intensifyParticles();
         } else if (daysRemaining <= 7) {
             countdownElement.classList.add('countdown-urgent');
         } else if (daysRemaining <= 30) {
@@ -239,20 +335,101 @@ class HackathonCountdown {
         }
     }
 
+    intensifyParticles() {
+        this.particles.forEach(particle => {
+            particle.style.animationDuration = '1s';
+            particle.style.background = 'rgba(255, 69, 0, 0.8)';
+        });
+    }
+
+    triggerClickEffect(unit) {
+        unit.style.transform = 'scale(1.1)';
+        unit.style.transition = 'transform 0.2s ease-out';
+        
+        setTimeout(() => {
+            unit.style.transform = 'scale(1)';
+        }, 200);
+
+        // Create ripple effect
+        const ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.3);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+            left: 50%;
+            top: 50%;
+            width: 100px;
+            height: 100px;
+            margin-left: -50px;
+            margin-top: -50px;
+        `;
+        
+        unit.style.position = 'relative';
+        unit.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    }    triggerHoverEffect(unit, isHover) {
+        const timeCircle = unit.querySelector('.time-circle');
+        if (timeCircle) {
+            if (isHover) {
+                timeCircle.style.transform = 'scale(1.05)';
+                timeCircle.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.6)';
+            } else {
+                timeCircle.style.transform = 'scale(1)';
+                timeCircle.style.boxShadow = '0 0 15px rgba(100, 255, 218, 0.3)';
+            }
+        }
+    }
+
+    triggerExcitementBoost() {
+        const excitementMeter = document.querySelector('.excitement-meter');
+        excitementMeter.style.transform = 'scale(1.05)';
+        excitementMeter.style.transition = 'transform 0.3s ease-out';
+        
+        setTimeout(() => {
+            excitementMeter.style.transform = 'scale(1)';
+        }, 300);
+    }
+
     displayEventEnded() {
-        const countdownElement = document.getElementById('hackathonCountdown');
-        if (countdownElement) {
-            countdownElement.innerHTML = `
+        const countdownContainer = document.querySelector('.countdown-column');
+        if (countdownContainer) {
+            countdownContainer.innerHTML = `
                 <div class="countdown-ended">
+                    <div class="ended-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
                     <div class="ended-message">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Event Completed! Thanks to all participants!</span>
+                        <h3>Event Completed!</h3>
+                        <p>Thanks to all participants for making it amazing!</p>
+                    </div>
+                    <div class="ended-stats">
+                        <div class="stat">
+                            <span class="stat-number">250+</span>
+                            <span class="stat-label">Participants</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">48</span>
+                            <span class="stat-label">Hours of Coding</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Projects Created</span>
+                        </div>
                     </div>
                 </div>
             `;
         }
-    }    startTimer() {
-        // Update every second for more responsive countdown
+    }
+
+    startTimer() {
+        // Update every second for smooth animations
         setInterval(() => {
             this.updateCountdown();
         }, 1000);

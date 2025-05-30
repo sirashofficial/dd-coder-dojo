@@ -55,12 +55,14 @@ Last updated: 2025-05-25
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
-    
-    <!-- Font Awesome with loading optimization -->
+      <!-- Font Awesome with loading optimization -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </noscript>
+    
+    <!-- Chart.js for Business Intelligence Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Critical CSS (inline for performance) -->
     <style>
@@ -194,70 +196,378 @@ Last updated: 2025-05-25
         <ul class="nav-links">
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="programs.html">Programs</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="community.html">Community</a></li>
-        </ul>
+            <li class="dropdown">
+                <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
+                <ul class="dropdown-menu">
+                    <li><a href="community.html">Community Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>        </ul>
+        <style>
+        /* --- ENFORCE DARK MODE ONLY --- */
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --accent-blue: #0ea5e9;
+            --accent-purple: #8b5cf6;
+        }
+        
+        body {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        /* --- ENHANCED DROPDOWN STYLES --- */
+        .nav-links { 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            gap: 1.5rem; 
+        }
+        
+        .dropdown { 
+            position: relative; 
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0ea5e9 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.25), 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(14, 165, 233, 0.3);
+            padding: 1rem 0;
+            min-width: 220px;
+            backdrop-filter: blur(20px);
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+            animation: slideDownEnhanced 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        @keyframes slideDownEnhanced {
+            from { 
+                opacity: 0; 
+                transform: translateY(-15px) scale(0.95); 
+                filter: blur(5px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+                filter: blur(0);
+            }
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 16px 24px;
+            color: #ffffff !important;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover::before,
+        .dropdown-menu a:focus::before {
+            width: 100%;
+        }
+        
+        .dropdown-menu a:hover, 
+        .dropdown-menu a:focus { 
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff !important;
+            padding-left: 28px;
+            transform: translateX(4px);
+        }
+        
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+        
+        .dropdown-toggle:after {
+            content: ' ▼';
+            font-size: 0.7em;
+            color: var(--accent-blue);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-left: 4px;
+        }
+        
+        .dropdown:hover .dropdown-toggle:after {
+            transform: rotate(180deg);
+            color: #ffffff;
+        }
+        
+        /* --- ENHANCED CAROUSEL/TAB NAVIGATION --- */
+        .carousel-nav, .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .carousel-nav .nav-btn {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: var(--text-secondary);
+            border: 2px solid #475569;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-nav .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .carousel-nav .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .carousel-nav .nav-btn:hover, 
+        .carousel-nav .nav-btn:focus {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-blue);
+            background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
+            color: #ffffff;
+            outline: none;
+        }
+        
+        .carousel-indicators .indicator {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: #475569;
+            border: 2px solid #64748b;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .carousel-indicators .indicator.active {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            transform: scale(1.3);
+            box-shadow: 0 4px 16px rgba(14,165,233,0.4);
+            border-color: var(--accent-blue);
+        }
+        
+        /* --- MODERN CARD ENHANCEMENTS --- */        
+        .card-modern, .highlight-card, .stat-card, .schedule-day-card, .carousel-card, .btn, .quick-link-btn {
+            background: rgba(30, 41, 59, 0.9) !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(14, 165, 233, 0.1);
+            border-radius: 16px !important;
+            border: 2px solid rgba(14, 165, 233, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-modern:hover, .highlight-card:hover, .stat-card:hover, .schedule-day-card:hover, .carousel-card:hover, .btn:hover, .quick-link-btn:hover {
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        
+        /* Quick Link Button Styling */
+        .quick-link-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
+            color: #fff !important;
+            padding: 0.7em 1.2em;
+            border-radius: 2em !important;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(139, 92, 246, 0.3) !important;
+        }
+        
+        .quick-link-btn:hover { 
+            background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%) !important;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+        
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 900px) {
+            .nav-links { 
+                flex-direction: column; 
+                gap: 0.5rem; 
+            }
+            .dropdown-menu { 
+                position: static; 
+                box-shadow: none; 
+                min-width: 0; 
+                border-radius: 0; 
+                display: block;
+            }
+        }
+    </style>
     </nav>
 
-    <!-- Dark Mode Toggle -->
-    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark/light mode">
-        <svg viewBox="0 0 24 24" class="sun-icon">
-            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-        </svg>
-        <svg viewBox="0 0 24 24" class="moon-icon">
-            <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
-        </svg>
-    </button>
+    <!-- Dark Mode Enforced - No Toggle Needed -->
+    <style>
+        body {
+            background: #181a23 !important;
+            color: #f1f5f9 !important;
+        }
+        /* Remove any light mode overrides and enforce dark backgrounds */
+        .navbar, .modern-section, .enhanced-banner, .modern-footer {
+            background: linear-gradient(120deg, #181a23 0%, #23263a 100%) !important;
+            color: #f1f5f9 !important;
+        }
+        .modern-section, .enhanced-banner {
+            box-shadow: 0 8px 32px rgba(15,23,42,0.28), 0 1.5px 8px rgba(139,92,246,0.10);
+        }
+        .card-modern, .highlight-card, .stat-card, .schedule-day-card, .carousel-card, .btn, .quick-link-btn {
+            background: rgba(36,39,56,0.85) !important;
+            box-shadow: 0 2px 8px 0 rgba(139,92,246,0.10), 0 1.5px 8px rgba(14,165,233,0.05);
+            border-radius: 1.2em !important;
+            border: 1.5px solid rgba(139,92,246,0.13);
+            transition: box-shadow 0.18s;
+        }
+        .card-modern:hover, .highlight-card:hover, .stat-card:hover, .schedule-day-card:hover, .carousel-card:hover, .btn:hover, .quick-link-btn:hover {
+            box-shadow: 0 8px 24px 0 rgba(139,92,246,0.18), 0 2.5px 12px rgba(14,165,233,0.10);
+            transform: none !important;
+        }
+        .carousel-container.modern-carousel {
+            background: rgba(36,39,56,0.7);
+            border-radius: 1.5em;
+            box-shadow: 0 8px 32px rgba(139,92,246,0.18), 0 1.5px 8px rgba(14,165,233,0.10);
+            padding: 2em 1em 2.5em 1em;
+            position: relative;
+        }
+        .carousel-nav .nav-btn {
+            background: linear-gradient(120deg, #b3e0ff 60%, #0ea5e9 100%);
+            color: #23263a;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(14,165,233,0.10);
+            width: 3em;
+            height: 3em;
+            font-size: 1.5em;
+            margin: 0 0.5em;
+            transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+        }
+        .carousel-nav .nav-btn:hover, .carousel-nav .nav-btn:focus {
+            background: linear-gradient(120deg, #0ea5e9 60%, #b3e0ff 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(14,165,233,0.18);
+            outline: none;
+            transform: scale(1.08);
+        }
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.7em;
+            margin-top: 1.2em;
+        }
+        .carousel-indicators .indicator {
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            background: #b3e0ff;
+            border: 2px solid #0ea5e9;
+            transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+        }
+        .carousel-indicators .indicator.active {
+            background: linear-gradient(120deg, #0ea5e9 60%, #b3e0ff 100%);
+            transform: scale(1.18);
+            box-shadow: 0 4px 16px rgba(14,165,233,0.22);
+        }
+        /* Glassmorphism for carousel cards */
+        .carousel-card {
+            background: rgba(36,39,56,0.85);
+            backdrop-filter: blur(8px) saturate(1.2);
+            border-radius: 1.2em;
+            box-shadow: 0 6px 24px 0 rgba(139,92,246,0.18), 0 1.5px 8px rgba(14,165,233,0.10);
+            border: 1.5px solid rgba(139,92,246,0.13);
+            transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+        }
+        .carousel-card:hover {
+            transform: translateY(-6px) scale(1.04) perspective(400px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 12px 36px 0 rgba(139,92,246,0.28), 0 2.5px 12px rgba(14,165,233,0.18);
+        }
+    </style>
 
     <main id="main-content" tabindex="-1">
+        <!-- Quick Links Bar for Parents & Kids -->        <nav class="quick-links-bar" aria-label="Quick Links" style="display:flex;gap:1.5rem;justify-content:center;margin:2rem 0 1rem 0;">
+            <a href="programs.html" class="quick-link-btn">View Programs</a>
+            <a href="resources.html" class="quick-link-btn">Learning Resources</a>
+            <a href="gallery.html" class="quick-link-btn">Student Projects</a>
+            <a href="contact.html" class="quick-link-btn">Contact Us</a>        </nav>
+        
         <!-- Hero Section -->
-        <section class="hero">            <div class="hero-background">
+        <section class="hero">
+            <div class="hero-background">
                 <canvas id="matrixCanvas"></canvas>
                 <div class="matrix-rain"></div>
                 <div class="floating-particles"></div>
             </div>
-              <div class="hero-content fade-in" data-animation="slideInLeft">
+            <div class="hero-content fade-in" data-animation="slideInLeft">
                 <h1 class="hero-title slide-in-left">
-                    <span class="typing-text" data-text="Code The Future">Code The Future</span>
+                    Code with Ubuntu
                 </h1>
                 <p class="hero-subtitle fade-in" style="animation-delay: 0.3s">
-                    <span class="subtitle-line">Empowering young minds through</span>
-                    <span class="rotating-words">
-                        <span class="word active">coding education</span>
-                        <span class="word">creative thinking</span>
-                        <span class="word">problem solving</span>
-                        <span class="word">digital innovation</span>
-                    </span>
-                </p>                <div class="cta-buttons scale-in" style="animation-delay: 0.6s">
-                    <a href="register.html" class="btn-enhanced btn-primary pulse-btn tooltip" data-tooltip="Start your coding journey today!">
-                        <span>Join Our Community</span>
-                        <div class="btn-particles"></div>
-                    </a>
-                    <a href="programs.html" class="btn-enhanced btn-secondary glow-btn tooltip" data-tooltip="Discover our exciting programs">
-                        <span>Explore Programs</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    Empowering young minds through free, creative coding education in Durban. Join our inclusive community and build the future with us!
+                </p>
+                <div class="cta-buttons scale-in" style="animation-delay: 0.6s">
+                    <a href="programs.html" class="btn btn-primary">Explore Programs</a>
+                    <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
                 </div>
-                
                 <div class="hero-stats fade-in" style="animation-delay: 0.9s">
-                    <div class="stat-item scale-in" style="animation-delay: 1.0s">
-                        <span class="stat-number" data-count="150" data-target="150">0</span>
-                        <span class="stat-label">Students Enrolled</span>
-                    </div>
-                    <div class="stat-item scale-in" style="animation-delay: 1.1s">
-                        <span class="stat-number" data-count="200" data-target="200">0</span>
-                        <span class="stat-label">Projects Created</span>
-                    </div>
-                    <div class="stat-item scale-in" style="animation-delay: 1.2s">
-                        <span class="stat-number" data-count="3" data-target="3">0</span>
-                        <span class="stat-label">Age Groups</span>
-                    </div>
+                    <div class="stat-item"><span class="stat-number">150+</span> Students</div>
+                    <div class="stat-item"><span class="stat-number">100%</span> Free</div>
+                    <div class="stat-item"><span class="stat-number">5</span> Weekly Classes</div>
                 </div>
             </div>
-            
             <div class="hero-visual slide-in-right" style="animation-delay: 0.4s">
                 <div class="code-container">
                     <div class="code-header">
@@ -268,7 +578,7 @@ Last updated: 2025-05-25
                         </div>
                         <span class="code-title">future_coder.js</span>
                     </div><pre class="code-content"><code>
-<span class="code-line"><span class="code-comment">// Welcome to DD Coder Dojo!</span><span class="code-cursor"></span></span>
+<span class="code-line"><span class="code-comment">// Welcome to Code with Ubuntu!</span><span class="code-cursor"></span></span>
 <span class="code-line"><span class="code-keyword">function</span> <span class="code-function">joinCommunity</span>() {<span class="code-cursor"></span></span>
 <span class="code-line">  <span class="code-keyword">const</span> <span class="code-variable">student</span> = {<span class="code-cursor"></span></span>
 <span class="code-line">    <span class="code-property">curiosity</span>: <span class="code-string">'unlimited'</span>,<span class="code-cursor"></span></span>
@@ -309,163 +619,69 @@ Last updated: 2025-05-25
                     </div>
                 </div>
             </div>
-        </section>        <!-- Programs Overview Section -->
-        <section class="programs fade-in" id="programs" data-parallax="0.1">
+        </section>        <!-- Featured Event Banner (Modern Hackathon Section) -->
+        <section class="featured-event-banner modern-hackathon-section" id="featured-event">
+            <div class="particles-container">
+                <div class="particle particle-1"></div>
+                <div class="particle particle-2"></div>
+                <div class="particle particle-3"></div>
+                <div class="particle particle-4"></div>
+                <div class="particle particle-5"></div>
+                <div class="particle particle-6"></div>
+            </div>
             <div class="container">
-                <h2 class="slide-in-left" data-animation="fadeInUp">Our Programs</h2>
-                <p class="section-subtitle fade-in" style="animation-delay: 0.2s">From blocks to big ideas - discover the perfect coding path for every age!</p>
-                
-                <div class="programs-grid">
-                    <!-- Junior Program Card -->
-                    <div class="program-card card-modern scale-in" data-program="junior" style="animation-delay: 0.3s">
-                        <div class="program-card-inner">
-                            <div class="program-card-front">
-                                <div class="program-icon">
-                                    <i class="fas fa-child"></i>
-                                </div>
-                                <h3>Junior Ninjas</h3>
-                                <p class="age-range">Ages 7-10</p>
-                                <p class="program-intro">Start your coding adventure with visual programming and creative games!</p>
-                                <div class="skill-preview">
-                                    <span class="skill-tag">Scratch</span>
-                                    <span class="skill-tag">Logic</span>
-                                    <span class="skill-tag">Creativity</span>
-                                </div>
-                                <div class="flip-indicator">
-                                    <i class="fas fa-hand-pointer"></i>
-                                    <span>Hover to explore</span>
-                                </div>
-                            </div>
-                            
-                            <div class="program-card-back">
-                                <div class="program-details">
-                                    <h4>What You'll Learn</h4>
-                                    <ul class="curriculum-list">
-                                        <li><i class="fas fa-check"></i> Block-based coding with Scratch</li>
-                                        <li><i class="fas fa-check"></i> Basic computer skills & typing</li>
-                                        <li><i class="fas fa-check"></i> Creative storytelling through games</li>
-                                        <li><i class="fas fa-check"></i> Problem-solving fundamentals</li>
-                                        <li><i class="fas fa-check"></i> Digital citizenship basics</li>
-                                    </ul>
-                                    
-                                    <div class="schedule-info">
-                                        <h5><i class="fas fa-calendar"></i> Schedule</h5>
-                                        <p>Thursday: 14:00-15:00<br>Friday: 13:00-15:00</p>
-                                    </div>
-                                    
-                                    <div class="progress-bar">
-                                        <span>Beginner Friendly</span>
-                                        <div class="progress">
-                                            <div class="progress-fill" style="width: 20%"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="action-buttons">
-                                        <a href="https://scratch.mit.edu/" target="_blank" class="btn btn-try">Try Scratch</a>
-                                        <a href="contact.html" class="btn btn-join">Join Now</a>
-                                    </div>
-                                </div>
+                <div class="hackathon-grid">
+                    <div class="event-info-column">
+                        <div class="event-badge modern-badge slide-in-up">
+                            <div class="badge-glow"></div>
+                            <i class="fas fa-star spinning-icon"></i>
+                            <span>Featured Event</span>
+                            <div class="badge-pulse"></div>
+                        </div>
+                        <h2 class="event-title modern-title slide-in-up" style="animation-delay: 0.1s;">
+                            <span class="title-gradient">Annual Summer</span>
+                            <span class="title-emphasis">Hackathon 2025</span>
+                        </h2>
+                        <div class="event-date-container slide-in-up" style="animation-delay: 0.2s;">
+                            <div class="date-info">
+                                <div class="date-item"><i class="fas fa-calendar-alt"></i><span>July 26, 2025</span></div>
+                                <div class="date-separator">|</div>
+                                <div class="date-item"><i class="fas fa-clock"></i><span>48 Hours of Coding</span></div>
                             </div>
                         </div>
-                    </div>                    <!-- Intermediate Program Card -->
-                    <div class="program-card card-modern scale-in" data-program="intermediate" style="animation-delay: 0.4s">
-                        <div class="program-card-inner">
-                            <div class="program-card-front">
-                                <div class="program-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <h3>Code Explorers</h3>
-                                <p class="age-range">Ages 11-13</p>
-                                <p class="program-intro">Bridge to real programming with web development and Python basics!</p>
-                                <div class="skill-preview">
-                                    <span class="skill-tag">HTML/CSS</span>
-                                    <span class="skill-tag">Python</span>
-                                    <span class="skill-tag">Web Dev</span>
-                                </div>
-                                <div class="flip-indicator">
-                                    <i class="fas fa-hand-pointer"></i>
-                                    <span>Hover to explore</span>
-                                </div>
-                            </div>
-                            
-                            <div class="program-card-back">
-                                <div class="program-details">
-                                    <h4>What You'll Learn</h4>
-                                    <ul class="curriculum-list">
-                                        <li><i class="fas fa-check"></i> HTML & CSS foundations</li>
-                                        <li><i class="fas fa-check"></i> Python programming basics</li>
-                                        <li><i class="fas fa-check"></i> Building simple websites</li>
-                                        <li><i class="fas fa-check"></i> Introduction to databases</li>
-                                        <li><i class="fas fa-check"></i> Version control with Git</li>
-                                    </ul>
-                                    
-                                    <div class="schedule-info">
-                                        <h5><i class="fas fa-calendar"></i> Schedule</h5>
-                                        <p>Tuesday & Wednesday<br>14:00-16:00</p>
-                                    </div>
-                                    
-                                    <div class="progress-bar">
-                                        <span>Intermediate Level</span>
-                                        <div class="progress">
-                                            <div class="progress-fill" style="width: 60%"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="action-buttons">
-                                        <a href="https://code.org/student/middle-high" target="_blank" class="btn btn-try">Try Code.org</a>
-                                        <a href="contact.html" class="btn btn-join">Join Now</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="event-description modern-description slide-in-up" style="animation-delay: 0.3s;">
+                            <p class="description-main"><strong>Our biggest coding event of the year!</strong> Join us for an electrifying 48-hour hackathon packed with prizes, teamwork, and fun challenges.</p>
+                            <p class="description-sub">Open to all ages and skill levels—bring your ideas, your friends, and your energy!</p>
                         </div>
-                    </div>                    <!-- Senior Program Card -->
-                    <div class="program-card card-modern scale-in" data-program="senior" style="animation-delay: 0.5s">
-                        <div class="program-card-inner">
-                            <div class="program-card-front">
-                                <div class="program-icon">
-                                    <i class="fas fa-laptop-code"></i>
-                                </div>
-                                <h3>Tech Innovators</h3>
-                                <p class="age-range">Ages 14-17</p>
-                                <p class="program-intro">Master advanced programming and build real-world applications!</p>
-                                <div class="skill-preview">
-                                    <span class="skill-tag">Full Stack</span>
-                                    <span class="skill-tag">micro:bit</span>
-                                    <span class="skill-tag">Projects</span>
-                                </div>
-                                <div class="flip-indicator">
-                                    <i class="fas fa-hand-pointer"></i>
-                                    <span>Hover to explore</span>
-                                </div>
+                        <div class="event-highlights modern-highlights">
+                            <div class="highlight-card modern-card" style="animation-delay: 0.4s;"><div class="card-icon"><i class="fas fa-trophy"></i></div><div class="card-content"><h4>R500 Grand Prize</h4><p>Win big for your innovative solution!</p></div><div class="card-glow"></div></div>
+                            <div class="highlight-card modern-card" style="animation-delay: 0.5s;"><div class="card-icon"><i class="fas fa-users"></i></div><div class="card-content"><h4>All Ages Welcome</h4><p>Perfect for beginners and experts alike</p></div><div class="card-glow"></div></div>
+                            <div class="highlight-card modern-card" style="animation-delay: 0.6s;"><div class="card-icon"><i class="fas fa-pizza-slice"></i></div><div class="card-content"><h4>Free Food & Swag</h4><p>Fuel up with snacks and take home goodies</p></div><div class="card-glow"></div></div>
+                            <div class="highlight-card modern-card" style="animation-delay: 0.7s;"><div class="card-icon"><i class="fas fa-lightbulb"></i></div><div class="card-content"><h4>Workshops & Mentors</h4><p>Learn from industry professionals</p></div><div class="card-glow"></div></div>
+                        </div>
+                        <div class="event-actions modern-actions slide-in-up" style="animation-delay: 0.8s;">
+                            <a href="community.html" class="btn btn-primary modern-btn"><span class="btn-text"><i class="fas fa-calendar-alt"></i>View Event Details</span><div class="btn-glow"></div></a>
+                            <a href="contact.html" class="btn btn-secondary modern-btn"><span class="btn-text"><i class="fas fa-users"></i>Register Your Team</span><div class="btn-glow"></div></a>
+                        </div>
+                    </div>
+                    <div class="countdown-column">
+                        <div class="countdown-timer modern-countdown" id="hackathonCountdown">
+                            <div class="countdown-header">
+                                <div class="countdown-icon"><i class="fas fa-rocket pulse-icon"></i></div>
+                                <h3 class="countdown-title">Event Countdown</h3>
+                                <p class="countdown-subtitle">Get ready to code!</p>
                             </div>
-                            
-                            <div class="program-card-back">
-                                <div class="program-details">
-                                    <h4>What You'll Learn</h4>
-                                    <ul class="curriculum-list">
-                                        <li><i class="fas fa-check"></i> Advanced JavaScript & Python</li>
-                                        <li><i class="fas fa-check"></i> Full-stack web development</li>
-                                        <li><i class="fas fa-check"></i> micro:bit physical computing</li>
-                                        <li><i class="fas fa-check"></i> App development basics</li>
-                                        <li><i class="fas fa-check"></i> Portfolio & career prep</li>
-                                    </ul>
-                                    
-                                    <div class="schedule-info">
-                                        <h5><i class="fas fa-calendar"></i> Schedule</h5>
-                                        <p>Monday<br>14:00-16:00</p>
-                                    </div>
-                                    
-                                    <div class="progress-bar">
-                                        <span>Advanced Level</span>
-                                        <div class="progress">
-                                            <div class="progress-fill" style="width: 90%"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="action-buttons">
-                                        <a href="https://www.freecodecamp.org/" target="_blank" class="btn btn-try">Try FreeCodeCamp</a>
-                                        <a href="contact.html" class="btn btn-join">Join Now</a>
-                                    </div>
+                            <div class="countdown-display modern-display">
+                                <div class="time-unit days-unit"><div class="time-circle"><span class="time-value" id="days">0</span><div class="circle-progress" data-unit="days"></div></div><span class="time-label">Days</span></div>
+                                <div class="time-unit hours-unit"><div class="time-circle"><span class="time-value" id="hours">0</span><div class="circle-progress" data-unit="hours"></div></div><span class="time-label">Hours</span></div>
+                                <div class="time-unit minutes-unit"><div class="time-circle"><span class="time-value" id="minutes">0</span><div class="circle-progress" data-unit="minutes"></div></div><span class="time-label">Minutes</span></div>
+                                <div class="time-unit seconds-unit"><div class="time-circle"><span class="time-value" id="seconds">0</span><div class="circle-progress" data-unit="seconds"></div></div><span class="time-label">Seconds</span></div>
+                            </div>
+                            <div class="countdown-footer">
+                                <div class="excitement-meter">
+                                    <div class="meter-label">Excitement Level</div>
+                                    <div class="meter-bar"><div class="meter-fill"></div></div>
+                                    <div class="meter-text">Building Up!</div>
                                 </div>
                             </div>
                         </div>
@@ -474,233 +690,117 @@ Last updated: 2025-05-25
             </div>
         </section>
 
-        <!-- Featured Event Banner -->
-        <section class="featured-event-banner" id="featured-event">
-            <div class="container">
-                <div class="featured-event-content">
-                    <div class="event-badge">
-                        <i class="fas fa-star"></i>
-                        <span>Featured Event</span>
-                    </div>
-                    <h3>Annual Summer Hackathon 2025</h3>
-                    <p>🏆 July 26, 2025 - Our biggest coding event of the year! Join us for 48 hours of coding, prizes, and fun.</p>
-                    <div class="event-highlights">
-                        <div class="highlight">
-                            <i class="fas fa-trophy"></i>
-                            <span>$500 Grand Prize</span>
-                        </div>
-                        <div class="highlight">
-                            <i class="fas fa-users"></i>
-                            <span>All Ages Welcome</span>
-                        </div>
-                        <div class="highlight">
-                            <i class="fas fa-pizza-slice"></i>
-                            <span>Free Food & Swag</span>
-                        </div>
-                    </div>
-                    <div class="event-actions">
-                        <a href="community.html" class="btn btn-primary">
-                            <i class="fas fa-calendar-alt"></i>
-                            View Details
-                        </a>
-                        <a href="contact.html" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i>
-                            Register Interest
-                        </a>
-                    </div>
-                </div>
-                <div class="countdown-timer" id="hackathonCountdown">
-                    <div class="countdown-label">Countdown to Hackathon:</div>                    <div class="countdown-display">
-                        <div class="time-unit">
-                            <span class="time-value" id="days">0</span>
-                            <span class="time-label">Days</span>
-                        </div>
-                        <div class="time-unit">
-                            <span class="time-value" id="hours">0</span>
-                            <span class="time-label">Hours</span>
-                        </div>
-                        <div class="time-unit">
-                            <span class="time-value" id="minutes">0</span>
-                            <span class="time-label">Minutes</span>
-                        </div>
-                        <div class="time-unit">
-                            <span class="time-value" id="seconds">0</span>
-                            <span class="time-label">Seconds</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Student Showcase Carousel -->
-        <section class="student-showcase" id="showcase">
+        <!-- Student Showcase Carousel (Redesigned) -->
+        <section class="student-showcase modern-section" id="showcase"></section>
             <div class="container">
                 <div class="showcase-header">
-                    <h2>Amazing Student Projects</h2>
-                    <p>See what our young coders are creating at DD Coder Dojo!</p>
+                    <h2 class="slide-in-left gradient-text">Amazing Student Projects</h2>
+                    <p class="fade-in" style="animation-delay:0.2s">See what our young coders are creating at DD Coder Dojo!</p>
                 </div>
-
-                <div class="carousel-container">
-                    <div class="carousel-track" id="carouselTrack">
-                        <!-- Project slides will be populated by JavaScript -->
-                    </div>
-
+                <div class="carousel-container modern-carousel">
+                    <div class="carousel-track" id="carouselTrack"></div>
                     <div class="carousel-nav">
-                        <button class="nav-btn prev-btn" id="prevBtn">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="nav-btn next-btn" id="nextBtn">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                        <button class="nav-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="nav-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
                     </div>
-
-                    <div class="carousel-indicators" id="carouselIndicators">
-                        <!-- Indicators will be populated by JavaScript -->
-                    </div>
+                    <div class="carousel-indicators" id="carouselIndicators"></div>
                 </div>
-
-                <div class="showcase-stats">
+                <div class="showcase-stats modern-stats">
                     <div class="stat-item">
-                        <div class="stat-number" data-target="150">0</div>
+                        <div class="stat-number gradient-text" data-target="150">0</div>
                         <div class="stat-label">Projects Created</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-target="47">0</div>
+                        <div class="stat-number gradient-text" data-target="47">0</div>
                         <div class="stat-label">Active Students</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-target="23">0</div>
+                        <div class="stat-number gradient-text" data-target="23">0</div>
                         <div class="stat-label">Success Stories</div>
                     </div>
                 </div>
             </div>
-        </section>        <!-- Live Statistics Section -->
-        <section class="statistics-section fade-in" id="statistics" data-parallax="0.05">
+        </section>
+
+        <!-- Live Statistics Section (Redesigned) -->
+        <section class="statistics-section fade-in modern-section" id="statistics" data-parallax="0.05"></section>
             <div class="container">
                 <div class="stats-header fade-in">
-                    <h2 class="slide-in-left">Our Impact in Numbers</h2>
-                    <p class="scale-in" style="animation-delay: 0.2s">See the amazing progress we're making together at DD Coder Dojo!</p>
+                    <h2 class="slide-in-left gradient-text">Our Impact in Numbers</h2>
+                    <p class="scale-in" style="animation-delay:0.2s">See the amazing progress we're making together at DD Coder Dojo!</p>
                 </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.3s">
-                        <div class="stat-icon pulse-on-hover">
-                            <i class="fas fa-users"></i>
-                        </div>
+                <div class="stats-grid modern-stats-grid">
+                    <div class="stat-card card-modern scale-in" style="animation-delay:0.3s">
+                        <div class="stat-icon pulse-on-hover"><i class="fas fa-users"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-count="247" data-target="247" data-suffix="">0</div>
+                            <div class="stat-number gradient-text" data-count="247" data-target="247">0</div>
                             <div class="stat-label">Students Taught</div>
                             <div class="stat-sublabel">Since 2022</div>
                         </div>
-                        <div class="stat-animation">
-                            <div class="pulse-ring"></div>
-                        </div>
                     </div>
-
-                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.4s">
-                        <div class="stat-icon pulse-on-hover">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
+                    <div class="stat-card card-modern scale-in" style="animation-delay:0.4s">
+                        <div class="stat-icon pulse-on-hover"><i class="fas fa-project-diagram"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-count="380" data-target="380" data-suffix="">0</div>
+                            <div class="stat-number gradient-text" data-count="380" data-target="380">0</div>
                             <div class="stat-label">Projects Created</div>
                             <div class="stat-sublabel">And counting!</div>
                         </div>
-                        <div class="stat-animation">
-                            <div class="pulse-ring"></div>
-                        </div>
                     </div>
-
-                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.5s">
-                        <div class="stat-icon pulse-on-hover">
-                            <i class="fas fa-clock"></i>
-                        </div>
+                    <div class="stat-card card-modern scale-in" style="animation-delay:0.5s">
+                        <div class="stat-icon pulse-on-hover"><i class="fas fa-clock"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-count="1250" data-target="1250" data-suffix="">0</div>
+                            <div class="stat-number gradient-text" data-count="1250" data-target="1250">0</div>
                             <div class="stat-label">Coding Hours</div>
                             <div class="stat-sublabel">This year</div>
                         </div>
-                        <div class="stat-animation">
-                            <div class="pulse-ring"></div>
-                        </div>
                     </div>
-
-                    <div class="stat-card card-modern scale-in" style="animation-delay: 0.6s">
-                        <div class="stat-icon pulse-on-hover">
-                            <i class="fas fa-trophy"></i>
-                        </div>
+                    <div class="stat-card card-modern scale-in" style="animation-delay:0.6s">
+                        <div class="stat-icon pulse-on-hover"><i class="fas fa-trophy"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-count="89" data-target="89" data-suffix="%">0</div>
+                            <div class="stat-number gradient-text" data-count="89" data-target="89" data-suffix="%">0</div>
                             <div class="stat-label">Success Rate</div>
                             <div class="stat-sublabel">Students progressing</div>
                         </div>
-                        <div class="stat-animation">
-                            <div class="pulse-ring"></div>
-                        </div>
                     </div>
-
                     <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
+                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="15" data-suffix="">0</div>
+                            <div class="stat-number gradient-text" data-target="15">0</div>
                             <div class="stat-label">Schools Reached</div>
                             <div class="stat-sublabel">Through Digital Democracy</div>
                         </div>
-                        <div class="stat-animation">
-                            <div class="pulse-ring"></div>
-                        </div>
                     </div>
-
                     <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
+                        <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="7" data-suffix="">0</div>
+                            <div class="stat-number gradient-text" data-target="7">0</div>
                             <div class="stat-label">Peer Mentors</div>
                             <div class="stat-sublabel">Leading by example</div>
                         </div>
-                        <div class="stat-animation">
-                            <div class="pulse-ring"></div>
-                        </div>
                     </div>
                 </div>
-
-                <div class="impact-highlights">
+                <div class="impact-highlights modern-impact-highlights">
                     <div class="highlight-item">
-                        <div class="highlight-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="highlight-content">
+                        <div class="highlight-icon"><i class="fas fa-graduation-cap"></i></div>                        <div class="highlight-content">
                             <h4>Career Pathways</h4>
                             <p>12 students now pursuing computer science studies</p>
                         </div>
                     </div>
-
-                    <div class="highlight-item">
-                        <div class="highlight-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
+                        <div class="highlight-icon"><i class="fas fa-award"></i></div>
                         <div class="highlight-content">
                             <h4>Competitions Won</h4>
                             <p>3 regional coding competitions in 2024</p>
                         </div>
                     </div>
-
                     <div class="highlight-item">
-                        <div class="highlight-icon">
-                            <i class="fas fa-globe-africa"></i>
-                        </div>
+                        <div class="highlight-icon"><i class="fas fa-globe-africa"></i></div>
                         <div class="highlight-content">
                             <h4>Community Growth</h4>
                             <p>Expanding to 5 new locations in 2025</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="live-status">
+                <div class="live-status modern-live-status">
                     <div class="status-indicator">
                         <div class="live-dot"></div>
                         <span>Live from DD Coder Dojo</span>
@@ -708,43 +808,41 @@ Last updated: 2025-05-25
                     <p>Currently: <span id="currentActivity">47 students actively coding this week</span></p>
                 </div>
             </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about" id="about">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2>About DD Coder Dojo</h2>
+        </section>        <!-- About Section (Redesigned) -->
+        <section class="about modern-section" id="about">
+            <div class="container modern-about-container">
+                <div class="about-content modern-about-content">
+                    <div class="about-text modern-about-text">
+                        <h2 class="gradient-text">About DD Coder Dojo</h2>
                         <p>Located in Austerville, Durban, DD (Digital Democracy) Coder Dojo is part of the global CoderDojo movement, providing free coding education to young people aged 7-17.</p>
                         <p>Our mission is to empower the next generation with digital skills, creative thinking, and problem-solving abilities that will serve them throughout their lives.</p>
-                        <div class="stats">
+                        <div class="stats modern-about-stats">
                             <div class="stat">
-                                <h3>150+</h3>
+                                <h3 class="gradient-text">150+</h3>
                                 <p>Students Enrolled</p>
                             </div>
                             <div class="stat">
-                                <h3>3</h3>
+                                <h3 class="gradient-text">3</h3>
                                 <p>Age Groups</p>
                             </div>
                             <div class="stat">
-                                <h3>100%</h3>
+                                <h3 class="gradient-text">100%</h3>
                                 <p>Free Classes</p>
                             </div>
                         </div>
-                    </div>                <div class="about-image">
-                        <img src="images/coding-kids.jpg" alt="Kids learning to code" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'missing-image-placeholder\'><i class=\'fas fa-users\'></i><span>Kids Learning to Code</span></div>';">
                     </div>
-                </div>
+                    <div class="about-image modern-about-image">
+                        <img src="images/coding-kids.jpg" alt="Kids learning to code" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'missing-image-placeholder\'><i class=\'fas fa-users\'></i><span>Kids Learning to Code</span></div>';">
+                    </div>                </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <div class="container">
-                <h2>Get In Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
+        <!-- Contact Section (Redesigned) -->
+        <section class="contact modern-section" id="contact">
+            <div class="container modern-contact-container">
+                <h2 class="gradient-text">Get In Touch</h2>
+                <div class="contact-content modern-contact-content">
+                    <div class="contact-info modern-contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
@@ -767,7 +865,7 @@ Last updated: 2025-05-25
                             </div>
                         </div>
                     </div>
-                    <div class="contact-form">
+                    <div class="contact-form modern-contact-form">
                         <form id="contactForm" action="#" method="POST">
                             <input type="text" name="name" placeholder="Your Name" required>
                             <input type="email" name="email" placeholder="Your Email" required>
@@ -778,18 +876,18 @@ Last updated: 2025-05-25
                                 <option value="senior">Senior (Ages 14-17)</option>
                             </select>
                             <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </form>
+                            <button type="submit" class="btn btn-primary">Send Message</button>                        </form>
                     </div>
                 </div>
             </div>
-        </section>        <!-- Coding Schedule Section -->
+        </section>
+
+        <!-- Coding Schedule Section (Original) -->
         <section class="coding-schedule-section" id="schedule">
             <div class="container">
-                <h2 class="slide-in-up">Weekly Coding Schedule</h2>
-                <p class="section-subtitle fade-in" style="animation-delay: 0.2s">Join us for free coding classes every weekday! Find the perfect time for your age group.</p>
-                
-                <div class="schedule-container fade-in" style="animation-delay: 0.4s">
+                <h2 class="section-title">Weekly Coding Schedule</h2>
+                <p class="section-subtitle">Join us for free coding classes every weekday! Find the perfect time for your age group.</p>
+                <div class="schedule-container">
                     <div class="schedule-header">
                         <div class="schedule-title">
                             <i class="fas fa-calendar-week"></i>
@@ -799,15 +897,14 @@ Last updated: 2025-05-25
                             <span class="current-week">Week of <span id="currentWeekDate"></span></span>
                         </div>
                     </div>
-                    
                     <div class="weekly-schedule">
-                        <div class="schedule-day-card monday scale-in" style="animation-delay: 0.1s">
+                        <div class="schedule-day-card monday">
                             <div class="day-header">
                                 <span class="day-name">Monday</span>
                                 <span class="day-date" id="mondayDate"></span>
                             </div>
                             <div class="day-content">
-                                <div class="class-session tech-innovators">
+                                <div class="class-session">
                                     <div class="time-slot">
                                         <i class="fas fa-clock"></i>
                                         <span>14:00 - 16:00</span>
@@ -815,23 +912,16 @@ Last updated: 2025-05-25
                                     <div class="program-info">
                                         <h4>Tech Innovators</h4>
                                         <p>Ages 14-17 • Advanced Programming</p>
-                                        <div class="technologies">
-                                            <span class="tech-tag">Python</span>
-                                            <span class="tech-tag">JavaScript</span>
-                                            <span class="tech-tag">Web Dev</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="schedule-day-card tuesday scale-in" style="animation-delay: 0.2s">
+                        </div>                        <div class="schedule-day-card tuesday">
                             <div class="day-header">
                                 <span class="day-name">Tuesday</span>
                                 <span class="day-date" id="tuesdayDate"></span>
                             </div>
                             <div class="day-content">
-                                <div class="class-session code-explorers">
+                                <div class="class-session">
                                     <div class="time-slot">
                                         <i class="fas fa-clock"></i>
                                         <span>14:00 - 16:00</span>
@@ -839,23 +929,16 @@ Last updated: 2025-05-25
                                     <div class="program-info">
                                         <h4>Code Explorers</h4>
                                         <p>Ages 11-13 • Intermediate Programming</p>
-                                        <div class="technologies">
-                                            <span class="tech-tag">Scratch</span>
-                                            <span class="tech-tag">HTML/CSS</span>
-                                            <span class="tech-tag">Python Basics</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="schedule-day-card wednesday scale-in" style="animation-delay: 0.3s">
+                        </div>                        <div class="schedule-day-card wednesday">
                             <div class="day-header">
                                 <span class="day-name">Wednesday</span>
                                 <span class="day-date" id="wednesdayDate"></span>
                             </div>
                             <div class="day-content">
-                                <div class="class-session code-explorers">
+                                <div class="class-session">
                                     <div class="time-slot">
                                         <i class="fas fa-clock"></i>
                                         <span>14:00 - 16:00</span>
@@ -863,23 +946,17 @@ Last updated: 2025-05-25
                                     <div class="program-info">
                                         <h4>Code Explorers</h4>
                                         <p>Ages 11-13 • Intermediate Programming</p>
-                                        <div class="technologies">
-                                            <span class="tech-tag">Game Design</span>
-                                            <span class="tech-tag">App Development</span>
-                                            <span class="tech-tag">micro:bit</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="schedule-day-card thursday scale-in" style="animation-delay: 0.4s">
+                        <div class="schedule-day-card thursday">
                             <div class="day-header">
                                 <span class="day-name">Thursday</span>
                                 <span class="day-date" id="thursdayDate"></span>
                             </div>
                             <div class="day-content">
-                                <div class="class-session junior-ninjas">
+                                <div class="class-session">
                                     <div class="time-slot">
                                         <i class="fas fa-clock"></i>
                                         <span>14:00 - 15:00</span>
@@ -887,23 +964,17 @@ Last updated: 2025-05-25
                                     <div class="program-info">
                                         <h4>Junior Ninjas</h4>
                                         <p>Ages 7-10 • Beginner Programming</p>
-                                        <div class="technologies">
-                                            <span class="tech-tag">ScratchJr</span>
-                                            <span class="tech-tag">Block Coding</span>
-                                            <span class="tech-tag">Creative Games</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="schedule-day-card friday scale-in" style="animation-delay: 0.5s">
+                        <div class="schedule-day-card friday">
                             <div class="day-header">
                                 <span class="day-name">Friday</span>
                                 <span class="day-date" id="fridayDate"></span>
                             </div>
                             <div class="day-content">
-                                <div class="class-session junior-ninjas">
+                                <div class="class-session">
                                     <div class="time-slot">
                                         <i class="fas fa-clock"></i>
                                         <span>13:00 - 15:00</span>
@@ -911,65 +982,40 @@ Last updated: 2025-05-25
                                     <div class="program-info">
                                         <h4>Junior Ninjas</h4>
                                         <p>Ages 7-10 • Beginner Programming</p>
-                                        <div class="technologies">
-                                            <span class="tech-tag">Storytelling</span>
-                                            <span class="tech-tag">Animation</span>
-                                            <span class="tech-tag">Fun Projects</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="schedule-footer fade-in" style="animation-delay: 0.6s">
+                    <div class="schedule-footer">
                         <div class="schedule-stats">
-                            <div class="stat-item">
-                                <i class="fas fa-users"></i>
-                                <span><strong>5</strong> Programs per week</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-clock"></i>
-                                <span><strong>9</strong> Hours of coding</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-dollar-sign"></i>
-                                <span><strong>100%</strong> Free</span>
-                            </div>
+                            <div class="stat-item"><i class="fas fa-users"></i><span><strong>5</strong> Programs per week</span></div>
+                            <div class="stat-item"><i class="fas fa-clock"></i><span><strong>9</strong> Hours of coding</span></div>
+                            <div class="stat-item"><i class="fas fa-dollar-sign"></i><span><strong>100%</strong> Free</span></div>
                         </div>
-                        
                         <div class="schedule-actions">
-                            <a href="contact.html" class="btn btn-primary pulse-on-hover">
-                                <i class="fas fa-user-plus"></i>
-                                Join a Class
-                            </a>
-                            <a href="programs.html" class="btn btn-secondary">
-                                <i class="fas fa-info-circle"></i>
-                                Learn More
-                            </a>
+                            <a href="contact.html" class="btn btn-primary"><i class="fas fa-user-plus"></i>Join a Class</a>
+                            <a href="programs.html" class="btn btn-secondary"><i class="fas fa-info-circle"></i>Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
+    </main>    <!-- Footer (Redesigned) -->
+    <footer class="footer modern-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+            <div class="footer-content modern-footer-content">
+                <div class="footer-section modern-footer-section">
                     <h3>DD (Digital Democracy) Coder Dojo</h3>
                     <p>From blocks to big ideas — come code with us! Supported by KCA in partnership with Raspberry Pi Foundation.</p>
-                    <div class="social-links">
+                    <div class="social-links modern-social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
-                <div class="footer-section">
+                <div class="footer-section modern-footer-section">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
@@ -980,7 +1026,7 @@ Last updated: 2025-05-25
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                <div class="footer-section modern-footer-section">
                     <h3>Our Programs</h3>
                     <ul>
                         <li><a href="programs.html#junior">Junior Ninjas (7-10)</a></li>
@@ -988,22 +1034,22 @@ Last updated: 2025-05-25
                         <li><a href="programs.html#senior">Tech Innovators (14-17)</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                <div class="footer-section modern-footer-section">
                     <h3>Contact Info</h3>
                     <p><i class="fas fa-envelope"></i> ashley@kcasa.org.za</p>
                     <p><i class="fas fa-map-marker-alt"></i> 178 Austerville Drive, Wentworth, Durban</p>
                     <p><i class="fas fa-phone"></i> 031 461 3101</p>
                 </div>
-            </div>
-            <div class="footer-bottom">
+            </div>            <div class="footer-bottom modern-footer-bottom">
                 <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>
-    </footer>    <!-- jQuery CDN for DOM manipulation and effects (load first) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    </footer>
     
-    <!-- JavaScript Files -->
+    <!-- jQuery CDN for DOM manipulation and effects (load first) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+      <!-- JavaScript Files -->
     <script src="js/critical-optimizations.js"></script>
     <script src="js/effects/matrix.js"></script>
     <script src="js/formHandler.js"></script>
@@ -1012,6 +1058,13 @@ Last updated: 2025-05-25
     <script src="js/pages/home.js"></script>
     <script src="js/pages/home_stats.js"></script>
     <script src="js/schedule-manager.js"></script>
+    
+    <!-- Phase 7: Data Management & Analytics -->
+    <script src="js/data-management/data-manager.js"></script>
+    <script src="js/analytics/advanced-analytics.js"></script>
+    <script src="js/business-intelligence/bi-dashboard.js"></script>
+    <script src="js/user-insights/user-insights.js"></script>
+    <script src="js/ab-testing/ab-testing.js"></script>
       <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
@@ -1027,6 +1080,15 @@ Last updated: 2025-05-25
         } else if (window.location.protocol === 'file:') {
             console.info('Service worker registration skipped for file:// protocol');
         }
+    </script>
+    <!-- Remove the dark mode toggle button and related scripts -->
+    <!-- Removed: <button class="dark-mode-toggle" id="darkModeToggle" ...> ... </button> -->
+    <!-- Remove any dark mode toggle JS -->
+    <script>
+        // Remove any dark mode toggle JS (if present)
+        $(function() {
+            $('#darkModeToggle').remove();
+        });
     </script>
 </body>
 </html>

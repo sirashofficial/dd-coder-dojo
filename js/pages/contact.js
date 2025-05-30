@@ -1,6 +1,6 @@
 /**
- * DD Coder Dojo - Enhanced Contact Page Functionality
- * Comprehensive contact form with validation, accessibility, and UX improvements
+ * DD Coder Dojo - Enhanced Contact & Registration Page Functionality
+ * Combined contact form and registration with tabs, validation, accessibility, and UX improvements
  */
 
 class ContactPage {
@@ -10,32 +10,57 @@ class ContactPage {
         this.successMessage = null;
         this.isSubmitting = false;
         
+        // Tab system
+        this.currentTab = 'contact';
+        this.tabButtons = null;
+        this.tabContents = null;
+        
+        // Registration form
+        this.registrationForm = null;
+        this.currentStep = 1;
+        this.totalSteps = 3;
+        this.formData = {};
+        
         this.config = {
             maxMessageLength: 1000,
             debounceDelay: 300,
-            animationDuration: 300
+            animationDuration: 300,
+            autoSaveDelay: 2000,
+            validationDelay: 300
         };
+
+        this.validationRules = {
+            required: (value) => value.trim().length > 0,
+            email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+            phone: (value) => /^(\+27|0)[0-9]{9}$/.test(value.replace(/\s/g, '')),
+            age: (value) => {
+                const age = parseInt(value);
+                return age >= 7 && age <= 17;
+            },
+            name: (value) => value.trim().length >= 2 && /^[a-zA-Z\s]+$/.test(value)        };
 
         this.init();
     }
 
     async init() {
         try {
-            console.log('📞 Initializing contact page...');
+            console.log('📞 Initializing contact & registration page...');
             
             await this.waitForMainApp();
             this.setupElements();
+            this.setupTabSystem();
             this.setupFormValidation();
             this.setupFormSubmission();
+            this.setupRegistrationSteps();
             this.setupEnhancements();
             this.setupAccessibility();
+            this.handleURLHash();
             
-            console.log('✅ Contact page initialized successfully!');
+            console.log('✅ Contact & registration page initialized successfully!');
             
         } catch (error) {
-            console.error('❌ Contact page initialization failed:', error);
-        }
-    }
+            console.error('❌ Contact & registration page initialization failed:', error);
+        }    }
 
     async waitForMainApp() {
         return new Promise((resolve) => {
@@ -51,15 +76,467 @@ class ContactPage {
         this.form = document.getElementById('contactForm');
         this.submitButton = this.form?.querySelector('button[type="submit"], .submit-btn');
         this.successMessage = document.getElementById('successMessage');
+        
+        // Tab system elements
+        this.tabButtons = document.querySelectorAll('.tab-btn');
+        this.tabContents = document.querySelectorAll('.tab-content');
+        
+        // Registration form elements
+        this.registrationForm = document.getElementById('registrationForm');
 
         if (!this.form) {
             console.warn('Contact form not found');
-            return;
         }
 
         // Store original button text
         if (this.submitButton) {
             this.submitButton.dataset.originalText = this.submitButton.innerHTML;
+        }
+    }
+
+    setupTabSystem() {
+        if (!this.tabButtons || this.tabButtons.length === 0) return;
+
+        this.tabButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetTab = button.getAttribute('data-tab');
+                this.switchTab(targetTab);
+            });
+        });
+
+        // Handle keyboard navigation
+        this.tabButtons.forEach((button, index) => {
+            button.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const nextIndex = e.key === 'ArrowLeft' 
+                        ? (index - 1 + this.tabButtons.length) % this.tabButtons.length
+                        : (index + 1) % this.tabButtons.length;
+                    this.tabButtons[nextIndex].focus();
+                    this.switchTab(this.tabButtons[nextIndex].getAttribute('data-tab'));
+                }
+            });
+        });
+    }
+
+    switchTab(targetTab) {
+        if (this.currentTab === targetTab) return;
+
+        // Update tab buttons
+        this.tabButtons.forEach(button => {
+            const isActive = button.getAttribute('data-tab') === targetTab;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-selected', isActive);
+            button.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+
+        // Update tab contents
+        this.tabContents.forEach(content => {
+            const isActive = content.id === `${targetTab}Tab`;
+            content.classList.toggle('active', isActive);
+            content.setAttribute('aria-hidden', !isActive);
+        });
+
+        this.currentTab = targetTab;
+
+        // Update URL hash without scrolling
+        if (targetTab === 'register') {
+            history.replaceState(null, null, '#register');
+        } else {
+            history.replaceState(null, null, location.pathname);
+        }
+
+        // Focus management
+        if (targetTab === 'register') {
+            const firstInput = document.querySelector('#registerTab input:first-of-type');
+            if (firstInput) {
+                setTimeout(() => firstInput.focus(), 100);
+            }
+        }
+    }
+
+    handleURLHash() {
+        const hash = window.location.hash.substring(1);
+        if (hash === 'register') {
+            this.switchTab('register');
+        }
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', () => {
+            const newHash = window.location.hash.substring(1);
+            if (newHash === 'register') {
+                this.switchTab('register');
+            } else if (newHash === '') {
+                this.switchTab('contact');
+            }        });
+    }
+
+    setupRegistrationSteps() {
+        if (!this.registrationForm) return;
+
+        // Step navigation buttons
+        const nextButtons = this.registrationForm.querySelectorAll('.next-step');
+        const prevButtons = this.registrationForm.querySelectorAll('.prev-step');
+        
+        nextButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.nextStep();
+            });
+        });
+
+        prevButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.prevStep();
+            });
+        });
+
+        // Form validation for registration
+        const regFields = this.registrationForm.querySelectorAll('input, select, textarea');
+        regFields.forEach(field => {
+            const debouncedValidation = this.debounce(() => {
+                this.validateRegistrationField(field);
+            }, this.config.validationDelay);
+
+            field.addEventListener('blur', () => this.validateRegistrationField(field));
+            field.addEventListener('input', debouncedValidation);
+            field.addEventListener('focus', () => this.clearFieldError(field));
+        });
+
+        // Registration form submission
+        this.registrationForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (this.isSubmitting) return;
+            
+            if (await this.validateRegistrationForm()) {
+                await this.submitRegistrationForm();
+            }
+        });
+
+        // Auto-save functionality
+        this.setupAutoSave();
+        
+        // Load saved data
+        this.loadSavedData();
+        
+        // Initialize step display
+        this.updateStepDisplay();
+    }
+
+    nextStep() {
+        if (this.currentStep >= this.totalSteps) return;
+        
+        // Validate current step before proceeding
+        if (!this.validateCurrentStep()) {
+            return;
+        }
+
+        this.currentStep++;
+        this.updateStepDisplay();
+        this.saveFormData();
+    }
+
+    prevStep() {
+        if (this.currentStep <= 1) return;
+        
+        this.currentStep--;
+        this.updateStepDisplay();
+    }
+
+    updateStepDisplay() {
+        // Update step indicator
+        const stepIndicator = document.querySelector('.step-indicator');
+        if (stepIndicator) {
+            const steps = stepIndicator.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.toggle('active', stepNumber === this.currentStep);
+                step.classList.toggle('completed', stepNumber < this.currentStep);
+            });
+        }
+
+        // Show/hide step content
+        const stepContents = this.registrationForm.querySelectorAll('.step-content');
+        stepContents.forEach((content, index) => {
+            const stepNumber = index + 1;
+            content.classList.toggle('active', stepNumber === this.currentStep);
+            content.style.display = stepNumber === this.currentStep ? 'block' : 'none';
+        });
+
+        // Update navigation buttons
+        const prevButton = this.registrationForm.querySelector('.prev-step');
+        const nextButton = this.registrationForm.querySelector('.next-step');
+        const submitButton = this.registrationForm.querySelector('.submit-btn');
+
+        if (prevButton) {
+            prevButton.style.display = this.currentStep === 1 ? 'none' : 'inline-block';
+        }
+
+        if (nextButton) {
+            nextButton.style.display = this.currentStep === this.totalSteps ? 'none' : 'inline-block';
+        }
+
+        if (submitButton) {
+            submitButton.style.display = this.currentStep === this.totalSteps ? 'inline-block' : 'none';
+        }
+
+        // Update progress
+        this.updateProgress();
+    }
+
+    updateProgress() {
+        const progressBar = document.querySelector('.progress-bar');
+        if (progressBar) {
+            const progress = (this.currentStep / this.totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+    }
+
+    validateCurrentStep() {
+        const currentStepContent = this.registrationForm.querySelector(`.step-content:nth-child(${this.currentStep})`);
+        if (!currentStepContent) return true;
+
+        const fields = currentStepContent.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+
+        fields.forEach(field => {
+            if (!this.validateRegistrationField(field)) {
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    validateRegistrationField(field) {
+        const value = field.value.trim();
+        const fieldName = field.name || field.id;
+        let isValid = true;
+        let errorMessage = '';
+
+        // Required field validation
+        if (field.hasAttribute('required') && !this.validationRules.required(value)) {
+            isValid = false;
+            errorMessage = 'This field is required';
+        }
+
+        // Specific field validations
+        if (value && fieldName) {
+            switch (fieldName) {
+                case 'email':
+                case 'parentEmail':
+                    if (!this.validationRules.email(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address';
+                    }
+                    break;
+                case 'phone':
+                case 'parentPhone':
+                    if (!this.validationRules.phone(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid South African phone number';
+                    }
+                    break;
+                case 'studentName':
+                case 'parentName':
+                    if (!this.validationRules.name(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid name (letters and spaces only)';
+                    }
+                    break;
+                case 'age':
+                    if (!this.validationRules.age(value)) {
+                        isValid = false;
+                        errorMessage = 'Age must be between 7 and 17 years';
+                    }
+                    break;
+            }
+        }
+
+        // Update field UI
+        this.updateFieldValidation(field, isValid, errorMessage);
+        return isValid;
+    }
+
+    setupAutoSave() {
+        if (!this.registrationForm) return;
+
+        const fields = this.registrationForm.querySelectorAll('input, select, textarea');
+        let autoSaveTimeout;
+
+        fields.forEach(field => {
+            field.addEventListener('input', () => {
+                clearTimeout(autoSaveTimeout);
+                autoSaveTimeout = setTimeout(() => {
+                    this.saveFormData();
+                }, this.config.autoSaveDelay);
+            });
+        });
+    }
+
+    saveFormData() {
+        if (!this.registrationForm) return;
+
+        const formData = new FormData(this.registrationForm);
+        const data = {};
+        
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+
+        this.formData = { ...this.formData, ...data };
+        
+        // Save to localStorage
+        try {
+            localStorage.setItem('ddcd_registration_data', JSON.stringify({
+                data: this.formData,
+                step: this.currentStep,
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            console.warn('Could not save form data to localStorage:', error);
+        }
+    }
+
+    updateFieldValidation(field, isValid, errorMessage = '') {
+        if (!field) return;
+
+        const formGroup = field.closest('.form-group');
+        if (!formGroup) return;
+
+        // Remove existing validation classes and error messages
+        field.classList.remove('valid', 'invalid');
+        formGroup.classList.remove('has-error', 'has-success');
+        
+        // Remove existing error message
+        const existingError = formGroup.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+
+        if (isValid) {
+            // Add success styling
+            field.classList.add('valid');
+            formGroup.classList.add('has-success');
+            field.setAttribute('aria-invalid', 'false');
+            field.removeAttribute('aria-describedby');
+        } else {
+            // Add error styling
+            field.classList.add('invalid');
+            formGroup.classList.add('has-error');
+            field.setAttribute('aria-invalid', 'true');
+            
+            // Create and add error message
+            if (errorMessage) {
+                const errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.textContent = errorMessage;
+                errorElement.setAttribute('role', 'alert');
+                errorElement.setAttribute('aria-live', 'polite');
+                
+                // Set up ARIA relationship
+                const errorId = `${field.id || field.name}-error`;
+                errorElement.id = errorId;
+                field.setAttribute('aria-describedby', errorId);
+                
+                // Insert error message after the field
+                field.parentNode.insertBefore(errorElement, field.nextSibling);
+            }
+        }
+    }
+
+    loadSavedData() {
+        try {
+            const saved = localStorage.getItem('ddcd_registration_data');
+            if (saved) {
+                const { data, step, timestamp } = JSON.parse(saved);
+                
+                // Check if data is not too old (24 hours)
+                if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                    this.formData = data;
+                    this.currentStep = step || 1;
+                    
+                    // Populate form fields
+                    Object.entries(data).forEach(([key, value]) => {
+                        const field = this.registrationForm?.querySelector(`[name="${key}"]`);
+                        if (field) {
+                            field.value = value;
+                        }
+                    });
+                    
+                    this.updateStepDisplay();
+                }
+            }
+        } catch (error) {
+            console.warn('Could not load saved form data:', error);
+        }
+    }
+
+    async validateRegistrationForm() {
+        if (!this.registrationForm) return false;
+
+        const fields = this.registrationForm.querySelectorAll('input, select, textarea');
+        let isValid = true;
+
+        fields.forEach(field => {
+            if (!this.validateRegistrationField(field)) {
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    async submitRegistrationForm() {
+        if (this.isSubmitting) return;
+
+        this.isSubmitting = true;
+        const submitButton = this.registrationForm.querySelector('.submit-btn');
+        
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+        }
+
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Clear saved data
+            localStorage.removeItem('ddcd_registration_data');
+
+            // Show success message
+            this.showRegistrationSuccess();
+            
+            // Reset form
+            this.registrationForm.reset();
+            this.currentStep = 1;
+            this.updateStepDisplay();
+
+        } catch (error) {
+            console.error('Registration submission failed:', error);
+            this.showError('Registration failed. Please try again.');
+        } finally {
+            this.isSubmitting = false;
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+            }
+        }
+    }
+
+    showRegistrationSuccess() {
+        const successMessage = document.getElementById('registrationSuccessMessage');
+        if (successMessage) {
+            successMessage.style.display = 'block';
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide after 10 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 10000);
         }
     }
 
@@ -99,367 +576,366 @@ class ContactPage {
         });
     }
 
-    setupProgramRecommendation() {
-        const studentAgeField = this.form.querySelector('#studentAge, select[name*="age"]');
-        const programField = this.form.querySelector('#program, select[name*="program"]');
+    setupRegistrationSteps() {
+        if (!this.registrationForm) return;
+
+        // Step navigation buttons
+        const nextButtons = this.registrationForm.querySelectorAll('.next-step');
+        const prevButtons = this.registrationForm.querySelectorAll('.prev-step');
         
-        if (!studentAgeField || !programField) return;
+        nextButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.nextStep();
+            });
+        });
 
-        studentAgeField.addEventListener('change', () => {
-            const age = parseInt(studentAgeField.value);
-            if (isNaN(age)) return;
+        prevButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.prevStep();
+            });
+        });
 
-            let recommendedProgram = '';
-            let programName = '';
+        // Form validation for registration
+        const regFields = this.registrationForm.querySelectorAll('input, select, textarea');
+        regFields.forEach(field => {
+            const debouncedValidation = this.debounce(() => {
+                this.validateRegistrationField(field);
+            }, this.config.validationDelay);
 
-            if (age >= 7 && age <= 10) {
-                recommendedProgram = 'junior';
-                programName = 'Junior Ninjas';
-            } else if (age >= 11 && age <= 13) {
-                recommendedProgram = 'intermediate';
-                programName = 'Code Explorers';
-            } else if (age >= 14 && age <= 17) {
-                recommendedProgram = 'senior';
-                programName = 'Tech Innovators';
-            }
+            field.addEventListener('blur', () => this.validateRegistrationField(field));
+            field.addEventListener('input', debouncedValidation);
+            field.addEventListener('focus', () => this.clearFieldError(field));
+        });
 
-            if (recommendedProgram) {
-                programField.value = recommendedProgram;
-                this.showRecommendationMessage(age, programName);
+        // Registration form submission
+        this.registrationForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (this.isSubmitting) return;
+            
+            if (await this.validateRegistrationForm()) {
+                await this.submitRegistrationForm();
             }
         });
+
+        // Auto-save functionality
+        this.setupAutoSave();
     }
 
-    setupEnhancements() {
-        this.setupCharacterCounts();
-        this.setupFieldEnhancements();
-        this.setupProgressIndicator();
-    }
-
-    setupCharacterCounts() {
-        const messageField = this.form.querySelector('#message, textarea[name*="message"]');
-        if (!messageField) return;
-
-        const maxLength = this.config.maxMessageLength;
-        messageField.setAttribute('maxlength', maxLength);
-
-        const counter = document.createElement('div');
-        counter.className = 'character-counter';
-        counter.style.cssText = `
-            font-size: 0.85rem;
-            color: var(--text-color);
-            opacity: 0.7;
-            text-align: right;
-            margin-top: 0.25rem;
-            transition: color 0.3s ease;
-        `;
-
-        const updateCounter = () => {
-            const remaining = maxLength - messageField.value.length;
-            const percentage = (messageField.value.length / maxLength) * 100;
-            
-            counter.textContent = `${remaining} characters remaining`;
-            
-            if (percentage > 90) {
-                counter.style.color = '#ef4444';
-            } else if (percentage > 75) {
-                counter.style.color = '#f59e0b';
-            } else {
-                counter.style.color = 'var(--text-color)';
-            }
-        };
-
-        messageField.addEventListener('input', updateCounter);
-        messageField.parentNode.appendChild(counter);
-        updateCounter();
-    }
-
-    setupFieldEnhancements() {
-        // Email field enhancements
-        const emailField = this.form.querySelector('#email, input[type="email"]');
-        if (emailField) {
-            emailField.setAttribute('autocomplete', 'email');
-            emailField.setAttribute('spellcheck', 'false');
-            
-            // Add email format helper
-            const helper = document.createElement('small');
-            helper.style.cssText = `
-                color: var(--text-color);
-                opacity: 0.6;
-                font-size: 0.8rem;
-                margin-top: 0.25rem;
-                display: block;
-            `;
-            helper.textContent = 'We\'ll use this to send you updates about your inquiry';
-            emailField.parentNode.appendChild(helper);
+    nextStep() {
+        if (this.currentStep >= this.totalSteps) return;
+        
+        // Validate current step before proceeding
+        if (!this.validateCurrentStep()) {
+            return;
         }
 
-        // Phone field enhancements
-        const phoneField = this.form.querySelector('#phone, input[type="tel"]');
-        if (phoneField) {
-            phoneField.setAttribute('autocomplete', 'tel');
-            phoneField.setAttribute('placeholder', '+27 or 0XX XXX XXXX');
-            
-            // Format phone number as user types
-            phoneField.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    if (value.startsWith('27')) {
-                        value = '+' + value;
-                    } else if (value.startsWith('0')) {
-                        // South African format
-                        if (value.length > 3) {
-                            value = value.substring(0, 3) + ' ' + value.substring(3, 6) + ' ' + value.substring(6, 10);
-                        }
-                    }
-                }
-                e.target.value = value;
+        this.currentStep++;
+        this.updateStepDisplay();
+        this.saveFormData();
+    }
+
+    prevStep() {
+        if (this.currentStep <= 1) return;
+        
+        this.currentStep--;
+        this.updateStepDisplay();
+    }
+
+    updateStepDisplay() {
+        // Update step indicator
+        const stepIndicator = document.querySelector('.step-indicator');
+        if (stepIndicator) {
+            const steps = stepIndicator.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.toggle('active', stepNumber === this.currentStep);
+                step.classList.toggle('completed', stepNumber < this.currentStep);
             });
         }
 
-        // Name field enhancements
-        const nameFields = this.form.querySelectorAll('input[name*="name"], input[name*="Name"]');
-        nameFields.forEach(field => {
-            field.setAttribute('autocomplete', field.name.includes('parent') ? 'name' : 'name');
-            field.setAttribute('spellcheck', 'false');
+        // Show/hide step content
+        const stepContents = this.registrationForm.querySelectorAll('.step-content');
+        stepContents.forEach((content, index) => {
+            const stepNumber = index + 1;
+            content.classList.toggle('active', stepNumber === this.currentStep);
+            content.style.display = stepNumber === this.currentStep ? 'block' : 'none';
         });
+
+        // Update navigation buttons
+        const prevButton = this.registrationForm.querySelector('.prev-step');
+        const nextButton = this.registrationForm.querySelector('.next-step');
+        const submitButton = this.registrationForm.querySelector('.submit-btn');
+
+        if (prevButton) {
+            prevButton.style.display = this.currentStep === 1 ? 'none' : 'inline-block';
+        }
+
+        if (nextButton) {
+            nextButton.style.display = this.currentStep === this.totalSteps ? 'none' : 'inline-block';
+        }
+
+        if (submitButton) {
+            submitButton.style.display = this.currentStep === this.totalSteps ? 'inline-block' : 'none';
+        }
+
+        // Update progress
+        this.updateProgress();
     }
 
-    setupProgressIndicator() {
-        const requiredFields = this.form.querySelectorAll('[required]');
-        if (requiredFields.length === 0) return;
-
-        const progressContainer = document.createElement('div');
-        progressContainer.className = 'form-progress';
-        progressContainer.style.cssText = `
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        `;
-
-        const progressLabel = document.createElement('div');
-        progressLabel.style.cssText = `
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-color);
-        `;
-
-        const progressText = document.createElement('span');
-        progressText.textContent = 'Form Completion';
-
-        const progressPercentage = document.createElement('span');
-        progressPercentage.className = 'progress-percentage';
-
-        progressLabel.appendChild(progressText);
-        progressLabel.appendChild(progressPercentage);
-
-        const progressBar = document.createElement('div');
-        progressBar.style.cssText = `
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-        `;
-
-        const progressFill = document.createElement('div');
-        progressFill.className = 'progress-fill';
-        progressFill.style.cssText = `
-            height: 100%;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 3px;
-        `;
-
-        progressBar.appendChild(progressFill);
-        progressContainer.appendChild(progressLabel);
-        progressContainer.appendChild(progressBar);
-
-        // Insert progress indicator at the top of the form
-        this.form.insertBefore(progressContainer, this.form.firstChild);
-
-        // Update progress as fields are filled
-        const updateProgress = () => {
-            let filledFields = 0;
-            requiredFields.forEach(field => {
-                if (field.value.trim()) filledFields++;
-            });
-
-            const percentage = Math.round((filledFields / requiredFields.length) * 100);
-            progressFill.style.width = `${percentage}%`;
-            progressPercentage.textContent = `${percentage}%`;
-        };
-
-        requiredFields.forEach(field => {
-            field.addEventListener('input', updateProgress);
-            field.addEventListener('change', updateProgress);
-        });
-
-        updateProgress();
+    updateProgress() {
+        const progressBar = document.querySelector('.progress-bar');
+        if (progressBar) {
+            const progress = (this.currentStep / this.totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
     }
 
-    setupAccessibility() {
-        // Add aria-labels and improve form accessibility
-        const formGroups = this.form.querySelectorAll('.form-group');
-        
-        formGroups.forEach(group => {
-            const label = group.querySelector('label');
-            const field = group.querySelector('input, select, textarea');
-            
-            if (label && field) {
-                const labelId = `label-${field.name || Math.random().toString(36).substr(2, 9)}`;
-                label.id = labelId;
-                field.setAttribute('aria-labelledby', labelId);
-                
-                if (field.hasAttribute('required')) {
-                    field.setAttribute('aria-required', 'true');
-                }
-            }
-        });
+    validateCurrentStep() {
+        const currentStepContent = this.registrationForm.querySelector(`.step-content:nth-child(${this.currentStep})`);
+        if (!currentStepContent) return true;
 
-        // Add form navigation hints
-        const fieldsets = this.form.querySelectorAll('fieldset');
-        fieldsets.forEach((fieldset, index) => {
-            fieldset.setAttribute('aria-label', `Section ${index + 1} of form`);
-        });
-    }
-
-    async validateForm() {
-        const requiredFields = this.form.querySelectorAll('[required]');
+        const fields = currentStepContent.querySelectorAll('input[required], select[required], textarea[required]');
         let isValid = true;
-        let firstInvalidField = null;
 
-        // Validate all required fields
-        for (const field of requiredFields) {
-            if (!this.validateField(field)) {
+        fields.forEach(field => {
+            if (!this.validateRegistrationField(field)) {
                 isValid = false;
-                if (!firstInvalidField) {
-                    firstInvalidField = field;
-                }
             }
-        }
-
-        // Focus on first invalid field
-        if (firstInvalidField) {
-            firstInvalidField.focus();
-            this.scrollToField(firstInvalidField);
-        }
+        });
 
         return isValid;
     }
 
-    validateField(field) {
+    validateRegistrationField(field) {
         const value = field.value.trim();
+        const fieldName = field.name || field.id;
         let isValid = true;
-        let message = '';
+        let errorMessage = '';
 
-        // Required validation
-        if (field.hasAttribute('required') && !value) {
-            message = 'This field is required';
+        // Required field validation
+        if (field.hasAttribute('required') && !this.validationRules.required(value)) {
             isValid = false;
+            errorMessage = 'This field is required';
         }
-        // Email validation
-        else if (field.type === 'email' && value) {
-            if (!this.validateEmail(value)) {
-                message = 'Please enter a valid email address';
-                isValid = false;
+
+        // Specific field validations
+        if (value && fieldName) {
+            switch (fieldName) {
+                case 'email':
+                case 'parentEmail':
+                    if (!this.validationRules.email(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address';
+                    }
+                    break;
+                case 'phone':
+                case 'parentPhone':
+                    if (!this.validationRules.phone(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid South African phone number';
+                    }
+                    break;
+                case 'studentName':
+                case 'parentName':
+                    if (!this.validationRules.name(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid name (letters and spaces only)';
+                    }
+                    break;
+                case 'age':
+                    if (!this.validationRules.age(value)) {
+                        isValid = false;
+                        errorMessage = 'Age must be between 7 and 17 years';
+                    }
+                    break;
             }
         }
-        // Phone validation
-        else if (field.type === 'tel' && value) {
-            if (!this.validatePhoneNumber(value)) {
-                message = 'Please enter a valid South African phone number';
-                isValid = false;
-            }
+
+        // Update field UI
+        this.updateFieldValidation(field, isValid, errorMessage);
+        return isValid;
+    }
+
+    setupAutoSave() {
+        if (!this.registrationForm) return;
+
+        const fields = this.registrationForm.querySelectorAll('input, select, textarea');
+        let autoSaveTimeout;
+
+        fields.forEach(field => {
+            field.addEventListener('input', () => {
+                clearTimeout(autoSaveTimeout);
+                autoSaveTimeout = setTimeout(() => {
+                    this.saveFormData();
+                }, this.config.autoSaveDelay);
+            });
+        });
+    }
+
+    saveFormData() {
+        if (!this.registrationForm) return;
+
+        const formData = new FormData(this.registrationForm);
+        const data = {};
+        
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
         }
-        // Student age validation
-        else if (field.name === 'studentAge' && value) {
-            const age = parseInt(value);
-            if (age < 7 || age > 17) {
-                message = 'Student age must be between 7 and 17';
-                isValid = false;
-            }
+
+        this.formData = { ...this.formData, ...data };
+        
+        // Save to localStorage
+        try {
+            localStorage.setItem('ddcd_registration_data', JSON.stringify({
+                data: this.formData,
+                step: this.currentStep,
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            console.warn('Could not save form data to localStorage:', error);
+        }
+    }
+
+    updateFieldValidation(field, isValid, errorMessage = '') {
+        if (!field) return;
+
+        const formGroup = field.closest('.form-group');
+        if (!formGroup) return;
+
+        // Remove existing validation classes and error messages
+        field.classList.remove('valid', 'invalid');
+        formGroup.classList.remove('has-error', 'has-success');
+        
+        // Remove existing error message
+        const existingError = formGroup.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
         }
 
         if (isValid) {
-            this.clearFieldError(field);
-            this.showFieldSuccess(field);
+            // Add success styling
+            field.classList.add('valid');
+            formGroup.classList.add('has-success');
+            field.setAttribute('aria-invalid', 'false');
+            field.removeAttribute('aria-describedby');
         } else {
-            this.showFieldError(field, message);
+            // Add error styling
+            field.classList.add('invalid');
+            formGroup.classList.add('has-error');
+            field.setAttribute('aria-invalid', 'true');
+            
+            // Create and add error message
+            if (errorMessage) {
+                const errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.textContent = errorMessage;
+                errorElement.setAttribute('role', 'alert');
+                errorElement.setAttribute('aria-live', 'polite');
+                
+                // Set up ARIA relationship
+                const errorId = `${field.id || field.name}-error`;
+                errorElement.id = errorId;
+                field.setAttribute('aria-describedby', errorId);
+                
+                // Insert error message after the field
+                field.parentNode.insertBefore(errorElement, field.nextSibling);
+            }
         }
+    }
+
+    loadSavedData() {
+        try {
+            const saved = localStorage.getItem('ddcd_registration_data');
+            if (saved) {
+                const { data, step, timestamp } = JSON.parse(saved);
+                
+                // Check if data is not too old (24 hours)
+                if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                    this.formData = data;
+                    this.currentStep = step || 1;
+                    
+                    // Populate form fields
+                    Object.entries(data).forEach(([key, value]) => {
+                        const field = this.registrationForm?.querySelector(`[name="${key}"]`);
+                        if (field) {
+                            field.value = value;
+                        }
+                    });
+                    
+                    this.updateStepDisplay();
+                }
+            }
+        } catch (error) {
+            console.warn('Could not load saved form data:', error);
+        }
+    }
+
+    async validateRegistrationForm() {
+        if (!this.registrationForm) return false;
+
+        const fields = this.registrationForm.querySelectorAll('input, select, textarea');
+        let isValid = true;
+
+        fields.forEach(field => {
+            if (!this.validateRegistrationField(field)) {
+                isValid = false;
+            }
+        });
 
         return isValid;
     }
 
-    async submitForm() {
-        if (!this.form || this.isSubmitting) return;
+    async submitRegistrationForm() {
+        if (this.isSubmitting) return;
 
         this.isSubmitting = true;
-        this.setSubmitState('loading');
+        const submitButton = this.registrationForm.querySelector('.submit-btn');
+        
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+        }
 
         try {
-            // Collect form data
-            const formData = new FormData(this.form);
-            const data = Object.fromEntries(formData.entries());
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-            // Add timestamp
-            data.submittedAt = new Date().toISOString();
+            // Clear saved data
+            localStorage.removeItem('ddcd_registration_data');
 
-            // Simulate API call (replace with actual endpoint)
-            await this.delay(2000);
-
-            // In a real implementation, you would send data to your backend:
-            // const response = await fetch('/api/contact', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(data)
-            // });
-
-            this.handleSubmitSuccess(data);
+            // Show success message
+            this.showRegistrationSuccess();
+            
+            // Reset form
+            this.registrationForm.reset();
+            this.currentStep = 1;
+            this.updateStepDisplay();
 
         } catch (error) {
-            console.error('Form submission error:', error);
-            this.handleSubmitError(error);
+            console.error('Registration submission failed:', error);
+            this.showError('Registration failed. Please try again.');
         } finally {
             this.isSubmitting = false;
-            this.setSubmitState('default');
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+            }
         }
     }
 
-    handleSubmitSuccess(data) {
-        // Show success message
-        this.showSuccessMessage();
-        
-        // Reset form
-        this.form.reset();
-        
-        // Clear any existing errors
-        this.clearAllErrors();
-        
-        // Update progress indicator
-        const progressFill = this.form.querySelector('.progress-fill');
-        const progressPercentage = this.form.querySelector('.progress-percentage');
-        if (progressFill && progressPercentage) {
-            progressFill.style.width = '0%';
-            progressPercentage.textContent = '0%';
+    showRegistrationSuccess() {
+        const successMessage = document.getElementById('registrationSuccessMessage');
+        if (successMessage) {
+            successMessage.style.display = 'block';
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide after 10 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 10000);
         }
-
-        // Log for debugging (remove in production)
-        console.log('Form submitted successfully:', data);
-
-        // Track submission (if you have analytics)
-        this.trackFormSubmission('success', data);
-    }
-
-    handleSubmitError(error) {
-        this.showErrorMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
-        this.trackFormSubmission('error', { error: error.message });
     }
 
     setSubmitState(state) {
@@ -830,12 +1306,11 @@ class ScheduleDisplay {
     }
 
     showProgramDetails(program) {
-        // Simple alert for now - in production, you might show a modal
-        const programInfo = Object.values(this.scheduleData).find(p => p.program === program);
+        // Simple alert for now - in production, you might show a modal        const programInfo = Object.values(this.scheduleData).find(p => p.program === program);
         if (programInfo) {
             const message = `${program}\nAges: ${programInfo.ages}\nTime: ${programInfo.time}\n\nWould you like to register?`;
             if (confirm(message)) {
-                window.location.href = 'register.html';
+                window.location.href = 'contact.html#register';
             }
         }
     }

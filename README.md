@@ -39,7 +39,12 @@ A modern, responsive website for DD Coder Dojo - building the next generation of
 │   └── js/
 │       ├── main.js         # Core functionality
 │       ├── components/     # Reusable components
-│       └── pages/          # Page-specific scripts
+│       ├── pages/          # Page-specific scripts
+│       ├── analytics/      # Advanced analytics system
+│       ├── business-intelligence/ # BI dashboard with charts
+│       ├── user-insights/  # Personalization & behavior tracking
+│       ├── ab-testing/     # Statistical testing framework
+│       └── data-management/ # Data management layer
 │
 ├── 📊 Data
 │   └── data/
@@ -68,7 +73,11 @@ A modern, responsive website for DD Coder Dojo - building the next generation of
 - **📱 Responsive Design** - Mobile-first, accessible interface
 - **⚡ PWA Support** - Service worker for offline functionality
 - **🎨 Modern UI/UX** - Clean, professional design
-- **📊 Analytics** - Performance monitoring and user insights
+- **📊 Advanced Analytics** - Comprehensive data management and insights
+- **🧠 Business Intelligence** - Real-time dashboard with Chart.js visualization
+- **👤 User Insights** - Personalized recommendations and behavior tracking
+- **🧪 A/B Testing** - Statistical testing framework for optimization
+- **📈 Performance Monitoring** - User experience and engagement tracking
 
 ## 🛠️ Development
 

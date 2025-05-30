@@ -3,47 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register for DD Coder Dojo | Free Coding Classes</title>
+    <title>Redirecting to Registration | DD Coder Dojo</title>
+    <meta http-equiv="refresh" content="0; url=contact.html#register">
+    <link rel="canonical" href="contact.html#register">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            text-align: center;
+        }
+        .redirect-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <div class="spinner"></div>
+        <h1>Redirecting to Registration...</h1>
+        <p>You're being redirected to our new registration location.</p>
+        <p>If you're not redirected automatically, <a href="contact.html#register" style="color: #60a5fa;">click here</a>.</p>
+    </div>
     
-    <!-- Enhanced SEO Meta Tags -->
-    <meta name="description" content="Register for free coding classes at DD Coder Dojo. Ages 7-17 welcome. Learn Scratch, Python, web development and more in Wentworth, Durban.">
-    <meta name="keywords" content="DD Coder Dojo, register, registration, free coding classes, ages 7-17, Wentworth, Durban">
-    <meta name="author" content="DD Coder Dojo">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ddcoderdojo.com/register.html">
-    <meta property="og:title" content="Register for DD Coder Dojo | Free Coding Classes">
-    <meta property="og:description" content="Register for free coding classes at DD Coder Dojo. Ages 7-17 welcome. Learn Scratch, Python, web development and more in Wentworth, Durban.">
-    <meta property="og:image" content="https://ddcoderdojo.com/images/register-og.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ddcoderdojo.com/register.html">
-    <meta property="twitter:title" content="Register for DD Coder Dojo | Free Coding Classes">
-    <meta property="twitter:description" content="Register for free coding classes at DD Coder Dojo. Ages 7-17 welcome. Learn Scratch, Python, web development and more in Wentworth, Durban.">
-    <meta property="twitter:image" content="https://ddcoderdojo.com/images/register-twitter.jpg">
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- Theme Colors & Favicon -->
-    <meta name="theme-color" content="#2563eb">
-    <meta name="msapplication-TileColor" content="#2563eb">    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="css/main.css" as="style">
-    <link rel="preload" href="css/production-optimizations.css" as="style">
-    <link rel="preload" href="css/pages/register.css" as="style">
+    <script>
+        // Immediate redirect for JS-enabled browsers
+        window.location.href = 'contact.html#register';
+    </script>
+</body>
+</html>
     <link rel="preload" href="js/critical-optimizations.js" as="script">
-    
-    <!-- Font Awesome (Lazy Loaded) -->
+      <!-- Font Awesome (Lazy Loaded) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Chart.js for Business Intelligence Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Google Fonts (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,12 +94,60 @@
         </button>        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="programs.html">Programs</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="community.html">Community</a></li>
+            <li class="dropdown">
+                <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
+                <ul class="dropdown-menu">
+                    <li><a href="community.html">Community Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
             <li><a href="contact.html">Contact</a></li>
+            <li class="active"><a href="register.html">Register</a></li>
         </ul>
+        <style>
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: #1e293b;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            border-radius: 0 0 8px 8px;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu li { width: 100%; }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75em 1.2em;
+            color: #f1f5f9;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 1em;
+        }
+        .dropdown-menu a:hover { background: #334155; color: #8b5cf6; }
+        .dropdown-toggle:after {
+            content: ' ▼';
+            font-size: 0.7em;
+        }
+        @media (max-width: 900px) {
+            .nav-links { flex-direction: column; gap: 0.5rem; }
+            .dropdown-menu { position: static; box-shadow: none; min-width: 0; border-radius: 0; }
+        }
+        </style>
+        <!-- ...existing code... -->
     </nav>
 
     <!-- Dark Mode Toggle -->
@@ -113,18 +178,7 @@
                         <h3><i class="fas fa-gift"></i> Completely Free</h3>
                         <p>All our coding classes are 100% free. No hidden costs, no materials to buy. We provide everything you need to learn!</p>
                     </div>
-                    
-                    <div class="info-item">
-                        <h3><i class="fas fa-calendar-alt"></i> Class Schedule</h3>
-                        <ul>
-                            <li><strong>Monday:</strong> Tech Innovators (14:00-16:00)</li>
-                            <li><strong>Tuesday-Wednesday:</strong> Code Explorers (14:00-16:00)</li>
-                            <li><strong>Thursday:</strong> Junior Ninjas (14:00-15:00)</li>
-                            <li><strong>Friday:</strong> Junior Ninjas (13:00-15:00)</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-item">
+  <div class="info-item">
                         <h3><i class="fas fa-clipboard-list"></i> Next Steps</h3>
                         <p>After online registration:</p>
                         <ul>
@@ -395,12 +449,18 @@
             </div>
         </div>    </footer>
 
-    <!-- JavaScript Files -->
-    <script src="js/critical-optimizations.js"></script>
+    <!-- JavaScript Files -->    <script src="js/critical-optimizations.js"></script>
     <script src="js/main.js"></script>
     <script src="js/enhancedAnimations.js"></script>
     <script src="js/pages/register.js"></script>
     <script src="js/formHandler.js"></script>
+    
+    <!-- Phase 7: Data Management & Analytics -->
+    <script src="js/data-management/data-manager.js"></script>
+    <script src="js/analytics/advanced-analytics.js"></script>
+    <script src="js/business-intelligence/bi-dashboard.js"></script>
+    <script src="js/user-insights/user-insights.js"></script>
+    <script src="js/ab-testing/ab-testing.js"></script>
       <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {

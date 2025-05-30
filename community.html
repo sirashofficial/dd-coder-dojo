@@ -51,9 +51,13 @@ Last updated: 2025-05-25
   <link rel="stylesheet" href="css/pages/community.css">
   <link rel="stylesheet" href="css/fullcalendar-enhancements.css">
   
-  <!-- External Stylesheets (non-critical) -->
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>  <!-- FullCalendar CSS with fallback -->
+  <!-- External Stylesheets (non-critical) -->  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>  
+  
+  <!-- Chart.js for Business Intelligence Dashboard -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- FullCalendar CSS with fallback -->
   <style id="fullcalendar-css-fallback">
     .calendar-loading { display: none; }
     .calendar-error { display: none; background: #fee; border: 1px solid #fcc; padding: 1rem; margin: 1rem 0; border-radius: 4px; }
@@ -82,14 +86,61 @@ Last updated: 2025-05-25
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
     </button>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="programs.html">Programs</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="community.html" class="active">Community</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
+                <ul class="dropdown-menu">
+                    <li><a href="community.html">Community Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="register.html">Register</a></li>
+        </ul>
+        <style>
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: #1e293b;
+            min-width: 180px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            border-radius: 0 0 8px 8px;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu li { width: 100%; }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75em 1.2em;
+            color: #f1f5f9;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 1em;
+        }
+        .dropdown-menu a:hover { background: #334155; color: #8b5cf6; }
+        .dropdown-toggle:after {
+            content: ' ▼';
+            font-size: 0.7em;
+        }
+        @media (max-width: 900px) {
+            .nav-links { flex-direction: column; gap: 0.5rem; }
+            .dropdown-menu { position: static; box-shadow: none; min-width: 0; border-radius: 0; }
+        }
+        </style>
   </nav>
   <main id="main-content" tabindex="-1">
     <section class="community-header hero-section parallax-container fade-in">
@@ -115,18 +166,7 @@ Last updated: 2025-05-25
         <h2 class="section-title slide-in-up">Events Calendar</h2>
         <p class="section-subtitle slide-in-up" data-animation-delay="0.2s">Stay up to date with all our exciting community events</p>
       </div>
-      
-      <!-- Quick Class Schedule Section (Mobile-Friendly) -->
-      <div class="quick-schedule-section">
-        <h3>This Week's Classes</h3>
-        <div class="quick-schedule-grid" id="quickScheduleGrid">
-          <!-- Will be populated by JavaScript -->
-        </div>
-        <button class="btn btn-outline view-full-calendar" onclick="document.querySelector('.calendar-container').scrollIntoView({behavior: 'smooth'})">
-          <i class="fas fa-calendar-alt"></i>
-          View Full Calendar
-        </button>
-      </div>
+  
         <!-- Calendar Navigation -->
       <div class="calendar-navigation">
         <div class="view-toggle-buttons">
@@ -177,14 +217,7 @@ Last updated: 2025-05-25
           </div>
         </div>
         <div id='fullCalendar'></div>
-        
-        <!-- Quick Schedule Overview -->
-        <div class="schedule-overview">
-          <h4><i class="fas fa-clock"></i> Regular Class Schedule</h4>
-          <div class="weekly-schedule" id="weeklySchedule">
-            <!-- Will be populated by JavaScript -->
-          </div>
-        </div>
+  
       </div>
       
       <!-- Original Calendar (kept for fallback) -->
@@ -464,6 +497,13 @@ Last updated: 2025-05-25
     }
   </script>
   <script defer src="js/pages/community.js"></script>
+  
+  <!-- Phase 7: Data Management & Analytics -->
+  <script src="js/data-management/data-manager.js"></script>
+  <script src="js/analytics/advanced-analytics.js"></script>
+  <script src="js/business-intelligence/bi-dashboard.js"></script>
+  <script src="js/user-insights/user-insights.js"></script>
+  <script src="js/ab-testing/ab-testing.js"></script>
     
         <!-- Service Worker Registration -->
   <script>

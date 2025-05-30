@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - A/B Testing Framework
+ * Code with Ubuntu - A/B Testing Framework
  * Phase 7: Data Management & Analytics Implementation
  * 
  * Advanced A/B testing system for feature experimentation, content optimization,
@@ -836,4 +836,4 @@ const abTestingFramework = new ABTestingFramework();
 // Export for global access
 window.DDABTesting = abTestingFramework;
 
-console.log('🧪 DD Coder Dojo A/B Testing Framework loaded successfully!');
+console.log('🧪 Code with Ubuntu A/B Testing Framework loaded successfully!');

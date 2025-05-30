@@ -5,19 +5,17 @@ Last updated: 2025-01-20
 */
 
 /* ===== GLOBAL ENHANCEMENTS ===== */
-:root {
-  /* Enhanced color palette */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-secondary: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-  --gradient-accent: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  --gradient-dark: linear-gradient(135deg, #232526 0%, #414345 100%);
-  
-  /* Enhanced shadows */
+:root {  /* Enhanced color palette - Warmer and more balanced */
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #10b981 100%);
+  --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --gradient-dark: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    /* Enhanced shadows - Less blue tinting */
   --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
   --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
   --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.3);
-  --shadow-colored: 0 10px 40px rgba(102, 0, 255, 0.2);
-  --shadow-glow: 0 0 30px rgba(0, 217, 255, 0.3);
+  --shadow-colored: 0 10px 40px rgba(124, 58, 237, 0.2);
+  --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.3);
   
   /* Enhanced spacing */
   --section-padding: clamp(4rem, 8vw, 8rem);

@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced Resources Page Functionality
+ * Code with Ubuntu - Enhanced Resources Page Functionality
  * Interactive learning resources with categorization, search, and progress tracking
  */
 
@@ -1291,7 +1291,7 @@ class ResourcesManager {
                 border: 1px solid rgba(255, 255, 255, 0.1);
             ">
                 <h2 style="color: var(--secondary-color); margin-bottom: 1rem;">
-                    <i class="fas fa-rocket"></i> Welcome to DD Coder Dojo Resources!
+                    <i class="fas fa-rocket"></i> Welcome to Code with Ubuntu Resources!
                 </h2>
                 <p style="color: var(--text-color); margin-bottom: 2rem;">
                     Explore our curated collection of coding resources. We'll track your progress and recommend personalized learning paths as you go!

@@ -443,7 +443,7 @@ class EventCalendar {
   // Export calendar functionality for mobile users
   exportCalendar() {
     const classEvents = this.events.filter(event => event.type === 'class');
-    let icalContent = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//DD Coder Dojo//Class Schedule//EN\n';
+    let icalContent = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Code with Ubuntu//Class Schedule//EN\n';
     
     classEvents.forEach(event => {
       const startDate = new Date(event.date + 'T' + event.time.split('-')[0] + ':00');
@@ -1082,7 +1082,7 @@ class EventCalendar {
             description: `${classesForDay.length} classes available today. Click to see details.`,
             type: 'coder-dojo-available',
             time: 'Multiple times',
-            location: 'DD Coder Dojo',
+            location: 'Code with Ubuntu',
             classCount: classesForDay.length,
             classes: classesForDay.map(cls => ({
               title: cls.title,
@@ -1201,7 +1201,7 @@ class EventCalendar {
             // Check if it's a weekend
             const dayOfWeek = clickedDate.getDay();
             if (dayOfWeek === 0 || dayOfWeek === 6) {
-              this.showNotification('No classes on weekends. DD Coder Dojo is closed Saturdays and Sundays.', 'info');
+              this.showNotification('No classes on weekends. Code with Ubuntu is closed Saturdays and Sundays.', 'info');
             } else {
               this.showNotification('No classes scheduled for this day.', 'info');
             }
@@ -1239,7 +1239,7 @@ class EventCalendar {
             info.el.classList.add('fc-day-weekend-closed');
             info.el.style.backgroundColor = '#f8f9fa';
             info.el.style.color = '#6c757d';
-            info.el.setAttribute('title', 'DD Coder Dojo is closed on weekends');
+            info.el.setAttribute('title', 'Code with Ubuntu is closed on weekends');
           } else {
             // Check if there are classes this day
             const dayEvents = this.getEventsForDate(info.date);
@@ -1433,7 +1433,7 @@ class EventCalendar {
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//DD Coder Dojo//Enhanced Calendar//EN',
+      'PRODID:-//Code with Ubuntu//Enhanced Calendar//EN',
       'CALSCALE:GREGORIAN'
     ];
 
@@ -1448,7 +1448,7 @@ class EventCalendar {
         `DTEND:${this.formatDateForICS(endDate)}`,
         `SUMMARY:${event.title}`,
         `DESCRIPTION:${event.description || event.title}`,
-        `LOCATION:${event.location || 'DD Coder Dojo'}`,
+        `LOCATION:${event.location || 'Code with Ubuntu'}`,
         `CATEGORIES:${event.category}`,
         'END:VEVENT'
       );

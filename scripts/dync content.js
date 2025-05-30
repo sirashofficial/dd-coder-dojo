@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * DD Coder Dojo - Content Synchronization Script
+ * Code with Ubuntu - Content Synchronization Script
  * 
  * This script helps automate content updates across the website.
  * Run with: node scripts/sync-content.js
@@ -40,7 +40,7 @@ class ContentSyncManager {
     }
 
     async run() {
-        console.log('🚀 Starting DD Coder Dojo content sync...\n');
+        console.log('🚀 Starting Code with Ubuntu content sync...\n');
         
         try {
             await this.createBackup();

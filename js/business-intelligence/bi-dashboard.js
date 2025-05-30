@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Business Intelligence Dashboard
+ * Code with Ubuntu - Business Intelligence Dashboard
  * Phase 7: Data Management & Analytics Implementation
  * 
  * Comprehensive dashboard for administrators to view analytics,
@@ -734,7 +734,7 @@ class BusinessIntelligenceDashboard {
             timeRange: this.config.defaultTimeRange,
             metrics: this.dashboardData,
             charts: Object.keys(this.chartConfigs),
-            exportedBy: 'DD Coder Dojo BI Dashboard'
+            exportedBy: 'Code with Ubuntu BI Dashboard'
         };
 
         const dataStr = JSON.stringify(exportData, null, 2);
@@ -809,4 +809,4 @@ const biDashboard = new BusinessIntelligenceDashboard();
 // Export for global access
 window.DDBusinessIntelligence = biDashboard;
 
-console.log('📊 DD Coder Dojo Business Intelligence Dashboard loaded successfully!');
+console.log('📊 Code with Ubuntu Business Intelligence Dashboard loaded successfully!');

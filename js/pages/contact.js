@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced Contact & Registration Page Functionality
+ * Code with Ubuntu - Enhanced Contact & Registration Page Functionality
  * Combined contact form and registration with tabs, validation, accessibility, and UX improvements
  */
 

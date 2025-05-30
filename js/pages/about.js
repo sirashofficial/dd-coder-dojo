@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced About Page
+ * Code with Ubuntu - Enhanced About Page
  * Dynamic team loading with error handling and animations
  */
 
@@ -182,14 +182,14 @@ class AboutPageManager {
         card.style.animationDelay = `${index * this.config.animationDelay}ms`;
 
         // Handle missing images gracefully
-        const imageUrl = member.image || 'images/mentors/placeholder.jpg';
+        const imageUrl = member.image || 'images/team/placeholder.jpg';
         
         card.innerHTML = `
             <div class="member-img">
                 <img src="${imageUrl}" 
                      alt="${member.name}" 
                      loading="lazy"
-                     onerror="this.src='images/mentors/placeholder.jpg'; this.onerror=null;">
+                     onerror="this.src='images/team/placeholder.jpg'; this.onerror=null;">
             </div>
             <div class="member-info">
                 <h3>${member.name}</h3>

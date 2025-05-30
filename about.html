@@ -1,6 +1,6 @@
 <!--
 File: about.html
-Purpose: About page for DD Coder Dojo. Describes the organization's mission, team, special features, history, and contact info. Enhanced with advanced jQuery effects for interactivity and modern user experience.
+Purpose: About page for Code with Ubuntu. Describes the organization's mission, team, special features, history, and contact info. Enhanced with advanced jQuery effects for interactivity and modern user experience.
 Last updated: 2025-05-25
 -->
 
@@ -8,12 +8,11 @@ Last updated: 2025-05-25
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | DD Coder Dojo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>About Us | Code with Ubuntu</title>
       <!-- Enhanced SEO Meta Tags -->
-    <meta name="description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
-    <meta name="keywords" content="DD Coder Dojo, about, mission, team, coding education, Austerville, Durban">
-    <meta name="author" content="DD Coder Dojo">
+    <meta name="description" content="Learn about Code with Ubuntu's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta name="keywords" content="Code with Ubuntu, Coder Dojo, about, mission, team, coding education, Austerville, Durban, Ubuntu coding">
+    <meta name="author" content="Code with Ubuntu">
     <meta name="robots" content="index, follow">
     
     <!-- Preload Critical Resources -->
@@ -24,16 +23,14 @@ Last updated: 2025-05-25
     
     <!-- Enhanced Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ddcoderdojo.com/about.html">
-    <meta property="og:title" content="About Us | DD Coder Dojo">
-    <meta property="og:description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta property="og:url" content="https://ddcoderdojo.com/about.html">    <meta property="og:title" content="About Us | Code with Ubuntu">
+    <meta property="og:description" content="Learn about Code with Ubuntu's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
     <meta property="og:image" content="https://ddcoderdojo.com/images/about-header.jpg">
     
     <!-- Enhanced Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ddcoderdojo.com/about.html">
-    <meta property="twitter:title" content="About Us | DD Coder Dojo">
-    <meta property="twitter:description" content="Learn about DD Coder Dojo's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
+    <meta property="twitter:url" content="https://ddcoderdojo.com/about.html">    <meta property="twitter:title" content="About Us | Code with Ubuntu">
+    <meta property="twitter:description" content="Learn about Code with Ubuntu's mission to empower young minds through coding education in Austerville, Durban. Meet our team and discover our journey.">
     <meta property="twitter:image" content="https://ddcoderdojo.com/images/about-header.jpg">
     
     <!-- Theme Colors & Favicon -->
@@ -84,14 +81,12 @@ Last updated: 2025-05-25
     Navigation functionality: js/main.js
     Navigation styles: css/main.css
     ====================================
-    -->
-    <nav class="navbar" aria-label="Main navigation">
-        <div class="logo">
+    -->    <nav class="navbar" aria-label="Main navigation">        <div class="logo">
             <div class="logo-icon">
                 <div class="orbit" aria-hidden="true"></div>
                 <div class="core" aria-hidden="true"></div>
             </div>
-            <span>DD Coder Dojo</span>
+            <span>Code with Ubuntu</span>
         </div>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
             <div class="bar"></div>
@@ -152,18 +147,7 @@ Last updated: 2025-05-25
             .nav-links { flex-direction: column; gap: 0.5rem; }
             .dropdown-menu { position: static; box-shadow: none; min-width: 0; border-radius: 0; }
         }
-        </style>
-    </nav>
-
-    <!-- Dark Mode Toggle -->
-    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark/light mode">
-        <svg viewBox="0 0 24 24" class="sun-icon">
-            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-        </svg>
-        <svg viewBox="0 0 24 24" class="moon-icon">
-            <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
-        </svg>
-    </button>
+        </style>    </nav>
 
     <main id="main-content" tabindex="-1">
         <!-- 
@@ -181,8 +165,8 @@ Last updated: 2025-05-25
         ====================================        -->
         <section class="about-header fade-in">
             <!-- EDITABLE CONTENT START -->
-            <h1 class="slide-in-left">DD (Digital Democracy) Coder Dojo</h1>
-            <p class="scale-in" style="animation-delay: 0.2s">From blocks to big ideas — come code with us! Free coding classes for ages 7-17, supported by KCA in partnership with Raspberry Pi Foundation</p>
+            <h1 class="slide-in-left">Code with Ubuntu</h1>
+            <p class="scale-in" style="animation-delay: 0.2s">A CoderDojo club empowering young people in Durban with free, creative coding classes for ages 7-17. Supported by KCA in partnership with the Raspberry Pi Foundation.</p>
             <!-- EDITABLE CONTENT END -->
         </section>
 
@@ -207,7 +191,7 @@ Last updated: 2025-05-25
                 <!-- MISSION BOX - EDITABLE CONTENT START -->
                 <div class="mission-vision-box card-modern scale-in" style="animation-delay: 0.4s">
                     <h3><i class="fas fa-bullseye pulse-on-hover"></i>Our Mission</h3>
-                    <p>We believe that every child deserves access to quality technology education. DD (Digital Democracy) Coder Dojo provides free coding classes every weekday (Mon-Fri) for ages 7-17, teaching building games, apps & animations using Scratch, Python, & Web Development, while fostering problem-solving & creative thinking.</p>
+                    <p>We believe every child deserves access to quality technology education. Code with Ubuntu is a CoderDojo club offering free coding classes every weekday (Mon-Fri) for ages 7-17. We teach building games, apps & animations using Scratch, Python, and Web Development, while fostering problem-solving and creative thinking.</p>
                 </div>
                 <!-- MISSION BOX - EDITABLE CONTENT END -->
                 
@@ -242,7 +226,7 @@ Last updated: 2025-05-25
         ====================================
         -->
         <section class="team-section">
-            <h2>Our Peer Mentors</h2>
+            <h2>Our Team</h2>
             <!-- 
             TEAM GRID - POPULATED BY JAVASCRIPT
             Content loaded from: data/team.json
@@ -284,9 +268,8 @@ Last updated: 2025-05-25
                             <li>• <strong>Python</strong> programming fundamentals</li>
                             <li>• <strong>Web Development</strong> with HTML, CSS & JavaScript</li>
                             <li>• Problem-solving & creative thinking skills</li>
-                        </ul>
-                        <div class="special-counter" data-target="1200">0</div>
-                        <div class="counter-label">Students Taught</div>
+                        </ul>                        <div class="special-counter" data-target="160">0</div>
+                        <div class="counter-label">Students Served</div>
                     </div>
                     <!-- WHAT WE TEACH - EDITABLE CONTENT END -->
                     
@@ -316,7 +299,7 @@ Last updated: 2025-05-25
                             <li>• <strong>Schedule:</strong> Every Weekday (Mon-Fri)</li>
                         </ul>
                         <div class="special-counter" data-target="30">0</div>
-                        <div class="counter-label">Peer Mentors</div>
+                        <div class="counter-label">Team Members</div>
                     </div>
                     <!-- CONTACT DETAILS - EDITABLE CONTENT END -->
                 </div>
@@ -338,7 +321,7 @@ Last updated: 2025-05-25
                     <div class="success-story">
                         <div class="story-icon"><i class="fas fa-award pulse-on-hover"></i></div>
                         <h3>From Scratch to Scholarship</h3>
-                        <p>"I started at DD Coder Dojo with no coding experience. Now, I've built my own games and received a scholarship to study IT!"</p>
+                        <p>"I started at Code with Ubuntu with no coding experience. Now, I've built my own games and received a scholarship to study IT!"</p>
                         <div class="story-divider"></div>
                         <span class="story-author">– Thando, Age 16</span>
                     </div>
@@ -488,7 +471,7 @@ Last updated: 2025-05-25
         ====================================
         HISTORY & TIMELINE SECTION
         ====================================
-        Purpose: Show DD Coder Dojo's journey through the years
+        Purpose: Show Code with Ubuntu's journey through the years
         Content Manager: Edit the timeline content below
         Last Updated: 2025-01-16
         ====================================
@@ -497,17 +480,18 @@ Last updated: 2025-05-25
             <div class="container">
                 <h2>Our Journey</h2>
                 <div class="timeline">
-                    <!-- 2022: Laying the Foundation -->
+                    <!-- 2022: Humble Beginnings -->
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="date">2022</div>
-                            <h3>Laying the Foundation</h3>
-                            <p>DD Coder Dojo began with a simple mission: to provide free, accessible digital literacy education to young minds in Austerville. We started with basic typing skills and introduced Scratch programming, building confidence and curiosity in our first cohort of students. The foundation was built on community support and the belief that every child deserves access to technology education.</p>
+                            <div class="date">2022 (October)</div>
+                            <h3>Humble Beginnings</h3>
+                            <p>Blue Roof CoderDojo launched with Saturday sessions, welcoming our first 20 students aged 7-18. Starting with basic digital literacy and Scratch programming, we built the foundation for what would become a youth coding program. The focus was simple: make technology accessible to every child in our community.</p>
                             <ul>
-                                <li>• Launched with 25 pioneer students</li>
-                                <li>• Focus on digital literacy and Scratch programming</li>
-                                <li>• Basic typing skills development</li>
-                                <li>• Established community partnerships</li>
+                                <li>Launched October 29, 2022 with 20 pioneer students</li>
+                                <li>Saturday sessions only (10am-12pm)</li>
+                                <li>Focus on digital literacy and Scratch programming</li>
+                                <li>Partnership with WeThink Code</li>
+                                <li>Basic typing skills and computer fundamentals</li>
                             </ul>
                         </div>
                     </div>
@@ -517,42 +501,62 @@ Last updated: 2025-05-25
                         <div class="timeline-content">
                             <div class="date">2023</div>
                             <h3>Growth and Structure</h3>
-                            <p>The year of expansion and organization. We implemented structured weekly sessions, introduced Code.org curriculum, and established our peer mentor system. This year marked the transformation from a small community initiative to a structured educational program that could support more students effectively.</p>
+                            <p>The year of rapid expansion. We moved from weekend-only sessions to multiple weekly programs, introducing structured age groups and expanding our volunteer team. This transformation allowed us to serve more students while providing age-appropriate curriculum for different skill levels.</p>
                             <ul>
-                                <li>• Weekly structured sessions established</li>
-                                <li>• Code.org curriculum integration</li>
-                                <li>• Peer mentor system launched</li>
-                                <li>• Student enrollment grew to 75</li>
+                                <li>Expanded to weekday sessions across age groups</li>
+                                <li>Introduced Junior (7-10), Intermediate (11-13), Senior (14+) groups</li>
+                                <li>Student enrollment grew to 75+</li>
+                                <li>Volunteer facilitator team expanded</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- 2024: Innovation and Community -->
+                    <!-- 2024: Innovation and Curriculum Development -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <div class="date">2024</div>
-                            <h3>Innovation and Community</h3>
-                            <p>A year of creative breakthroughs and technological exploration. We introduced themed coding events, brought micro:bit hardware programming into our curriculum, and celebrated our students' achievements with our first annual showcase. The community spirit flourished as we expanded our reach and impact.</p>
+                            <h3>Innovation and Curriculum Development</h3>
+                            <p>A year of curriculum enhancement and community building. We integrated more advanced programming languages, introduced project-based learning, and established comprehensive tracking systems. Our focus shifted to creating pathways from basic coding to real-world applications.</p>
                             <ul>
-                                <li>• Themed coding events and competitions</li>
-                                <li>• micro:bit hardware programming introduced</li>
-                                <li>• First annual student showcase</li>
-                                <li>• Community celebrations and recognition</li>
+                                <li>HTML/CSS and JavaScript curriculum added</li>
+                                <li>Project-based learning methodology implemented</li>
+                                <li>Comprehensive student registration and tracking systems</li>
+                                <li>Community showcase events began</li>
+                                <li>Enhanced parent and community engagement</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- 2025: Empowering Through Experience -->
+                    <!-- 2025: Rebranding and Scaling Impact -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <div class="date">2025</div>
-                            <h3>Empowering Through Experience</h3>
-                            <p>Building on our strong foundation, we're launching structured curriculum pathways, organizing our first hackathons, and enhancing community engagement through WhatsApp groups. This year represents our commitment to creating lasting impact and preparing students for future opportunities in technology.</p>
+                            <h3>Rebranding and Scaling Impact</h3>
+                            <p>We evolved from Blue Roof CoderDojo to Code with Ubuntu, reflecting our philosophy of collaborative learning and community empowerment. With 160+ students across 6 weekly sessions, we're implementing structured curriculum pathways and planning our evolution into a comprehensive tech education hub that serves the broader community.</p>
                             <ul>
-                                <li>• Structured curriculum pathways</li>
-                                <li>• First DD Coder Dojo hackathons</li>
-                                <li>• Enhanced WhatsApp community engagement</li>
-                                <li>• Focus on real-world project applications</li>
+                                <li>Rebranded to Code with Ubuntu - embodying our community-centered approach</li>
+                                <li>160+ active students across 6 weekly sessions</li>
+                                <li>Structured curriculum pathways by age and skill level</li>                                <li>Enhanced volunteer management and training systems</li>
+                                <li>Planning expansion into web development services for community organizations</li>
+                                <li>Focus on real-world project applications and career preparation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 2025: Code with Ubuntu Rebrand and Expansion -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="date">2025</div>
+                            <h3>Code with Ubuntu: New Identity, Continued Mission</h3>
+                            <p>We rebranded from Blue Roof CoderDojo to Code with Ubuntu, reflecting our commitment to the Ubuntu philosophy of interconnectedness and community. This marks not just a name change, but a maturation of our vision to create lasting impact in digital education and youth empowerment.</p>
+                            <ul>
+                                <li>Rebranded to "Code with Ubuntu" - embracing Ubuntu philosophy</li>
+                                <li>Expanded to serve 160+ total students since inception</li>
+                                <li>Currently serving 60+ students weekly across 6 sessions</li>
+                                <li>Achieved 42% female participation rate</li>
+                                <li>700% growth from our initial 20 students in 2022</li>
+                                <li>Three distinct age-appropriate programs: Junior Ninjas (7-10), Code Explorers (11-13), Tech Innovators (14-17)</li>
+                                <li>Establishing pathways to technology careers and further education</li>
                             </ul>
                         </div>
                     </div>
@@ -577,7 +581,7 @@ Last updated: 2025-05-25
         <section class="cta-section">
             <div class="cta-content">
                 <!-- EDITABLE CONTENT START -->
-                <h2>Join DD Coder Dojo Community</h2>
+                <h2>Join Code with Ubuntu Community</h2>
                 <p>Ready to start your coding journey? Registration is free and open to ages 7-17. Contact us at 031 461 3101 or ashley@kcasa.org.za to get started!</p>
                 <a href="contact.html" class="btn-large">Get Started Today</a>
                 <!-- EDITABLE CONTENT END -->
@@ -633,7 +637,7 @@ Last updated: 2025-05-25
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
+                <p>&copy; 2025 Code with Ubuntu. All rights reserved.</p>
                 <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
             </div>
         </div>

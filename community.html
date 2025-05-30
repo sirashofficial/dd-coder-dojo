@@ -1,19 +1,17 @@
 <!--
 File: community.html
-Purpose: Community Engagement Hub for DD Coder Dojo. Showcases upcoming events, fundraisers, movie nights, and ways to get involved. Includes WhatsApp and parent resources.
+Purpose: Community Engagement Hub for Code with Ubuntu. Showcases upcoming events, fundraisers, movie nights, and ways to get involved. Includes WhatsApp and parent resources.
 Last updated: 2025-05-25
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community | DD Coder Dojo</title>
-  <meta name="description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Community | Code with Ubuntu</title>
+  <meta name="description" content="Get involved with Code with Ubuntu! See upcoming events, fundraisers, movie nights, and join our community.">
   
-  <!-- SEO & Social Media Meta Tags -->
-  <meta name="keywords" content="DD Coder Dojo, community, events, coding, education, fundraising">
-  <meta name="author" content="DD Coder Dojo">
+  <!-- SEO & Social Media Meta Tags -->  <meta name="keywords" content="Code with Ubuntu, Coder Dojo, community, events, coding, education, fundraising, Ubuntu coding">
+  <meta name="author" content="Code with Ubuntu">
     <!-- Performance optimizations -->
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//unpkg.com">
@@ -25,16 +23,14 @@ Last updated: 2025-05-25
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ddcoderdojo.com/community.html">
-  <meta property="og:title" content="Community | DD Coder Dojo">
-  <meta property="og:description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta property="og:url" content="https://ddcoderdojo.com/community.html">  <meta property="og:title" content="Community | Code with Ubuntu">
+  <meta property="og:description" content="Get involved with Code with Ubuntu! See upcoming events, fundraisers, movie nights, and join our community.">
   <meta property="og:image" content="https://ddcoderdojo.com/images/dd-coder-dojo-community-og.jpg">
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://ddcoderdojo.com/community.html">
-  <meta property="twitter:title" content="Community | DD Coder Dojo">
-  <meta property="twitter:description" content="Get involved with DD Coder Dojo! See upcoming events, fundraisers, movie nights, and join our community.">
+  <meta property="twitter:url" content="https://ddcoderdojo.com/community.html">  <meta property="twitter:title" content="Community | Code with Ubuntu">
+  <meta property="twitter:description" content="Get involved with Code with Ubuntu! See upcoming events, fundraisers, movie nights, and join our community.">
   <meta property="twitter:image" content="https://ddcoderdojo.com/images/dd-coder-dojo-community-twitter.jpg">
   
   <!-- Preload Critical Resources -->
@@ -50,9 +46,13 @@ Last updated: 2025-05-25
   <link rel="stylesheet" href="css/pages/home.css">
   <link rel="stylesheet" href="css/pages/community.css">
   <link rel="stylesheet" href="css/fullcalendar-enhancements.css">
-  
-  <!-- External Stylesheets (non-critical) -->  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- External Stylesheets (non-critical) -->  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>  
+  
+  <!-- Google Fonts (Ubuntu) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
   
   <!-- Chart.js for Business Intelligence Dashboard -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -77,10 +77,12 @@ Last updated: 2025-05-25
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <!-- Navigation (copied from main nav, will update next) -->
-  <nav class="navbar" aria-label="Main navigation">
-    <div class="logo">
-      <div class="logo-icon"><div class="orbit"></div><div class="core"></div></div>
-      <span>DD Coder Dojo</span>
+  <nav class="navbar" aria-label="Main navigation">    <div class="logo">
+      <div class="logo-icon">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="core" aria-hidden="true"></div>
+      </div>
+      <span>Code with Ubuntu</span>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -147,7 +149,7 @@ Last updated: 2025-05-25
       <div class="parallax-layer" data-speed="0.5">
         <div class="hero-content">
           <h1 class="hero-title slide-in-left" data-animation-delay="0.2s">Community Engagement</h1>
-          <p class="hero-subtitle slide-in-right" data-animation-delay="0.4s">Get involved! See our upcoming events, fundraisers, and ways to connect with DD Coder Dojo.</p>
+          <p class="hero-subtitle slide-in-right" data-animation-delay="0.4s">Get involved! See our upcoming events, fundraisers, and ways to connect with Code with Ubuntu.</p>
           <div class="hero-buttons scale-in" data-animation-delay="0.6s">
             <button class="btn btn-primary pulse-on-hover" data-tooltip="See upcoming events">
               <i class="fas fa-calendar-alt" aria-hidden="true"></i>
@@ -202,7 +204,7 @@ Last updated: 2025-05-25
       <div class="fullcalendar-container" id="fullCalendarContainer">
         <div class="calendar-controls">
           <div class="calendar-info">
-            <h4><i class="fas fa-info-circle"></i> DD Coder Dojo Schedule</h4>
+            <h4><i class="fas fa-info-circle"></i> Code with Ubuntu Schedule</h4>
             <p>Classes run Monday-Friday. No sessions on weekends.</p>
           </div>
           <div class="calendar-actions">
@@ -318,7 +320,7 @@ Last updated: 2025-05-25
         <!-- ...existing footer... -->
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 DD (Digital Democracy) Coder Dojo. All rights reserved.</p>
+        <p>&copy; 2025 Code with Ubuntu. All rights reserved.</p>
       </div>
     </div>
   </footer>  

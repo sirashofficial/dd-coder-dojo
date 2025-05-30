@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced Home Page Functionality
+ * Code with Ubuntu - Enhanced Home Page Functionality
  * Clean, properly structured JavaScript for the home page
  */
 

@@ -1,26 +1,40 @@
 [
   {
     "id": 1,
-    "name": "Ashley Muchenje",
-    "role": "Lead Peer Mentor",
-    "bio": "Ashley leads the DD Coder Dojo as the Lead Peer Mentor, coordinating our team of peer mentors and guiding students through their coding journey. He manages the program while also running digital literacy initiatives under the Digital Democracy project.",
-    "image": "images/mentors/ashley.jpg",
-    "email": "ashley@kcasa.org.za",
+    "name": "Sanele Madlala",
+    "role": "Facilitator",
+    "bio": "Sanele serves as a Facilitator at Code with Ubuntu, bringing expertise in guiding students through their coding journey and creating an engaging learning environment for all participants.",
+    "image": "images/team/sanele.jpg",
+    "email": "",
     "social": {
       "linkedin": "#",
-      "twitter": "#", 
       "github": "#"
     },
     "featured": true,
     "active": true,
-    "joinDate": "2022-01-15"
+    "joinDate": "2023-01-15"
   },
   {
     "id": 2,
-    "name": "Sanele",
-    "role": "Peer Mentor", 
-    "bio": "Sanele is one of our dedicated peer mentors, helping guide younger students through coding challenges and supporting them as they develop their programming skills and confidence.",
-    "image": "images/mentors/sanele.jpg",
+    "name": "Aaron Virasamy",
+    "role": "IT Facilitator and Marketing Support",
+    "bio": "Aaron combines technical expertise with marketing skills to support Code with Ubuntu's mission. As IT Facilitator, he helps manage our technical infrastructure while also providing essential marketing support to grow our community.",
+    "image": "images/team/aaron.jpg",
+    "email": "",
+    "social": {
+      "linkedin": "#",
+      "github": "#"
+    },
+    "featured": true,
+    "active": true,
+    "joinDate": "2023-02-20"
+  },
+  {
+    "id": 3,
+    "name": "Emmett Matthew Calum Pottier",
+    "role": "Volunteering Peer Mentor",
+    "bio": "Emmett brings passion and dedication as a Volunteering Peer Mentor, helping fellow students navigate coding challenges and fostering a collaborative learning environment at Code with Ubuntu.",
+    "image": "images/team/emmett.jpg",
     "email": "",
     "social": {
       "linkedin": "#",
@@ -31,26 +45,11 @@
     "joinDate": "2023-03-10"
   },
   {
-    "id": 3,
-    "name": "Mthokozisi",
-    "role": "Peer Mentor",
-    "bio": "Mthokozisi brings enthusiasm and technical knowledge to help students navigate web development and programming concepts, making complex ideas accessible and fun.",
-    "image": "images/mentors/mthokozisi.jpg", 
-    "email": "",
-    "social": {
-      "linkedin": "#",
-      "github": "#"
-    },
-    "featured": true,
-    "active": true,
-    "joinDate": "2023-05-20"
-  },
-  {
     "id": 4,
-    "name": "Aaron",
-    "role": "Peer Mentor",
-    "bio": "Aaron supports our coding community by mentoring students in various programming languages and helping them develop problem-solving skills through creative coding projects.",
-    "image": "images/mentors/aaron.jpg",
+    "name": "Cherri-Ann Estrice",
+    "role": "Facilitator",
+    "bio": "Cherri-Ann serves as a Facilitator at Code with Ubuntu, specializing in programming education and helping students develop both technical skills and problem-solving abilities in a supportive environment.",
+    "image": "images/team/cherri-ann.jpg",
     "email": "",
     "social": {
       "linkedin": "#",
@@ -58,14 +57,14 @@
     },
     "featured": true,
     "active": true,
-    "joinDate": "2023-07-12"
+    "joinDate": "2023-04-05"
   },
   {
     "id": 5,
-    "name": "Shanice", 
-    "role": "Peer Mentor",
-    "bio": "Shanice is passionate about helping younger students discover the joy of coding, providing patient guidance and encouragement as they learn to build games, apps, and animations.",
-    "image": "images/mentors/shanice.jpg",
+    "name": "Shanice Parshee Chinnasami",
+    "role": "Program and Facilitator Support",
+    "bio": "Shanice provides essential Program and Facilitator Support at Code with Ubuntu, ensuring smooth operations and helping coordinate activities that make our coding community thrive.",
+    "image": "images/team/shanice.jpg",
     "email": "",
     "social": {
       "linkedin": "#",
@@ -73,36 +72,6 @@
     },
     "featured": true,
     "active": true,
-    "joinDate": "2023-08-05"
-  },
-  {
-    "id": 6,
-    "name": "Sindi",
-    "role": "Peer Mentor",
-    "bio": "Sindi contributes to our mentoring team by helping students explore creative coding and digital storytelling, fostering both technical skills and creative expression.",
-    "image": "images/mentors/sindi.jpg",
-    "email": "",
-    "social": {
-      "linkedin": "#",
-      "github": "#"
-    },
-    "featured": true,
-    "active": true,
-    "joinDate": "2023-09-15"
-  },
-  {
-    "id": 7,
-    "name": "Cherri-Ann",
-    "role": "Peer Mentor",
-    "bio": "Cherri-Ann brings her programming expertise to help students develop their coding skills and logical thinking, specializing in Python programming and web development concepts.",
-    "image": "images/mentors/cherri-ann.jpg",
-    "email": "",
-    "social": {
-      "linkedin": "#",
-      "github": "#"
-    },
-    "featured": true,
-    "active": true,
-    "joinDate": "2023-10-01"
+    "joinDate": "2023-05-15"
   }
 ]

@@ -2500,18 +2500,27 @@ Community Features Section Styles
   min-width: 400px;
 }
 
-/* Modern Countdown Timer */
+/* Modern Countdown Timer - Redesigned Cyberpunk Theme */
 .modern-countdown {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 30px;
-  padding: 3rem;
+  background: linear-gradient(135deg, 
+    rgba(18, 18, 18, 0.95) 0%, 
+    rgba(30, 30, 30, 0.95) 35%, 
+    rgba(40, 20, 60, 0.9) 70%, 
+    rgba(20, 20, 40, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 25px;
+  padding: 2.5rem;
   color: white;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 0 30px rgba(147, 51, 234, 0.4),
+    0 0 60px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .modern-countdown::before {
@@ -2521,68 +2530,167 @@ Community Features Section Styles
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  opacity: 0.05;
-  border-radius: 30px;
-  animation: countdown-bg-pulse 4s ease-in-out infinite;
+  background: linear-gradient(45deg, 
+    transparent 25%, 
+    rgba(147, 51, 234, 0.1) 25%, 
+    rgba(147, 51, 234, 0.1) 50%, 
+    transparent 50%, 
+    transparent 75%, 
+    rgba(59, 130, 246, 0.1) 75%
+  );
+  background-size: 30px 30px;
+  border-radius: 25px;
+  animation: cyberpunk-grid-move 8s linear infinite;
 }
 
-@keyframes countdown-bg-pulse {
-  0%, 100% { opacity: 0.05; }
-  50% { opacity: 0.1; }
+.modern-countdown::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    #9333ea, 
+    #3b82f6, 
+    #06b6d4, 
+    #10b981, 
+    #f59e0b, 
+    #ef4444, 
+    #9333ea
+  );
+  background-size: 300% 300%;
+  border-radius: 25px;
+  z-index: -1;
+  animation: cyberpunk-border-flow 4s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-grid-move {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(30px) translateY(30px); }
+}
+
+@keyframes cyberpunk-border-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .countdown-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   position: relative;
   z-index: 2;
 }
 
 .countdown-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--accent-color), #ff6b35);
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, 
+    #9333ea 0%, 
+    #3b82f6 25%, 
+    #06b6d4 50%, 
+    #10b981 75%, 
+    #f59e0b 100%
+  );
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.4);
+  box-shadow: 
+    0 0 20px rgba(147, 51, 234, 0.6),
+    0 0 40px rgba(59, 130, 246, 0.4),
+    0 0 60px rgba(16, 185, 129, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-icon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: neon-sweep 3s linear infinite;
+}
+
+@keyframes neon-sweep {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .pulse-icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: white;
-  animation: pulse-scale 2s ease-in-out infinite;
+  animation: hologram-pulse 2s ease-in-out infinite;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  z-index: 2;
+  position: relative;
 }
 
-@keyframes pulse-scale {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+@keyframes hologram-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.1); 
+    filter: brightness(1.3);
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+  }
 }
 
 .countdown-title {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.9rem;
+  font-weight: 800;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(90deg, 
+    #6b21a8 0%, 
+    #1e40af 25%, 
+    #0c4a6e 50%, 
+    #065f46 75%, 
+    #b45309 100%
+  );
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: cyberpunk-text-flow 3s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(107, 33, 168, 0.8);
+}
+
+@keyframes cyberpunk-text-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .countdown-subtitle {
   font-size: 1.1rem;
-  opacity: 0.8;
+  opacity: 0.9;
   margin: 0;
+  color: #0c4a6e;
+  text-shadow: 0 0 10px rgba(12, 74, 110, 0.8);
+  animation: subtitle-glow 4s ease-in-out infinite;
 }
 
-/* Modern Display */
+@keyframes subtitle-glow {
+  0%, 100% { 
+    color: #0c4a6e;
+    text-shadow: 0 0 10px rgba(12, 74, 110, 0.8);
+  }
+  50% { 
+    color: #065f46;
+    text-shadow: 0 0 15px rgba(6, 95, 70, 0.9);
+  }
+}
+
+/* Modern Display - Cyberpunk Style */
 .modern-display {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
   position: relative;
   z-index: 2;
 }
@@ -2592,51 +2700,177 @@ Community Features Section Styles
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  position: relative;
 }
 
 .time-circle {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 85px;
+  height: 85px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(30, 30, 30, 0.9) 50%, 
+    rgba(0, 0, 0, 0.8) 100%
+  );
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.time-circle::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, 
+    #9333ea, 
+    #3b82f6, 
+    #06b6d4, 
+    #10b981, 
+    #f59e0b, 
+    #ef4444, 
+    #9333ea
+  );
+  background-size: 300% 300%;
+  border-radius: 50%;
+  z-index: -1;
+  animation: cyberpunk-circle-border 3s linear infinite;
+}
+
+.time-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, 
+    rgba(147, 51, 234, 0.2) 0%, 
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: inner-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-circle-border {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes inner-pulse {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: translate(-50%, -50%) scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: translate(-50%, -50%) scale(1.2); 
+  }
+}
+
+.time-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 0 25px rgba(147, 51, 234, 0.6),
+    0 0 50px rgba(59, 130, 246, 0.4);
 }
 
 .time-value {
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-size: 1.9rem;
+  font-weight: 900;
   font-family: 'Orbitron', monospace;
-  color: var(--secondary-color);
-  text-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+  color: #0c4a6e;
+  text-shadow: 
+    0 0 8px rgba(12, 74, 110, 0.9),
+    0 0 15px rgba(12, 74, 110, 0.7),
+    0 0 25px rgba(12, 74, 110, 0.5);
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  animation: neon-flicker 4s ease-in-out infinite;
+}
+
+@keyframes neon-flicker {
+  0%, 100% { 
+    opacity: 1;
+    text-shadow: 
+      0 0 8px rgba(12, 74, 110, 0.9),
+      0 0 15px rgba(12, 74, 110, 0.7),
+      0 0 25px rgba(12, 74, 110, 0.5);
+  }
+  2%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 8px rgba(12, 74, 110, 0.9),
+      0 0 15px rgba(12, 74, 110, 0.7),
+      0 0 25px rgba(12, 74, 110, 0.5);
+  }
+  4%, 20%, 24%, 55% {        
+    opacity: 0.85;
+    text-shadow: 
+      0 0 6px rgba(12, 74, 110, 0.8),
+      0 0 12px rgba(12, 74, 110, 0.6);
+  }
 }
 
 .circle-progress {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 84px;
-  height: 84px;
+  top: -3px;
+  left: -3px;
+  width: 91px;
+  height: 91px;
   border-radius: 50%;
-  background: conic-gradient(var(--secondary-color) 0deg, transparent 0deg);
-  animation: progress-spin 1s ease-in-out;
+  background: conic-gradient(
+    #9333ea 0deg, 
+    #3b82f6 72deg, 
+    #06b6d4 144deg, 
+    #10b981 216deg, 
+    #f59e0b 288deg, 
+    transparent 360deg
+  );
+  animation: hologram-rotation 2s linear infinite;
+  z-index: 1;
+}
+
+@keyframes hologram-rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .time-label {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.9;
-  color: var(--secondary-color);
+  letter-spacing: 2px;
+  color: #6b21a8;
+  text-shadow: 0 0 8px rgba(107, 33, 168, 0.8);
+  animation: label-glow 3s ease-in-out infinite;
 }
 
-/* Countdown Footer */
+@keyframes label-glow {
+  0%, 100% { 
+    color: #6b21a8;
+    text-shadow: 0 0 8px rgba(107, 33, 168, 0.8);
+  }
+  33% { 
+    color: #1e40af;
+    text-shadow: 0 0 10px rgba(30, 64, 175, 0.9);
+  }
+  66% { 
+    color: #0c4a6e;
+    text-shadow: 0 0 10px rgba(12, 74, 110, 0.9);
+  }
+}
+
+/* Countdown Footer - Cyberpunk Style */
 .countdown-footer {
   position: relative;
   z-index: 2;
@@ -2644,47 +2878,136 @@ Community Features Section Styles
 
 .excitement-meter {
   text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.excitement-meter:hover {
+  transform: scale(1.02);
+  filter: brightness(1.2);
 }
 
 .meter-label {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 1rem;
-  opacity: 0.9;
+  color: #0c4a6e;
+  text-shadow: 0 0 10px rgba(12, 74, 110, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .meter-bar {
   width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  height: 12px;
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(30, 30, 30, 0.8) 100%
+  );
+  border-radius: 20px;
   overflow: hidden;
   margin-bottom: 0.75rem;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.meter-bar::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg, 
+    #9333ea, 
+    #3b82f6, 
+    #06b6d4, 
+    #10b981, 
+    #f59e0b
+  );
+  border-radius: 20px;
+  z-index: -1;
 }
 
 .meter-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  background: linear-gradient(90deg, 
+    #9333ea 0%, 
+    #3b82f6 25%, 
+    #06b6d4 50%, 
+    #10b981 75%, 
+    #f59e0b 100%
+  );
   width: 75%;
-  border-radius: 4px;
-  animation: meter-pulse 3s ease-in-out infinite;
+  border-radius: 20px;
+  animation: cyberpunk-meter-pulse 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes meter-pulse {
-  0%, 100% { width: 75%; }
-  50% { width: 85%; }
+.meter-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 100%
+  );
+  animation: meter-shine 3s linear infinite;
+}
+
+@keyframes cyberpunk-meter-pulse {
+  0%, 100% { 
+    width: 75%; 
+    box-shadow: 
+      0 0 10px rgba(147, 51, 234, 0.5),
+      0 0 20px rgba(6, 182, 212, 0.3);
+  }
+  50% { 
+    width: 85%; 
+    box-shadow: 
+      0 0 15px rgba(147, 51, 234, 0.8),
+      0 0 30px rgba(6, 182, 212, 0.5);
+  }
+}
+
+@keyframes meter-shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 .meter-text {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent-color);
-  animation: text-glow 2s ease-in-out infinite;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #b45309;
+  text-shadow: 0 0 12px rgba(180, 83, 9, 0.9);
+  animation: cyberpunk-text-glow 3s ease-in-out infinite;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-@keyframes text-glow {
-  0%, 100% { text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-  50% { text-shadow: 0 0 20px rgba(245, 158, 11, 0.6); }
+@keyframes cyberpunk-text-glow {
+  0%, 100% { 
+    color: #b45309;
+    text-shadow: 0 0 12px rgba(180, 83, 9, 0.9);
+  }
+  25% { 
+    color: #dc2626;
+    text-shadow: 0 0 15px rgba(220, 38, 38, 0.9);
+  }
+  50% { 
+    color: #065f46;
+    text-shadow: 0 0 15px rgba(6, 95, 70, 0.9);
+  }
+  75% { 
+    color: #1e40af;
+    text-shadow: 0 0 15px rgba(30, 64, 175, 0.9);
+  }
 }
 
 /* Countdown Animation Effects */

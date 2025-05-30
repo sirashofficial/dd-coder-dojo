@@ -1,6 +1,6 @@
 {
-  "name": "DD Coder Dojo",
-  "short_name": "DD Coder Dojo",
+  "name": "Code with Ubuntu",
+  "short_name": "Code with Ubuntu",
   "description": "Empowering young minds through coding education in Austerville, Durban. Join our community of future innovators.",
   "start_url": "/",
   "display": "standalone",
@@ -70,7 +70,7 @@
     {
       "name": "Contact Us",
       "short_name": "Contact",
-      "description": "Get in touch with DD Coder Dojo",
+      "description": "Get in touch with Code with Ubuntu",
       "url": "/contact.html",
       "icons": [
         {
@@ -86,20 +86,20 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "DD Coder Dojo Homepage"
+      "label": "Code with Ubuntu Homepage"
     },
     {
       "src": "/images/screenshots/mobile-home.png",
       "sizes": "360x640",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "DD Coder Dojo Mobile View"
+      "label": "Code with Ubuntu Mobile View"
     }
   ],
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://ddcoderdojo.com/manifest.json"
+      "url": "https://codewithubuntu.org/manifest.json"
     }
   ],
   "prefer_related_applications": false,

@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced Gallery Page Functionality
+ * Code with Ubuntu - Enhanced Gallery Page Functionality
  * Interactive project gallery with filtering, search, and detailed views
  */
 

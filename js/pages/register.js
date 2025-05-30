@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced Registration Page Functionality
+ * Code with Ubuntu - Enhanced Registration Page Functionality
  * Multi-step form with validation, accessibility, and smooth UX
  */
 

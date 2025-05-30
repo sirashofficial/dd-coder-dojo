@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - User Insights & Personalization Engine
+ * Code with Ubuntu - User Insights & Personalization Engine
  * Phase 7: Data Management & Analytics Implementation
  * 
  * Advanced user behavior analysis, personalization, and recommendation system
@@ -930,4 +930,4 @@ const userInsights = new UserInsights();
 // Export for global access
 window.DDUserInsights = userInsights;
 
-console.log('🧠 DD Coder Dojo User Insights Engine loaded successfully!');
+console.log('🧠 Code with Ubuntu User Insights Engine loaded successfully!');

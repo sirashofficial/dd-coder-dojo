@@ -1,6 +1,6 @@
-# DD Coder Dojo Website
+# Code with Ubuntu Website
 
-A modern, responsive website for DD Coder Dojo - building the next generation of developers through coding education and community engagement.
+A modern, responsive website for Code with Ubuntu - building the next generation of developers through coding education and community engagement.
 
 ## 🚀 Quick Start
 
@@ -93,7 +93,7 @@ A modern, responsive website for DD Coder Dojo - building the next generation of
 
 ## 📞 Contact
 
-- **Website**: [DD Coder Dojo](http://localhost:8000)
+- **Website**: [Code with Ubuntu](http://localhost:8000)
 - **Email**: Contact via website form
 - **Community**: Join our coding sessions!
 

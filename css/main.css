@@ -1,23 +1,21 @@
 /* ===== PRODUCTION-OPTIMIZED GLOBAL STYLES ===== */
-:root {
-  /* Core Brand Colors - Optimized for accessibility and performance */
-  --primary-color: #8b5cf6;      /* WCAG AA compliant purple */
-  --secondary-color: #0ea5e9;    /* WCAG AA compliant cyan */
-  --accent-color: #f59e0b;       /* Attention-grabbing orange */
-  --dark-color: #0f172a;         /* Deep background for contrast */
+:root {  /* Core Brand Colors - Lightened and warmer palette */
+  --primary-color: #7c3aed;      /* Warmer purple, less blue */
+  --secondary-color: #06b6d4;    /* Softer cyan, more balanced */
+  --accent-color: #f59e0b;       /* Warm orange accent */
+  --dark-color: #1f2937;         /* Lighter dark background */
   --light-color: #ffffff;        /* Pure white for optimal contrast */
-  --text-color: #f1f5f9;         /* High contrast light text */
-  --text-dark: #1e293b;          /* Dark text for light backgrounds */
-  --surface-color: #1e293b;      /* Card/panel background */
-  
-  /* Status & Feedback Colors - Semantic colors for user feedback */
-  --text-muted: #cbd5e1;         /* Accessible muted text */
-  --border-light: rgba(255, 255, 255, 0.2);
-  --focus-color: #38bdf8;        /* High visibility focus indicator */
+  --text-color: #f9fafb;         /* Softer light text */
+  --text-dark: #374151;          /* Warmer dark text */
+  --surface-color: #374151;      /* Warmer card/panel background */
+    /* Status & Feedback Colors - Warmer and more balanced palette */
+  --text-muted: #d1d5db;         /* Warmer muted text */
+  --border-light: rgba(255, 255, 255, 0.15);
+  --focus-color: #10b981;        /* Green focus for better visibility */
   --error-color: #ef4444;        /* Error states */
   --success-color: #10b981;      /* Success states */
   --warning-color: #f59e0b;      /* Warning states */
-  --info-color: #3b82f6;         /* Information states */
+  --info-color: #06b6d4;         /* Softer blue for information */
   
   /* Typography System - Performance-optimized font loading */
   --title-font: 'Orbitron', 'Courier New', monospace;    /* Fallback for performance */
@@ -82,7 +80,7 @@
 *:focus {
   outline: 3px solid var(--focus-color) !important;
   outline-offset: 2px !important;
-  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.3) !important;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.3) !important;
 }
 
 /* Remove outline for mouse users, keep for keyboard users */
@@ -302,6 +300,48 @@ body.light-mode *:focus {
   height: 28px;
   margin-right: var(--space-sm);
   flex-shrink: 0;
+}
+
+/* Original logo styles with spinning orbit animation */
+.logo-icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin-right: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.orbit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--secondary-color);
+  border-radius: 50%;
+  animation: spin 8s linear infinite;
+}
+
+.core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logo span { font-size: 0.9rem; }
 }
 
 .orbit {

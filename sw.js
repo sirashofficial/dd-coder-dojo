@@ -1,7 +1,7 @@
-// DD Coder Dojo Service Worker
+// Code with Ubuntu Service Worker
 // Provides offline functionality, caching, and performance optimizations
 
-const CACHE_NAME = 'dd-coder-dojo-v1.0.0';
+const CACHE_NAME = 'code-with-ubuntu-v1.0.0';
 const OFFLINE_URL = '/offline.html';
 
 // Assets to cache immediately (critical resources)

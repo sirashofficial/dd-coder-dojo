@@ -1,5 +1,5 @@
 /**
- * DD Coder Dojo - Enhanced Main JavaScript
+ * Code with Ubuntu - Enhanced Main JavaScript
  * Comprehensive functionality with improved error handling, performance, and maintainability
  */
 
@@ -27,7 +27,7 @@ class DDCoderDojoApp {
 
     async init() {
         try {
-            console.log('🚀 DD Coder Dojo initializing...');
+            console.log('🚀 Code with Ubuntu initializing...');
             
             // Initialize core systems
             await this.initializeTheme();
@@ -38,7 +38,7 @@ class DDCoderDojoApp {
             this.setupErrorHandling();
             
             this.state.isInitialized = true;
-            console.log('✅ DD Coder Dojo initialized successfully!');
+            console.log('✅ Code with Ubuntu initialized successfully!');
             
             // Dispatch custom event for other scripts
             document.dispatchEvent(new CustomEvent('ddAppReady'));

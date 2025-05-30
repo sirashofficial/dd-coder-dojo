@@ -1,6 +1,6 @@
 /**
  * Performance Monitoring & Analytics
- * DD Coder Dojo Website Performance Tracking
+ * Code with Ubuntu Website Performance Tracking
  * Last updated: 2025-05-27
  */
 

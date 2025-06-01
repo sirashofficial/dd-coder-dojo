@@ -76,26 +76,10 @@ Last updated: 2025-05-25
             color: var(--text-color);
             line-height: 1.6;
         }
-        
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-        }        /* Logo fix - ensure visibility */
-        .logo {
-            display: flex !important;
-            align-items: center !important;        
-        }
-        
-        main {
-            padding-top: 80px;
-        }
-    </style>
-    
-    <!-- CSS Files (non-critical, loaded asynchronously) -->
+        /* Removed .navbar styles as they are in navigation.css */
+      </style>    <!-- CSS Files (non-critical, loaded asynchronously) -->
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/redesign.css">
     <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="css/mobile-accessibility.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="css/enhancements.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -107,6 +91,7 @@ Last updated: 2025-05-25
         <link rel="stylesheet" href="css/mobile-accessibility.css">
         <link rel="stylesheet" href="css/enhancements.css">
         <link rel="stylesheet" href="css/pages/home.css">
+        <link rel="stylesheet" href="css/redesign.css">
     </noscript>
     
     <!-- Enhanced Structured Data -->
@@ -172,279 +157,35 @@ Last updated: 2025-05-25
 </head>
 <body>
     <!-- Skip Link for Accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-    <!-- Navigation -->
-    <nav class="navbar" aria-label="Main navigation">
-    <div class="logo" style="display: flex; align-items: center; gap: 1.2em;">
-        <img src="images/logo.png" alt="Code with Ubuntu Logo" class="logo-img" style="height: 100px; width: auto; border-radius: 6px; background: none; box-shadow: none; filter: drop-shadow(0 0 12px #8b5cf6) drop-shadow(0 0 2px #fff); padding: 0;" />
-        <span style="font-weight: 900; font-size: 2.4rem; letter-spacing: -1.5px; color: #fff; text-shadow: 0 4px 16px #23263a, 0 0 4px #8b5cf6, 0 1px 0 #000;">Code with Ubuntu</span>
-    </div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </button>
-    <ul class="nav-links">
-        <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li class="dropdown">
-            <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
-                <li><a href="resources.html">Resources</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
-            <ul class="dropdown-menu">
-                <li><a href="community.html">Community Events</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-            </ul>
-        </li>
-        <li><a href="contact.html">Contact</a></li>        </ul>
-        <style>
-        /* --- ENFORCE DARK MODE ONLY --- */
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --accent-blue: #0ea5e9;
-            --accent-purple: #8b5cf6;
-        }
-        
-        body {
-            background-color: var(--bg-primary) !important;
-            color: var(--text-primary) !important;
-        }
-        
-        /* --- ENHANCED DROPDOWN STYLES --- */
-        .nav-links { 
-            list-style: none; 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            gap: 1.5rem; 
-        }
-        
-        .dropdown { 
-            position: relative; 
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0ea5e9 100%);
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.25), 0 8px 25px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(14, 165, 233, 0.3);
-            padding: 1rem 0;
-            min-width: 220px;
-            backdrop-filter: blur(20px);
-            display: none;
-            z-index: 1001;
-            overflow: hidden;
-        }
-        
-        .dropdown:hover .dropdown-menu,
-        .dropdown:focus-within .dropdown-menu {
-            display: block;
-            animation: slideDownEnhanced 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        @keyframes slideDownEnhanced {
-            from { 
-                opacity: 0; 
-                transform: translateY(-15px) scale(0.95); 
-                filter: blur(5px);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-                filter: blur(0);
-            }
-        }
-        
-        .dropdown-menu li {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            width: 100%;
-        }
-        
-        .dropdown-menu a {
-            display: block;
-            padding: 16px 24px;
-            color: #ffffff !important;
-            text-decoration: none;
-            background: none;
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .dropdown-menu a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-            transition: width 0.3s ease;
-        }
-        
-        .dropdown-menu a:hover::before,
-        .dropdown-menu a:focus::before {
-            width: 100%;
-        }
-        
-        .dropdown-menu a:hover, 
-        .dropdown-menu a:focus { 
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff !important;
-            padding-left: 28px;
-            transform: translateX(4px);
-        }
-        
-        .dropdown-menu li:last-child a {
-            border-bottom: none;
-        }
-        
-        .dropdown-toggle:after {
-            content: ' ▼';
-            font-size: 0.7em;
-            color: var(--accent-blue);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-left: 4px;
-        }
-        
-        .dropdown:hover .dropdown-toggle:after {
-            transform: rotate(180deg);
-            color: #ffffff;
-        }
-        
-        /* --- ENHANCED CAROUSEL/TAB NAVIGATION --- */
-        .carousel-nav, .carousel-indicators {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .carousel-nav .nav-btn {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: var(--text-secondary);
-            border: 2px solid #475569;
-            border-radius: 50%;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            width: 3rem;
-            height: 3rem;
-            font-size: 1.2rem;
-            margin: 0 0.5rem;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .carousel-nav .nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .carousel-nav .nav-btn:hover::before {
-            left: 100%;
-        }
-        
-        .carousel-nav .nav-btn:hover, 
-        .carousel-nav .nav-btn:focus {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-blue);
-            background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
-            color: #ffffff;
-            outline: none;
-        }
-        
-        .carousel-indicators .indicator {
-            width: 0.75rem;
-            height: 0.75rem;
-            border-radius: 50%;
-            background: #475569;
-            border: 2px solid #64748b;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        .carousel-indicators .indicator.active {
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
-            transform: scale(1.3);
-            box-shadow: 0 4px 16px rgba(14,165,233,0.4);
-            border-color: var(--accent-blue);
-        }
-        
-        /* --- MODERN CARD ENHANCEMENTS --- */        
-        .card-modern, .highlight-card, .stat-card, .schedule-day-card, .carousel-card, .btn, .quick-link-btn {
-            background: rgba(30, 41, 59, 0.9) !important;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(14, 165, 233, 0.1);
-            border-radius: 16px !important;
-            border: 2px solid rgba(14, 165, 233, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-modern:hover, .highlight-card:hover, .stat-card:hover, .schedule-day-card:hover, .carousel-card:hover, .btn:hover, .quick-link-btn:hover {
-            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-        
-        /* Quick Link Button Styling */
-        .quick-link-btn {
-            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
-            color: #fff !important;
-            padding: 0.7em 1.2em;
-            border-radius: 2em !important;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid rgba(139, 92, 246, 0.3) !important;
-        }
-        
-        .quick-link-btn:hover { 
-            background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%) !important;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-        }
-        
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 900px) {
-            .nav-links { 
-                flex-direction: column; 
-                gap: 0.5rem; 
-            }
-            .dropdown-menu { 
-                position: static; 
-                box-shadow: none; 
-                min-width: 0; 
-                border-radius: 0; 
-                display: block;
-            }
-        }
-    </style>
-    </nav>
+    <!-- New Site Header -->    <header class="navbar-modern" aria-label="Main navigation">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand" aria-label="Code with Ubuntu Home">
+                <img src="images/logo.png" alt="Code with Ubuntu Logo" class="navbar-logo">
+                <span class="navbar-name">Code<span>with</span>Ubuntu</span>
+            </a>
 
-    <!-- Dark Mode Enforced - No Toggle Needed -->
+            <button class="navbar-toggle" aria-controls="primary-navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="primary-navigation" id="primary-navigation">
+                <ul class="navbar-links">
+                    <li><a href="index.html" class="navbar-link active">Home</a></li>
+                    <li><a href="about.html" class="navbar-link">About</a></li>
+                    <li><a href="programs.html" class="navbar-link">Programs</a></li>
+                    <li><a href="resources.html" class="navbar-link">Resources</a></li>
+                    <li><a href="community.html" class="navbar-link">Community</a></li>
+                    <li><a href="gallery.html" class="navbar-link">Gallery</a></li>
+                    <li><a href="contact.html" class="navbar-link">Contact</a></li>
+                    <li><a href="register.html" class="navbar-cta">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header><!-- Dark Mode Enforced - No Toggle Needed -->
     <style>
         body {
             background: #181a23 !important;
@@ -609,7 +350,79 @@ Last updated: 2025-05-25
                     </div>
                 </div>
             </div>
-        </section>        <!-- Featured Event Banner (Modern Hackathon Section) -->
+        </section>        <!-- Program Highlights Section (Redesigned) -->
+        <section class="section-modern program-highlights" id="programs">
+            <div class="container">
+                <h2 class="section-title">Our <span class="gradient-text">Programs</span></h2>
+                <p class="section-subtitle">Discover our comprehensive range of coding programs designed for all skill levels</p>
+                
+                <div class="program-grid">
+                    <!-- Beginners Program -->
+                    <div class="card-modern program-card fade-in" style="animation-delay: 0.1s">
+                        <div class="program-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div class="program-content">
+                            <h3>Code Creators</h3>
+                            <p class="program-age">Ages 7-10</p>
+                            <p class="program-description">Perfect for young beginners, this program introduces coding concepts through fun, interactive activities and visual programming.</p>
+                            <ul class="program-features">
+                                <li><i class="fas fa-check"></i> Scratch visual programming</li>
+                                <li><i class="fas fa-check"></i> Computational thinking</li>
+                                <li><i class="fas fa-check"></i> Digital storytelling</li>
+                                <li><i class="fas fa-check"></i> Game design basics</li>
+                            </ul>
+                            <a href="programs.html#beginners" class="btn-modern btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Intermediate Program -->
+                    <div class="card-modern program-card fade-in" style="animation-delay: 0.3s">
+                        <div class="program-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="program-content">
+                            <h3>Code Explorers</h3>
+                            <p class="program-age">Ages 11-13</p>
+                            <p class="program-description">Building on core concepts, students learn real programming languages and create interactive projects and games.</p>
+                            <ul class="program-features">
+                                <li><i class="fas fa-check"></i> HTML & CSS fundamentals</li>
+                                <li><i class="fas fa-check"></i> JavaScript basics</li>
+                                <li><i class="fas fa-check"></i> Python introduction</li>
+                                <li><i class="fas fa-check"></i> Basic app development</li>
+                            </ul>
+                            <a href="programs.html#intermediate" class="btn-modern btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Program -->
+                    <div class="card-modern program-card fade-in" style="animation-delay: 0.5s">
+                        <div class="program-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="program-content">
+                            <h3>Tech Innovators</h3>
+                            <p class="program-age">Ages 14-17</p>
+                            <p class="program-description">Advanced programming concepts and specialized tracks for teens preparing for tech careers and further education.</p>
+                            <ul class="program-features">
+                                <li><i class="fas fa-check"></i> Advanced Python</li>
+                                <li><i class="fas fa-check"></i> Web development</li>
+                                <li><i class="fas fa-check"></i> Mobile app creation</li>
+                                <li><i class="fas fa-check"></i> Robotics & AI basics</li>
+                            </ul>
+                            <a href="programs.html#advanced" class="btn-modern btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="program-cta">
+                    <p>Ready to start your coding journey? Join us today!</p>
+                    <a href="register.html" class="btn-modern btn-cta">Register Now</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Event Banner (Modern Hackathon Section) -->
         <section class="featured-event-banner modern-hackathon-section" id="featured-event">
             <div class="particles-container">
                 <div class="particle particle-1"></div>
@@ -678,23 +491,14 @@ Last updated: 2025-05-25
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Student Showcase Carousel (Redesigned) -->
-        <section class="student-showcase modern-section" id="showcase"></section>
+        </section>        <!-- Student Showcase Carousel (Redesigned) -->
+        <section class="student-showcase modern-section" id="showcase">
             <div class="container">
                 <div class="showcase-header">
-                    <h2 class="slide-in-left gradient-text">Amazing Student Projects</h2>
-                    <p class="fade-in" style="animation-delay:0.2s">See what our young coders are creating at Code with Ubuntu!</p>
+                    <h2 class="slide-in-left gradient-text">Amazing Students</h2>
+                    <p class="fade-in" style="animation-delay:0.2s">Meet our talented young coders and see their incredible journey at Code with Ubuntu!</p>
                 </div>
-                <div class="carousel-container modern-carousel">
-                    <div class="carousel-track" id="carouselTrack"></div>
-                    <div class="carousel-nav">
-                        <button class="nav-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="nav-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div class="carousel-indicators" id="carouselIndicators"></div>
-                </div>
+                <div id="modernStudentSlideshow"></div>
                 <div class="showcase-stats modern-stats">                    <div class="stat-item">
                         <div class="stat-number gradient-text" data-target="160">0</div>
                         <div class="stat-label">Students Served</div>
@@ -709,80 +513,120 @@ Last updated: 2025-05-25
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Live Statistics Section (Redesigned) -->
-        <section class="statistics-section fade-in modern-section" id="statistics" data-parallax="0.05"></section>
+        </section>        <!-- Live Statistics Section (Redesigned) -->
+        <section class="section-modern statistics-section" id="statistics">
             <div class="container">
-                <div class="stats-header fade-in">
-                    <h2 class="slide-in-left gradient-text">Our Impact in Numbers</h2>
-                    <p class="scale-in" style="animation-delay:0.2s">See the amazing progress we're making together at Code with Ubuntu!</p>
-                </div>
-                <div class="stats-grid modern-stats-grid">
-                    <div class="stat-card card-modern scale-in" style="animation-delay:0.3s">
-                        <div class="stat-icon pulse-on-hover"><i class="fas fa-users"></i></div>                        <div class="stat-content">
-                            <div class="stat-number gradient-text" data-count="160" data-target="160">0</div>
+                <h2 class="section-title">Our <span class="gradient-text">Impact</span> in Numbers</h2>
+                <p class="section-subtitle">See the amazing progress we're making together at Code with Ubuntu!</p>
+                
+                <div class="stats-grid">
+                    <div class="card-modern stat-card fade-in" style="animation-delay:0.3s">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number counter" data-count="160">0</div>
                             <div class="stat-label">Students Served</div>
                             <div class="stat-sublabel">Since 2022</div>
                         </div>
                     </div>
-                    <div class="stat-card card-modern scale-in" style="animation-delay:0.4s">
-                        <div class="stat-icon pulse-on-hover"><i class="fas fa-project-diagram"></i></div>                        <div class="stat-content">
-                            <div class="stat-number gradient-text" data-count="60" data-target="60">0</div>
+                    
+                    <div class="card-modern stat-card fade-in" style="animation-delay:0.4s">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number counter" data-count="60">0</div>
                             <div class="stat-label">Weekly Participants</div>
                             <div class="stat-sublabel">Active students</div>
                         </div>
                     </div>
-                    <div class="stat-card card-modern scale-in" style="animation-delay:0.5s">
-                        <div class="stat-icon pulse-on-hover"><i class="fas fa-clock"></i></div>                        <div class="stat-content">
-                            <div class="stat-number gradient-text" data-count="42" data-target="42" data-suffix="%">0</div>
+                    
+                    <div class="card-modern stat-card fade-in" style="animation-delay:0.5s">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number counter" data-count="42" data-suffix="%">0</div>
                             <div class="stat-label">Female Participation</div>
                             <div class="stat-sublabel">Diversity & inclusion</div>
                         </div>
                     </div>
-                    <div class="stat-card card-modern scale-in" style="animation-delay:0.6s">
-                        <div class="stat-icon pulse-on-hover"><i class="fas fa-trophy"></i></div>                        <div class="stat-content">
-                            <div class="stat-number gradient-text" data-count="700" data-target="700" data-suffix="%">0</div>
+                    
+                    <div class="card-modern stat-card fade-in" style="animation-delay:0.6s">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                            <div class="icon-glow"></div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number counter" data-count="700" data-suffix="%">0</div>
                             <div class="stat-label">Growth Rate</div>
                             <div class="stat-sublabel">Since 2022</div>
                         </div>
-                    </div>                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-users-cog"></i></div>
+                    </div>
+                    
+                    <div class="card-modern stat-card fade-in" style="animation-delay:0.7s">
+                        <div class="stat-icon">
+                            <i class="fas fa-users-cog"></i>
+                            <div class="icon-glow"></div>
+                        </div>
                         <div class="stat-content">
-                            <div class="stat-number gradient-text" data-target="6">0</div>
+                            <div class="stat-number counter" data-count="6">0</div>
                             <div class="stat-label">Weekly Sessions</div>
                             <div class="stat-sublabel">Across 3 age groups</div>
                         </div>
-                    </div>                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    </div>
+                    
+                    <div class="card-modern stat-card fade-in" style="animation-delay:0.8s">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="icon-glow"></div>
+                        </div>
                         <div class="stat-content">
-                            <div class="stat-number gradient-text" data-target="3">0</div>
+                            <div class="stat-number counter" data-count="3">0</div>
                             <div class="stat-label">Years Operating</div>
                             <div class="stat-sublabel">Since October 2022</div>
                         </div>
                     </div>
                 </div>
-                <div class="impact-highlights modern-impact-highlights">
-                    <div class="highlight-item">
-                        <div class="highlight-icon"><i class="fas fa-graduation-cap"></i></div>                        <div class="highlight-content">
+                
+                <div class="impact-highlights">
+                    <div class="card-modern highlight-card fade-in" style="animation-delay:0.9s">
+                        <div class="highlight-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="highlight-content">
                             <h4>Career Pathways</h4>
                             <p>Supporting students with IT guidance and portfolio development</p>
                         </div>
                     </div>
-                        <div class="highlight-icon"><i class="fas fa-award"></i></div>
+                    
+                    <div class="card-modern highlight-card fade-in" style="animation-delay:1s">
+                        <div class="highlight-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
                         <div class="highlight-content">
                             <h4>Competitions Won</h4>
                             <p>3 regional coding competitions in 2024</p>
                         </div>
                     </div>
-                    <div class="highlight-item">
-                        <div class="highlight-icon"><i class="fas fa-globe-africa"></i></div>                        <div class="highlight-content">
+                    
+                    <div class="card-modern highlight-card fade-in" style="animation-delay:1.1s">
+                        <div class="highlight-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <div class="highlight-content">
                             <h4>Community Growth</h4>
                             <p>Multi-racial community representation serving Durban South</p>
                         </div>
                     </div>
                 </div>
-                <div class="live-status modern-live-status">                    <div class="status-indicator">
+                
+                <div class="live-status">
+                    <div class="status-indicator">
                         <div class="live-dot"></div>
                         <span>Live from Code with Ubuntu</span>
                     </div>
@@ -790,85 +634,197 @@ Last updated: 2025-05-25
                 </div>
             </div>
         </section>        <!-- About Section (Redesigned) -->
-        <section class="about modern-section" id="about">
-    <div class="container modern-about-container">
-        <div class="about-content modern-about-content">
-            <div class="about-text modern-about-text">
-                <h2 class="gradient-text">About Code with Ubuntu</h2>
-                <p>Code with Ubuntu (formerly Blue Roof CoderDojo) is a CoderDojo club located in Austerville, Durban, and part of the global CoderDojo movement. We provide free coding education to young people aged 7-17.</p>
-                <p>Our mission is to empower the next generation with digital skills, creative thinking, and problem-solving abilities that will serve them throughout their lives. The rebrand to <strong>Code with Ubuntu</strong> beautifully captures our philosophy—Ubuntu meaning "I am because we are"—emphasizing the collaborative, community-centered approach that drives our growth and impact.</p>                <div class="stats modern-about-stats">
-                    <div class="stat">
-                        <h3 class="gradient-text">160+</h3>
-                        <p>Students Served</p>
-                    </div>
-                    <div class="stat">
-                        <h3 class="gradient-text">6</h3>
-                        <p>Weekly Sessions</p>
-                    </div>
-                    <div class="stat">
-                        <h3 class="gradient-text">42%</h3>
-                        <p>Female Participation</p>
-                    </div>
-                </div>
-            </div>
-            <div class="about-image modern-about-image">
-                <img src="images/coding-kids.jpg" alt="Kids learning to code" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'missing-image-placeholder\'><i class=\'fas fa-users\'></i><span>Kids Learning to Code</span></div>';">
-            </div>
-        </div>
-    </div>
-</section>
-
-        <!-- Contact Section (Redesigned) -->
-        <section class="contact modern-section" id="contact">
-            <div class="container modern-contact-container">
-                <h2 class="gradient-text">Get In Touch</h2>
-                <div class="contact-content modern-contact-content">
-                    <div class="contact-info modern-contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h3>Location</h3>
-                                <p>178 Austerville Drive, Wentworth<br>Durban, South Africa</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h3>Email</h3>
-                                <p>ashley@kcasa.org.za</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h3>Class Times</h3>
-                                <p>Monday to Friday<br>Afternoons 14:00-16:00</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-form modern-contact-form">
-                        <form id="contactForm" action="#" method="POST">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <select name="program" required>
-                                <option value="">Select Program Interest</option>
-                                <option value="junior">Junior (Ages 7-10)</option>
-                                <option value="intermediate">Intermediate (Ages 11-13)</option>
-                                <option value="senior">Senior (Ages 14-17)</option>
-                            </select>
-                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                            <button type="submit" class="btn btn-primary">Send Message</button>                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Coding Schedule Section (Original) -->
-        <section class="coding-schedule-section" id="schedule">
+        <section class="section-modern about-section" id="about">
             <div class="container">
-                <h2 class="section-title">Weekly Coding Schedule</h2>
+                <h2 class="section-title">About <span class="gradient-text">Code with Ubuntu</span></h2>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <div class="card-modern about-card">
+                            <p class="about-lead">Code with Ubuntu (formerly Blue Roof CoderDojo) is a CoderDojo club located in Austerville, Durban, and part of the global CoderDojo movement. We provide free coding education to young people aged 7-17.</p>
+                            
+                            <p>Our mission is to empower the next generation with digital skills, creative thinking, and problem-solving abilities that will serve them throughout their lives. The rebrand to <strong>Code with Ubuntu</strong> beautifully captures our philosophy—Ubuntu meaning "I am because we are"—emphasizing the collaborative, community-centered approach that drives our growth and impact.</p>
+                            
+                            <div class="about-values">
+                                <div class="value-item">
+                                    <div class="value-icon">
+                                        <i class="fas fa-hands-helping"></i>
+                                    </div>
+                                    <div class="value-content">
+                                        <h4>Community</h4>
+                                        <p>Building stronger connections through shared learning</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="value-item">
+                                    <div class="value-icon">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <div class="value-content">
+                                        <h4>Innovation</h4>
+                                        <p>Encouraging creative solutions and new ideas</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="value-item">
+                                    <div class="value-icon">
+                                        <i class="fas fa-universal-access"></i>
+                                    </div>
+                                    <div class="value-content">
+                                        <h4>Accessibility</h4>
+                                        <p>Making technology education available to everyone</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a href="about.html" class="btn-modern btn-primary">Learn Our Story</a>
+                        </div>
+                    </div>
+                    
+                    <div class="about-media">
+                        <div class="about-image-wrapper">
+                            <div class="image-frame card-modern">
+                                <img src="images/coding-kids.jpg" alt="Kids learning to code" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'missing-image-placeholder\'><i class=\'fas fa-users\'></i><span>Kids Learning to Code</span></div>';">
+                                <div class="image-overlay">
+                                    <div class="overlay-content">
+                                        <span>Est. 2022</span>
+                                        <h4>Wentworth, Durban</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="about-stats">
+                                <div class="stat-bubble">
+                                    <span class="stat-number">160+</span>
+                                    <span class="stat-label">Students</span>
+                                </div>
+                                <div class="stat-bubble">
+                                    <span class="stat-number">6</span>
+                                    <span class="stat-label">Weekly Sessions</span>
+                                </div>
+                                <div class="stat-bubble">
+                                    <span class="stat-number">42%</span>
+                                    <span class="stat-label">Female Coders</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        <!-- Contact Section (Redesigned) -->
+        <section class="section-modern contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Get <span class="gradient-text">In Touch</span></h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you!</p>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="card-modern contact-card">
+                            <div class="contact-header">
+                                <h3>Contact Information</h3>
+                                <p>Reach out to us directly or visit us during class hours</p>
+                            </div>
+                            
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Location</h4>
+                                        <p>178 Austerville Drive, Wentworth<br>Durban, South Africa</p>
+                                        <a href="https://goo.gl/maps/YourLocationLink" target="_blank" class="contact-link">View on Map</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Email</h4>
+                                        <p>ashley@kcasa.org.za</p>
+                                        <a href="mailto:ashley@kcasa.org.za" class="contact-link">Send Email</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Class Times</h4>
+                                        <p>Monday to Friday<br>Afternoons 14:00-16:00</p>
+                                        <a href="programs.html#schedule" class="contact-link">View Full Schedule</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Social Media</h4>
+                                        <div class="social-links">
+                                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <div class="card-modern form-card">
+                            <div class="form-header">
+                                <h3>Send Us a Message</h3>
+                                <p>Fill out the form below and we'll get back to you shortly</p>
+                            </div>
+                            
+                            <form id="contactForm" class="contact-form" action="#" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="program">Program Interest</label>
+                                    <select id="program" name="program" required>
+                                        <option value="">Select Program Interest</option>
+                                        <option value="junior">Code Creators (Ages 7-10)</option>
+                                        <option value="intermediate">Code Explorers (Ages 11-13)</option>
+                                        <option value="senior">Tech Innovators (Ages 14-17)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Your Message</label>
+                                    <textarea id="message" name="message" placeholder="How can we help you?" rows="5" required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-modern btn-primary">
+                                    <span>Send Message</span>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        <!-- Coding Schedule Section (Redesigned) -->
+        <section class="section-modern schedule-section" id="schedule">
+            <div class="container">
+                <h2 class="section-title">Weekly <span class="gradient-text">Coding Schedule</span></h2>
                 <p class="section-subtitle">Join us for free coding classes every weekday! Find the perfect time for your age group.</p>
-                <div class="schedule-container">
+                
+                <div class="schedule-container card-modern">
                     <div class="schedule-header">
                         <div class="schedule-title">
                             <i class="fas fa-calendar-week"></i>
@@ -878,8 +834,9 @@ Last updated: 2025-05-25
                             <span class="current-week">Week of <span id="currentWeekDate"></span></span>
                         </div>
                     </div>
+                    
                     <div class="weekly-schedule">
-                        <div class="schedule-day-card monday">
+                        <div class="schedule-day-card">
                             <div class="day-header">
                                 <span class="day-name">Monday</span>
                                 <span class="day-date" id="mondayDate"></span>
@@ -896,7 +853,9 @@ Last updated: 2025-05-25
                                     </div>
                                 </div>
                             </div>
-                        </div>                        <div class="schedule-day-card tuesday">
+                        </div>
+                        
+                        <div class="schedule-day-card">
                             <div class="day-header">
                                 <span class="day-name">Tuesday</span>
                                 <span class="day-date" id="tuesdayDate"></span>
@@ -913,7 +872,9 @@ Last updated: 2025-05-25
                                     </div>
                                 </div>
                             </div>
-                        </div>                        <div class="schedule-day-card wednesday">
+                        </div>
+                        
+                        <div class="schedule-day-card">
                             <div class="day-header">
                                 <span class="day-name">Wednesday</span>
                                 <span class="day-date" id="wednesdayDate"></span>
@@ -930,8 +891,7 @@ Last updated: 2025-05-25
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="schedule-day-card thursday">
+                        </div>                        <div class="schedule-day-card">
                             <div class="day-header">
                                 <span class="day-name">Thursday</span>
                                 <span class="day-date" id="thursdayDate"></span>
@@ -943,13 +903,14 @@ Last updated: 2025-05-25
                                         <span>14:00 - 15:00</span>
                                     </div>
                                     <div class="program-info">
-                                        <h4>Junior Ninjas</h4>
+                                        <h4>Code Creators</h4>
                                         <p>Ages 7-10 • Beginner Programming</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="schedule-day-card friday">
+                        
+                        <div class="schedule-day-card">
                             <div class="day-header">
                                 <span class="day-name">Friday</span>
                                 <span class="day-date" id="fridayDate"></span>
@@ -961,68 +922,111 @@ Last updated: 2025-05-25
                                         <span>13:00 - 15:00</span>
                                     </div>
                                     <div class="program-info">
-                                        <h4>Junior Ninjas</h4>
+                                        <h4>Code Creators</h4>
                                         <p>Ages 7-10 • Beginner Programming</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="schedule-footer">
                         <div class="schedule-stats">
-                            <div class="stat-item"><i class="fas fa-users"></i><span><strong>5</strong> Programs per week</span></div>
-                            <div class="stat-item"><i class="fas fa-clock"></i><span><strong>9</strong> Hours of coding</span></div>
-                            <div class="stat-item"><i class="fas fa-dollar-sign"></i><span><strong>100%</strong> Free</span></div>
+                            <div class="stat-item">
+                                <i class="fas fa-users"></i>
+                                <span><strong>5</strong> Programs per week</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                <span><strong>9</strong> Hours of coding</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span><strong>100%</strong> Free</span>
+                            </div>
                         </div>
+                        
                         <div class="schedule-actions">
-                            <a href="contact.html" class="btn btn-primary"><i class="fas fa-user-plus"></i>Join a Class</a>
-                            <a href="programs.html" class="btn btn-secondary"><i class="fas fa-info-circle"></i>Learn More</a>
+                            <a href="contact.html" class="btn-modern btn-primary">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Join a Class</span>
+                            </a>
+                            <a href="programs.html" class="btn-modern btn-secondary">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Learn More</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>    <!-- Footer (Redesigned) -->
-    <footer class="footer modern-footer">
+    <footer class="footer-modern">
         <div class="container">
-            <div class="footer-content modern-footer-content">                <div class="footer-section modern-footer-section">
-                    <h3>Code with Ubuntu</h3>
-                    <p>From blocks to big ideas — come code with us! Supported by KCA in partnership with Raspberry Pi Foundation.</p>
-                    <div class="social-links modern-social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">
+                        <img src="images/logo.png" alt="Code with Ubuntu Logo">
+                        <h3>Code<span>with</span>Ubuntu</h3>
+                        <p>Empowering young minds through coding education. From blocks to big ideas — come code with us!</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="footer-section modern-footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="programs.html">Programs</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="programs.html"><i class="fas fa-chevron-right"></i> Programs</a></li>
+                        <li><a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                        <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section modern-footer-section">
-                    <h3>Our Programs</h3>
-                    <ul>
-                        <li><a href="programs.html#junior">Junior Ninjas (7-10)</a></li>
-                        <li><a href="programs.html#intermediate">Code Explorers (11-13)</a></li>
-                        <li><a href="programs.html#senior">Tech Innovators (14-17)</a></li>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Our Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="programs.html#junior"><i class="fas fa-code"></i> Junior Ninjas (7-10)</a></li>
+                        <li><a href="programs.html#intermediate"><i class="fas fa-laptop-code"></i> Code Explorers (11-13)</a></li>
+                        <li><a href="programs.html#senior"><i class="fas fa-robot"></i> Tech Innovators (14-17)</a></li>
+                        <li><a href="resources.html"><i class="fas fa-book"></i> Learning Materials</a></li>
+                        <li><a href="community.html#events"><i class="fas fa-calendar-alt"></i> Upcoming Events</a></li>
                     </ul>
                 </div>
-                <div class="footer-section modern-footer-section">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-envelope"></i> ashley@kcasa.org.za</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 178 Austerville Drive, Wentworth, Durban</p>
-                    <p><i class="fas fa-phone"></i> 031 461 3101</p>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>178 Austerville Drive, Wentworth, Durban, South Africa</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ashley@kcasa.org.za</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>031 461 3101</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Monday - Friday: 14:00 - 16:00</span>
+                    </div>
                 </div>
-            </div>            <div class="footer-bottom modern-footer-bottom">
+            </div>
+            <div class="footer-bottom">
                 <p>&copy; 2025 Code with Ubuntu. All rights reserved.</p>
-                <p>Supported by KCA (Keep A Child Alive) • In partnership with Raspberry Pi Foundation</p>
+                <div class="footer-bottom-links">
+                    <a href="about.html#privacy">Privacy Policy</a>
+                    <a href="about.html#terms">Terms of Use</a>
+                    <a href="#">Supported by KCA</a>
+                    <a href="#">Raspberry Pi Foundation</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -1116,7 +1120,7 @@ Last updated: 2025-05-25
         .timeline-year ul {
             font-size: 0.95em;
         }
-    }
-    </style>
+    }    </style>
+    <script src="js/navigation.js" defer></script>
 </body>
 </html>

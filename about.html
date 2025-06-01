@@ -50,18 +50,20 @@ Last updated: 2025-05-25
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    
-    <!-- Critical CSS Files -->
+      <!-- Critical CSS Files -->
+    <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/production-optimizations.css">
     <link rel="stylesheet" href="css/mobile-accessibility.css">
     <link rel="stylesheet" href="css/enhancements.css">
+    <link rel="stylesheet" href="css/redesign.css">
     <link rel="stylesheet" href="css/pages/about.css">
+    <link rel="stylesheet" href="css/pages/about-fix.css">
     
     <!-- jQuery CDN for advanced effects -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="about-page">
     <!-- 
     ====================================
     SKIP LINK FOR ACCESSIBILITY
@@ -81,75 +83,36 @@ Last updated: 2025-05-25
     Navigation functionality: js/main.js
     Navigation styles: css/main.css
     ====================================
-    -->    <nav class="navbar" aria-label="Main navigation">        <div class="logo">
-            <div class="logo-icon">
-                <div class="orbit" aria-hidden="true"></div>
-                <div class="core" aria-hidden="true"></div>
-            </div>
-            <span>Code with Ubuntu</span>
-        </div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </button>        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="active"><a href="about.html">About</a></li>
-            <li class="dropdown">
-                <a href="programs.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Programs</a>                <ul class="dropdown-menu">
-                    <li><a href="resources.html">Resources</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="community.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
-                <ul class="dropdown-menu">
-                    <li><a href="community.html">Community Events</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="register.html">Register</a></li>
-        </ul>
-        <style>
-        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            left: 0;
-            top: 100%;
-            background: #1e293b;
-            min-width: 180px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-            border-radius: 0 0 8px 8px;
-            z-index: 1001;
-        }
-        .dropdown:hover .dropdown-menu,
-        .dropdown:focus-within .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu li { width: 100%; }
-        .dropdown-menu a {
-            display: block;
-            padding: 0.75em 1.2em;
-            color: #f1f5f9;
-            text-decoration: none;
-            background: none;
-            border: none;
-            font-size: 1em;
-        }
-        .dropdown-menu a:hover { background: #334155; color: #8b5cf6; }
-        .dropdown-toggle:after {
-            content: ' ▼';
-            font-size: 0.7em;
-        }
-        @media (max-width: 900px) {
-            .nav-links { flex-direction: column; gap: 0.5rem; }
-            .dropdown-menu { position: static; box-shadow: none; min-width: 0; border-radius: 0; }
-        }
-        </style>    </nav>
+    -->    <!-- New Site Header -->
+    <header class="navbar-modern" aria-label="Main navigation">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand" aria-label="Code with Ubuntu Home">
+                <img src="images/logo.png" alt="Code with Ubuntu Logo" class="navbar-logo">
+                <span class="navbar-name">Code<span>with</span>Ubuntu</span>
+            </a>
 
-    <main id="main-content" tabindex="-1">
+            <button class="navbar-toggle" aria-controls="primary-navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="primary-navigation" id="primary-navigation">
+                <ul class="navbar-links">
+                    <li><a href="index.html" class="navbar-link">Home</a></li>
+                    <li><a href="about.html" class="navbar-link active">About</a></li>
+                    <li><a href="programs.html" class="navbar-link">Programs</a></li>
+                    <li><a href="resources.html" class="navbar-link">Resources</a></li>
+                    <li><a href="community.html" class="navbar-link">Community</a></li>
+                    <li><a href="gallery.html" class="navbar-link">Gallery</a></li>
+                    <li><a href="contact.html" class="navbar-link">Contact</a></li>
+                    <li><a href="register.html" class="navbar-cta">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" tabindex="-1" style="padding-top: var(--nav-height);">
         <!-- 
         ====================================
         ABOUT HEADER SECTION
@@ -162,8 +125,7 @@ Last updated: 2025-05-25
         - Change title: Edit h1 text below
         - Change description: Edit p text below
         - Change background: Edit css/pages/about.css (line 15)
-        ====================================        -->
-        <section class="about-header fade-in">
+        ====================================        -->        <section class="about-header fade-in">
             <!-- EDITABLE CONTENT START -->
             <h1 class="slide-in-left">Code with Ubuntu</h1>
             <p class="scale-in" style="animation-delay: 0.2s">A CoderDojo club empowering young people in Durban with free, creative coding classes for ages 7-17. Supported by KCA in partnership with the Raspberry Pi Foundation.</p>
@@ -677,8 +639,8 @@ Last updated: 2025-05-25
                     });
             });
         } else if (window.location.protocol === 'file:') {
-            console.info('Service worker registration skipped for file:// protocol');
-        }
+            console.info('Service worker registration skipped for file:// protocol');        }
     </script>
+    <script src="js/navigation.js"></script>
 </body>
 </html>

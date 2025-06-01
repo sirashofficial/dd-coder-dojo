@@ -1,0 +1,18 @@
+/* Fix for navigation tab blocking content on about page */
+main#main-content {
+    padding-top: var(--nav-height); /* Add padding that matches the nav height */
+    position: relative;
+    z-index: 1; /* Ensure content has a proper z-index */
+}
+
+/* Make sure about-header accounts for the fixed navigation */
+.about-header {
+    padding-top: calc(8rem + var(--nav-height)) !important; /* Add extra padding at the top */
+}
+
+/* Ensure any tabs used in about page content have proper z-index */
+.tab-content, 
+.tabs {
+    position: relative;
+    z-index: 5; /* Lower than nav but still above other content */
+}
